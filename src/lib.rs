@@ -221,6 +221,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     let symbolic_shape_specialization_index: RefCell<SymbolicShapeSpecializationIndex> =
         RefCell::new(FxHashMap::default());
     let guard_added_fast_index: RefCell<GuardAddedFastIndex> = RefCell::new(FxHashMap::default());
+    let sym_expr_info_index: RefCell<SymExprInfoIndex> = RefCell::new(FxHashMap::default());
 
     // Store results in an output Vec<PathBuf, String>
     let mut output: Vec<(PathBuf, String)> = Vec::new();
@@ -465,6 +466,60 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             metrics_index.entry(cid).or_default().push(m.clone());
         }
 
+        if let Some(ref guard) = e.propagate_real_tensors {
+            if config.export {
+                let failure_type = "Data Dependent Error";
+
+                let reason = format!(
+                    "When exporting, we were unable to figure out if the
+                    expression <code>{}</code> always holds.<br> As a result, it
+                    was specialized to evaluate to <code>{}</code>, and asserts
+                    were inserted into the graph.",
+                    guard.expr.clone().unwrap(),
+                    guard.result.clone().unwrap()
+                );
+
+                let sym_expr_info_index_borrowed = sym_expr_info_index.borrow();
+                let parser: Box<dyn StructuredLogParser> =
+                    Box::new(crate::parsers::PropagateRealTensorsParser {
+                        tt: &tt,
+                        sym_expr_info_index: &sym_expr_info_index_borrowed,
+                    });
+                run_parser(
+                    lineno,
+                    &parser,
+                    &e,
+                    &payload,
+                    &mut output_count,
+                    &mut output,
+                    compile_directory,
+                    &multi,
+                    &mut stats,
+                );
+
+                let filename = format!(
+                    "symbolic_guard_information_{}.html",
+                    (output_count - 1).to_string(),
+                );
+                let compile_id_dir: PathBuf = e
+                    .compile_id
+                    .as_ref()
+                    .map_or(format!("unknown_{lineno}"), |cid| cid.as_directory_name())
+                    .into();
+                let additional_info = format!(
+                    "Please click <a href='{}/{}'>here</a> for more information.",
+                    compile_id_dir.display(),
+                    filename,
+                );
+
+                export_failures.push(ExportFailure {
+                    failure_type: failure_type.to_string(),
+                    reason: reason,
+                    additional_info: additional_info,
+                });
+            }
+        }
+
         if let Some(stack) = e.stack {
             unknown_stack_trie.insert(stack.clone(), None);
         }
@@ -497,42 +552,6 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 stack_trie.insert(stack, e.compile_id.clone());
             };
         };
-
-        if let Some(guard) = e.propagate_real_tensors {
-            if config.export {
-                let failure_type = "Data Dependent Error";
-
-                let reason = format!(
-                    "When exporting, we were unable to figure out if the
-                    expression <code>{}</code> always holds.<br> As a result, it
-                    was specialized to evaluate to <code>{}</code>, and asserts
-                    were inserted into the graph.",
-                    guard.expr.clone().unwrap(),
-                    guard.result.unwrap()
-                );
-
-                let filename = format!(
-                    "symbolic_guard_information_{}.html",
-                    (output_count - 1).to_string(),
-                );
-                let compile_id_dir: PathBuf = e
-                    .compile_id
-                    .as_ref()
-                    .map_or(format!("unknown_{lineno}"), |cid| cid.as_directory_name())
-                    .into();
-                let additional_info = format!(
-                    "Please click <a href='{}/{}'>here</a> for more information.",
-                    compile_id_dir.display(),
-                    filename,
-                );
-
-                export_failures.push(ExportFailure {
-                    failure_type: failure_type.to_string(),
-                    reason: reason,
-                    additional_info: additional_info,
-                });
-            }
-        }
 
         if let Some(fake_kernel) = e.missing_fake_kernel {
             if config.export {
@@ -573,6 +592,23 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     additional_info: additional_info.to_string(),
                 });
             }
+        }
+
+        if let Some(sym_expr_info) = e.expression_created {
+            sym_expr_info_index
+                .borrow_mut()
+                .insert(sym_expr_info.result_id.unwrap(), sym_expr_info);
+        }
+
+        if let Some(unbacked_symbol) = e.create_unbacked_symbol {
+            sym_expr_info_index.borrow_mut().insert(
+                unbacked_symbol.node_id.unwrap(),
+                SymExprInfoMetadata {
+                    result: unbacked_symbol.symbol.clone(),
+                    result_id: unbacked_symbol.node_id.clone(),
+                    ..Default::default()
+                },
+            );
         }
     }
 

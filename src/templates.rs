@@ -500,7 +500,12 @@ pub static TEMPLATE_SYMBOLIC_GUARD_INFO: &str = r#"
 </head>
 <body>
     <h1>More detailed information on <code>{expr}</code></h1>
-    <h2>Stack</h2>
+    <h2>Provenance information for this guard:</h2>
+    <details open>
+    <summary>Provenance Information</summary>
+    {sym_expr_trie_html | format_unescaped}
+    </details>
+    <h2>Stacktrace for how this guard was triggered:</h2>
     {stack_html | format_unescaped}
 </body>
 </html>

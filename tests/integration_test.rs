@@ -186,7 +186,7 @@ fn test_export_report() {
     ];
     // Read the test file
     // chromium_events.log was generated from the following:
-    // TORCH_TRACE=~/trace_logs/test python test/export/test_draft_export.py -k test_data_dependent_failure
+    // TORCH_TRACE=~/trace_logs/test python test/export/test_draft_export.py -k test_complex_data_dependent
     let path = Path::new("tests/inputs/export.log").to_path_buf();
     let config = tlparse::ParseConfig {
         strict: true,

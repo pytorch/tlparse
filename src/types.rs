@@ -19,6 +19,7 @@ pub type StackIndex = FxHashMap<Option<CompileId>, StackSummary>; // NB: attempt
 pub type SymbolicShapeSpecializationIndex =
     FxHashMap<Option<CompileId>, Vec<SymbolicShapeSpecializationMetadata>>;
 pub type GuardAddedFastIndex = FxHashMap<Option<CompileId>, Vec<GuardAddedFastMetadata>>;
+pub type SymExprInfoIndex = FxHashMap<u64, SymExprInfoMetadata>;
 
 pub type FxIndexMap<K, V> = IndexMap<K, V, BuildHasherDefault<FxHasher>>;
 
@@ -368,6 +369,26 @@ pub struct SymbolicShapePropagateRealTensorMetadata {
     pub expr: Option<String>,
     pub result: Option<String>,
     pub stack: Option<StackSummary>,
+    pub expr_node_id: Option<u64>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct UnbackedSymbolMetadata {
+    pub symbol: Option<String>,
+    pub node_id: Option<u64>,
+    pub stack: Option<StackSummary>,
+    pub vr: Option<String>,
+}
+
+#[derive(Default, Debug, Deserialize, Serialize)]
+pub struct SymExprInfoMetadata {
+    pub method: Option<String>,
+    pub result: Option<String>,
+    pub result_id: Option<u64>,
+    pub arguments: Option<Vec<String>>,
+    pub arguments_id: Option<Vec<u64>>,
+    pub user_stack: Option<StackSummary>,
+    pub stack: Option<StackSummary>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -419,6 +440,7 @@ pub struct SymbolicGuardContext {
     pub css: &'static str,
     pub expr: String,
     pub stack_html: String,
+    pub sym_expr_trie_html: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -549,6 +571,8 @@ pub struct Envelope {
     pub link: Option<LinkMetadata>,
     pub symbolic_shape_specialization: Option<SymbolicShapeSpecializationMetadata>,
     pub propagate_real_tensors: Option<SymbolicShapePropagateRealTensorMetadata>,
+    pub create_unbacked_symbol: Option<UnbackedSymbolMetadata>,
+    pub expression_created: Option<SymExprInfoMetadata>,
     pub missing_fake_kernel: Option<FakeKernelMetadata>,
     pub mismatched_fake_kernel: Option<FakeKernelMetadata>,
     pub artifact: Option<ArtifactMetadata>,

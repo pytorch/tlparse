@@ -2,6 +2,7 @@ use crate::templates::TEMPLATE_QUERY_PARAM_SCRIPT;
 use crate::{types::*, ParseConfig};
 use html_escape::encode_text;
 use std::cell::RefCell;
+use std::collections::HashSet;
 use std::ffi::{OsStr, OsString};
 use std::path::Path;
 use std::path::PathBuf;
@@ -661,8 +662,75 @@ impl StructuredLogParser for ArtifactParser {
     }
 }
 
+fn render_sym_expr_trie(
+    expr: u64,
+    sym_expr_info_index: &SymExprInfoIndex,
+    depth: usize,
+    visited: &mut HashSet<u64>,
+) -> Option<String> {
+    if visited.contains(&expr) {
+        return None;
+    }
+    visited.insert(expr);
+
+    let sym_expr_info = sym_expr_info_index.get(&expr)?;
+    let sym_expr_args_id = sym_expr_info.argument_ids.clone().unwrap_or(Vec::new());
+
+    let mut children_elements = Vec::new();
+    for arg_id in sym_expr_args_id {
+        if let Some(child_element) =
+            render_sym_expr_trie(arg_id, sym_expr_info_index, depth + 1, visited)
+        {
+            children_elements.push(child_element);
+        }
+    }
+
+    let mut sym_expr_trie_html = format!(
+        r#"
+<div style="margin-left: {}px;">
+    <div style="padding: 16px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); background-color: white;">
+        <h3 style="font-weight: bold; font-size: 1.25rem;">{}</h3>
+        <div style="margin-top: 8px;">
+            <p><span style="font-weight: bold;">Method:</span> {}</p>
+            <p><span style="font-weight: bold;">Arguments:</span> {}</p>
+            <div style="margin-top: 8px; font-size: 0.875rem; color: #4a5568;">
+                <p><span style="font-weight: bold;">User entry code:</span> {}</p>
+                <p><span style="font-weight: bold;">User exit code:</span> {}</p>
+                <p><span style="font-weight: bold;">Framework code:</span> {}</p>
+            </div>
+        </div>
+    </div>
+</div>
+"#,
+        depth * 20,
+        sym_expr_info.result.clone().unwrap_or("".to_string()),
+        sym_expr_info.method.clone().unwrap_or("".to_string()),
+        sym_expr_info
+            .arguments
+            .clone()
+            .unwrap_or(Vec::new())
+            .join(", "),
+        sym_expr_info
+            .user_top_stack
+            .clone()
+            .unwrap_or("".to_string()),
+        sym_expr_info
+            .user_bottom_stack
+            .clone()
+            .unwrap_or("".to_string()),
+        sym_expr_info.floc.clone().unwrap_or("".to_string()),
+    );
+    if !children_elements.is_empty() {
+        for child_element in children_elements {
+            sym_expr_trie_html.push_str(&child_element);
+        }
+    }
+    Some(sym_expr_trie_html)
+}
+
 pub struct PropagateRealTensorsParser<'t> {
-    tt: &'t TinyTemplate<'t>,
+    pub tt: &'t TinyTemplate<'t>,
+    pub sym_expr_info_index: &'t SymExprInfoIndex,
 }
 impl StructuredLogParser for PropagateRealTensorsParser<'_> {
     fn name(&self) -> &'static str {
@@ -685,10 +753,20 @@ impl StructuredLogParser for PropagateRealTensorsParser<'_> {
             let filename = "symbolic_guard_information.html";
             let stack_html = format_stack(&m.stack.clone().unwrap_or(Vec::new()));
 
+            let mut visited = HashSet::new();
+            let sym_expr_trie_html = render_sym_expr_trie(
+                m.expr_node_id.unwrap(),
+                self.sym_expr_info_index,
+                0,
+                &mut visited,
+            )
+            .unwrap_or("".to_string());
+
             let context = SymbolicGuardContext {
                 css: crate::CSS,
                 expr: m.expr.clone().unwrap(),
                 stack_html: stack_html,
+                sym_expr_trie_html: sym_expr_trie_html,
             };
             let output = self.tt.render(&filename, &context)?;
             simple_file_output(&filename, lineno, compile_id, &output)
@@ -707,12 +785,9 @@ pub fn default_parsers<'t>(
 ) -> Vec<Box<dyn StructuredLogParser + 't>> {
     // We need to use Box wrappers here because vecs in Rust need to have known size
     if parser_config.export {
-        return vec![
-            Box::new(PropagateRealTensorsParser { tt }),
-            Box::new(SentinelFileParser::new("exported_program", |e| {
-                e.exported_program.as_ref()
-            })),
-        ];
+        return vec![Box::new(SentinelFileParser::new("exported_program", |e| {
+            e.exported_program.as_ref()
+        }))];
     }
 
     let result: Vec<Box<dyn StructuredLogParser>> = vec![
