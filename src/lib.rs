@@ -466,7 +466,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             metrics_index.entry(cid).or_default().push(m.clone());
         }
 
-        if let Some(ref guard) = e.propagate_real_tensors {
+        if let Some(ref guard) = e.propagate_real_tensors_provenance {
             if config.export {
                 let failure_type = "Data Dependent Error";
 
@@ -606,6 +606,8 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 SymExprInfoMetadata {
                     result: unbacked_symbol.symbol.clone(),
                     result_id: unbacked_symbol.node_id.clone(),
+                    user_stack: unbacked_symbol.user_stack.clone(),
+                    stack: unbacked_symbol.stack.clone(),
                     ..Default::default()
                 },
             );
@@ -674,8 +676,12 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             .drain(..)
             .map(|(x, y)| (x.map_or("(unknown)".to_string(), |e| e.to_string()), y))
             .collect(),
-        stack_trie_html: stack_trie.fmt(Some(&metrics_index)).unwrap(),
-        unknown_stack_trie_html: unknown_stack_trie.fmt(Some(&metrics_index)).unwrap(),
+        stack_trie_html: stack_trie
+            .fmt(Some(&metrics_index), "Stack", false)
+            .unwrap(),
+        unknown_stack_trie_html: unknown_stack_trie
+            .fmt(Some(&metrics_index), "Stack", false)
+            .unwrap(),
         has_unknown_stack_trie: !unknown_stack_trie.is_empty(),
         num_breaks: breaks.failures.len(),
         has_chromium_events: !chromium_events.is_empty(),

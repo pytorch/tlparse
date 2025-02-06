@@ -63,10 +63,12 @@ impl StackTrieNode {
     pub fn fmt(
         &self,
         metrics_index: Option<&CompilationMetricsIndex>,
+        caption: &str,
+        open: bool,
     ) -> Result<String, fmt::Error> {
         let mut f = String::new();
-        write!(f, "<details>")?;
-        write!(f, "<summary>Stack</summary>")?;
+        write!(f, "<details{}>", if open { " open" } else { "" })?;
+        write!(f, "<summary>{}</summary>", caption)?;
         write!(f, "<div class='stack-trie'>")?;
         write!(f, "<ul>")?;
         self.fmt_inner(&mut f, metrics_index)?;
@@ -194,6 +196,7 @@ pub struct FrameSummary {
     pub filename: u32,
     pub line: i32,
     pub name: String,
+    pub loc: Option<String>,
     pub uninterned_filename: Option<String>,
 }
 
@@ -241,10 +244,11 @@ impl fmt::Display for FrameSummary {
         } else {
             write!(
                 f,
-                "{}:{} in {}",
+                "{}:{} in {}<br>&nbsp;&nbsp;&nbsp;&nbsp;{}",
                 encode_text(simplify_filename(filename)),
                 self.line,
-                encode_text(&self.name)
+                encode_text(&self.name),
+                encode_text(&self.loc.clone().unwrap_or("".to_string()))
             )?;
         }
         Ok(())
@@ -364,18 +368,47 @@ pub struct SymbolicShapeSpecializationMetadata {
     pub user_stack: Option<StackSummary>,
 }
 
+#[derive(Debug, Deserialize, Serialize, Default)]
+pub struct FrameLocals {
+    pub locals: Option<FxHashMap<String, String>>,
+    pub symbols: Option<FxHashMap<String, String>>,
+}
+impl Display for FrameLocals {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if let Some(locals) = &self.locals {
+            write!(f, "Locals:<pre>\n")?;
+            for (name, value) in locals {
+                write!(f, "    {}: {}\n", name, value)?;
+            }
+            write!(f, "</pre>")?;
+        }
+        if let Some(symbols) = &self.symbols {
+            write!(f, "Symbols:<pre>\n")?;
+            for (name, value) in symbols {
+                write!(f, "    {}: {}\n", name, value)?;
+            }
+            write!(f, "</pre>")?;
+        }
+        Ok(())
+    }
+}
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SymbolicShapePropagateRealTensorMetadata {
     pub expr: Option<String>,
     pub result: Option<String>,
+    pub user_stack: Option<StackSummary>,
     pub stack: Option<StackSummary>,
     pub expr_node_id: Option<u64>,
+    pub symbol_to_sources: Option<FxHashMap<String, Vec<String>>>,
+    pub frame_locals: Option<FrameLocals>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct UnbackedSymbolMetadata {
     pub symbol: Option<String>,
     pub node_id: Option<u64>,
+    pub user_stack: Option<StackSummary>,
     pub stack: Option<StackSummary>,
     pub vr: Option<String>,
 }
@@ -386,7 +419,7 @@ pub struct SymExprInfoMetadata {
     pub result: Option<String>,
     pub result_id: Option<u64>,
     pub arguments: Option<Vec<String>>,
-    pub arguments_id: Option<Vec<u64>>,
+    pub argument_ids: Option<Vec<u64>>,
     pub user_stack: Option<StackSummary>,
     pub stack: Option<StackSummary>,
 }
@@ -439,7 +472,9 @@ pub struct CompilationMetricsContext<'e> {
 pub struct SymbolicGuardContext {
     pub css: &'static str,
     pub expr: String,
-    pub stack_html: String,
+    pub user_stack_html: String,
+    pub framework_stack_html: String,
+    pub locals_html: String,
     pub sym_expr_trie_html: String,
 }
 
@@ -570,7 +605,7 @@ pub struct Envelope {
     pub graph_dump: Option<GraphDumpMetadata>,
     pub link: Option<LinkMetadata>,
     pub symbolic_shape_specialization: Option<SymbolicShapeSpecializationMetadata>,
-    pub propagate_real_tensors: Option<SymbolicShapePropagateRealTensorMetadata>,
+    pub propagate_real_tensors_provenance: Option<SymbolicShapePropagateRealTensorMetadata>,
     pub create_unbacked_symbol: Option<UnbackedSymbolMetadata>,
     pub expression_created: Option<SymExprInfoMetadata>,
     pub missing_fake_kernel: Option<FakeKernelMetadata>,

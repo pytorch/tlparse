@@ -24,7 +24,6 @@ summary::-webkit-details-marker { color: #00ACF3; font-size: 125%; margin-right:
 summary:focus { outline-style: none; }
 article > details > summary { font-size: 28px; margin-top: 16px; }
 details > p { margin-left: 24px; }
-details details { margin-left: 36px; }
 details details summary { font-size: 16px; }
 "#;
 
@@ -500,13 +499,16 @@ pub static TEMPLATE_SYMBOLIC_GUARD_INFO: &str = r#"
 </head>
 <body>
     <h1>More detailed information on <code>{expr}</code></h1>
+    <h2>Stacktrace:</h2>
+    {user_stack_html | format_unescaped}
+    {framework_stack_html | format_unescaped}
+    <h2>Locals Information:</h2>
+    {locals_html | format_unescaped}
     <h2>Provenance information for this guard:</h2>
     <details open>
     <summary>Provenance Information</summary>
     {sym_expr_trie_html | format_unescaped}
     </details>
-    <h2>Stacktrace for how this guard was triggered:</h2>
-    {stack_html | format_unescaped}
 </body>
 </html>
 "#;
