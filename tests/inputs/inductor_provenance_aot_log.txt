@@ -1,0 +1,1658 @@
+V0213 10:06:43.630000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "ea8d5f3b71d4c6f123369837b5701c7b"}
+	{
+	"name": "dynamo",
+	"ts": 1739470003630658.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.635000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/torch/_dynamo/convert_frame.py", 0]}
+V0213 10:06:43.635000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/__run_lpar_main__.py", 1]}
+V0213 10:06:43.636000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/__par__/meta_only/bootstrap.py", 2]}
+V0213 10:06:43.636000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/__par__/bootstrap.py", 3]}
+V0213 10:06:43.636000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py", 4]}
+V0213 10:06:43.637000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/torch/export/__init__.py", 5]}
+V0213 10:06:43.637000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/torch/export/_trace.py", 6]}
+V0213 10:06:43.637000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/torch/export/exported_program.py", 7]}
+V0213 10:06:43.638000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/torch/_dynamo/eval_frame.py", 8]}
+V0213 10:06:43.638000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:23] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/module.py", 9]}
+V0213 10:06:43.638000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/convert_frame.py:972] {"dynamo_start": {"stack": [{"line": 38, "name": "<module>", "filename": 1}, {"line": 35, "name": "__invoke_main", "filename": 1}, {"line": 98, "name": "run_as_main", "filename": 2}, {"line": 94, "name": "run_as_main", "filename": 3}, {"line": 46, "name": "main", "filename": 4}, {"line": 370, "name": "export", "filename": 5}, {"line": 1019, "name": "wrapper", "filename": 6}, {"line": 121, "name": "wrapper", "filename": 7}, {"line": 2080, "name": "_export", "filename": 6}, {"line": 1019, "name": "wrapper", "filename": 6}, {"line": 121, "name": "wrapper", "filename": 7}, {"line": 1945, "name": "_export_for_training", "filename": 6}, {"line": 1298, "name": "_strict_export_lower_to_aten_ir", "filename": 6}, {"line": 693, "name": "_export_to_torch_ir", "filename": 6}, {"line": 1587, "name": "inner", "filename": 8}, {"line": 1751, "name": "_wrapped_call_impl", "filename": 9}, {"line": 1762, "name": "_call_impl", "filename": 9}, {"line": 570, "name": "_fn", "filename": 8}, {"line": 1751, "name": "_wrapped_call_impl", "filename": 9}, {"line": 30, "name": "forward", "filename": 4}]}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.639000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "aae7090d6ef9e393cd4c1db18cc6aa12"}
+	{
+	"name": "entire_frame_compile",
+	"ts": 1739470003639467.8,
+	"args": {
+	"fn_name": "_compile.compile_inner",
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.649000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:248] {"describe_storage": {"id": 0, "describer_id": 0, "size": 320}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.650000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:462] {"describe_tensor": {"id": 0, "ndim": 2, "dtype": "torch.float32", "device": "device(type='cuda', index=0)", "size": [8, 10], "is_leaf": true, "stride": [10, 1], "storage": 0, "view_func": "_CustomViewFunc(func=<built-in method _view_func_unsafe of Tensor object at 0x7f88a78af9c0>)", "describer_id": 0}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.650000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:1867] {"describe_source": {"describer_id": 0, "id": 0, "source": "L['x']"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.652000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:248] {"describe_storage": {"id": 1, "describer_id": 0, "size": 320}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.653000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:462] {"describe_tensor": {"id": 1, "ndim": 2, "dtype": "torch.float32", "device": "device(type='cuda', index=0)", "size": [8, 10], "is_leaf": true, "stride": [10, 1], "storage": 1, "view_func": "_CustomViewFunc(func=<built-in method _view_func_unsafe of Tensor object at 0x7f88a9d20b80>)", "describer_id": 0}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.653000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:1867] {"describe_source": {"describer_id": 0, "id": 1, "source": "L['y']"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.676000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/output_graph.py:1361] {"dynamo_output_graph": {"sizes": {"l_x_": [8, 10], "x": [8, 16], "x_1": [8, 16], "x_2": [8, 16]}}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "4cc363070b9fbf0808a57330cebb1697"}
+	class GraphModule(torch.nn.Module):
+	    def forward(self, L_x_: "f32[8, 10][10, 1]cuda:0"):
+	        l_x_ = L_x_
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:31 in forward, code: x = self.fc1(x)
+	        x: "f32[8, 16][16, 1]cuda:0" = self.L__self___fc1(l_x_);  l_x_ = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: x = self.relu(x)
+	        x_1: "f32[8, 16][16, 1]cuda:0" = self.L__self___relu(x);  x = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: x = self.sigmoid(x)
+	        x_2: "f32[8, 16][16, 1]cuda:0" = self.L__self___sigmoid(x_1);  x_1 = None
+	        return (x_2,)
+	        
+V0213 10:06:43.677000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "e3f07a427b7031ae9a163c1a4afddaa0"}
+	{
+	"name": "backend_compile",
+	"ts": 1739470003677287.8,
+	"args": {
+	"fn_name": "OutputGraph.call_user_compiler",
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.678000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "71f754abe045555e3ec3b2dfe8601c7e"}
+	{
+	"name": "backend_compile",
+	"ts": 1739470003678677.8,
+	"args": {
+	"fn_name": "OutputGraph.call_user_compiler",
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.693000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/guards.py:2502] {"dynamo_cpp_guards_str": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "1667e725bf83806b63b2c7537282ed5c"}
+	
+	TREE_GUARD_MANAGER:
+	+- RootGuardManager
+	| +- DEFAULT_DEVICE: utils_device.CURRENT_DEVICE == None                           # _dynamo/output_graph.py:491 in init_ambient_guards
+	| +- GLOBAL_STATE: ___check_global_state()
+	| +- TORCH_FUNCTION_MODE_STACK: ___check_torch_function_mode_stack()
+	| +- GuardManager: source=L['x'], accessed_by=FrameLocalsGuardAccessor(key='x', framelocals_idx=1)
+	| | +- TYPE_MATCH: ___check_type_id(L['x'], 140225372413968)                   
+	| | +- NO_HASATTR: hasattr(L['x'], '_dynamo_dynamic_indices') == False         
+	| +- GuardManager: source=L['y'], accessed_by=FrameLocalsGuardAccessor(key='y', framelocals_idx=2)
+	| | +- TYPE_MATCH: ___check_type_id(L['y'], 140225372413968)                   
+	| | +- NO_HASATTR: hasattr(L['y'], '_dynamo_dynamic_indices') == False         
+	| +- GuardManager: source=L['self'], accessed_by=FrameLocalsGuardAccessor(key='self', framelocals_idx=0)
+	| | +- ID_MATCH: ___check_obj_id(L['self'], 140226411458672)                 
+	| | +- GuardManager: source=L['self'].__dict__, accessed_by=GetGenericDictGuardAccessor
+	| | | +- GuardManager: source=L['self'].training, accessed_by=DictGetItemGuardAccessor('training')
+	| | | | +- ID_MATCH: ___check_obj_id(L['self'].training, 140226838509560)        
+	| | | +- GuardManager: source=L['self']._modules, accessed_by=DictGetItemGuardAccessor('_modules')
+	| | | | +- GuardManager: source=L['self'].fc1, accessed_by=DictGetItemGuardAccessor('fc1')
+	| | | | | +- ID_MATCH: ___check_obj_id(L['self'].fc1, 140226411461696)             
+	| | | | | +- GuardManager: source=L['self'].fc1.__dict__, accessed_by=GetGenericDictGuardAccessor
+	| | | | | | +- GuardManager: source=L['self'].fc1.training, accessed_by=DictGetItemGuardAccessor('training')
+	| | | | | | | +- ID_MATCH: ___check_obj_id(L['self'].fc1.training, 140226838509560)    
+	| | | | +- GuardManager: source=L['self'].relu, accessed_by=DictGetItemGuardAccessor('relu')
+	| | | | | +- ID_MATCH: ___check_obj_id(L['self'].relu, 140226412360752)            
+	| | | | | +- GuardManager: source=L['self'].relu.__dict__, accessed_by=GetGenericDictGuardAccessor
+	| | | | | | +- GuardManager: source=L['self'].relu.training, accessed_by=DictGetItemGuardAccessor('training')
+	| | | | | | | +- ID_MATCH: ___check_obj_id(L['self'].relu.training, 140226838509560)   
+	| | | | +- GuardManager: source=L['self'].sigmoid, accessed_by=DictGetItemGuardAccessor('sigmoid')
+	| | | | | +- ID_MATCH: ___check_obj_id(L['self'].sigmoid, 140226366522032)         
+	| | | | | +- GuardManager: source=L['self'].sigmoid.__dict__, accessed_by=GetGenericDictGuardAccessor
+	| | | | | | +- GuardManager: source=L['self'].sigmoid.training, accessed_by=DictGetItemGuardAccessor('training')
+	| | | | | | | +- ID_MATCH: ___check_obj_id(L['self'].sigmoid.training, 140226838509560)
+	+- LAMBDA_GUARD: L['x'].size()[0] == 8  # (unknown source L['x'].size()[0], please file a bug)
+	+- LAMBDA_GUARD: L['x'].size()[1] == 10  # (unknown source L['x'].size()[1], please file a bug)
+	+- LAMBDA_GUARD: L['x'].stride()[0] == 10  # (unknown source L['x'].stride()[0], please file a bug)
+	+- LAMBDA_GUARD: L['x'].stride()[1] == 1  # (unknown source L['x'].stride()[1], please file a bug)
+	+- LAMBDA_GUARD: L['x'].storage_offset() == 0  # (unknown source L['x'].storage_offset(), please file a bug)
+	+- LAMBDA_GUARD: L['y'].size()[0] == 8  # (unknown source L['y'].size()[0], please file a bug)
+	+- LAMBDA_GUARD: L['y'].size()[1] == 10  # (unknown source L['y'].size()[1], please file a bug)
+	+- LAMBDA_GUARD: L['y'].stride()[0] == 10  # (unknown source L['y'].stride()[0], please file a bug)
+	+- LAMBDA_GUARD: L['y'].stride()[1] == 1  # (unknown source L['y'].stride()[1], please file a bug)
+	+- LAMBDA_GUARD: L['y'].storage_offset() == 0  # (unknown source L['y'].storage_offset(), please file a bug)
+	
+	Guard latency = 0.00 us
+V0213 10:06:43.694000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "aea22c72a899c439a2fba9e9445b187a"}
+	{
+	"name": "entire_frame_compile",
+	"ts": 1739470003694058.8,
+	"args": {
+	"fn_name": "_compile.compile_inner",
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.695000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "b3df764a799b88525ad909435111cf20"}
+	{
+	"name": "gc",
+	"ts": 1739470003694968.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.696000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "c231f7bfdfd60d6a49db5112835aacfd"}
+	{
+	"name": "gc",
+	"ts": 1739470003696604.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:43.717000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1463] {"compilation_metrics": {"compile_id": "0/0", "frame_key": "1", "co_name": "forward", "co_filename": "/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py", "co_firstlineno": 30, "cache_size": 0, "accumulated_cache_size": 0, "guard_count": 11, "shape_env_guard_count": 0, "graph_op_count": 3, "graph_node_count": 5, "graph_input_count": 1, "start_time": 1739470003.634051, "entire_frame_compile_time_s": 0.054591, "backend_compile_time_s": 0.001389, "inductor_compile_time_s": null, "code_gen_time_s": null, "fail_type": null, "fail_reason": null, "fail_user_frame_filename": null, "fail_user_frame_lineno": null, "non_compliant_ops": [], "compliant_custom_ops": [], "restart_reasons": [], "dynamo_time_before_restart_s": 0.0, "has_guarded_code": true, "remote_cache_time_saved_s": null, "structured_logging_overhead_s": 0.015496, "config_suppress_errors": false, "config_inline_inbuilt_nn_modules": true, "specialize_float": true, "dynamo_config": "{\"_autograd_backward_strict_mode_conditional_banned_ops\": [\"stride\", \"storage_offset\", \"is_contiguous\"], \"_ddp_optimization_mode\": [\"ddp_optimizer\", \"python_reducer\", \"python_reducer_without_compiled_forward\", \"no_optimization\"], \"_unsafe_skip_fsdp_module_guards\": false, \"accumulated_recompile_limit\": 256, \"allow_complex_guards_as_runtime_asserts\": false, \"allow_empty_graphs\": false, \"allow_ignore_mark_dynamic\": false, \"allow_rnn\": true, \"allow_unspec_int_on_nn_module\": false, \"allowed_functions_module_string_ignorelist\": [\"torch._decomp\", \"torch._prims\", \"torch._refs\", \"torch.distributions\", \"torch.testing\"], \"assume_static_by_default\": true, \"automatic_dynamic_local_pgo\": true, \"automatic_dynamic_remote_pgo\": null, \"automatic_dynamic_shapes\": false, \"automatic_dynamic_shapes_mark_as\": \"dynamic\", \"capture_autograd_function\": true, \"capture_dynamic_output_shape_ops\": true, \"capture_func_transforms\": true, \"capture_scalar_outputs\": true, \"capture_sparse_compute\": false, \"compiled_autograd\": false, \"compiled_autograd_kwargs_override\": {}, \"cprofile\": false, \"cudagraph_backend_keep_input_mutation\": false, \"cudagraph_backend_support_input_mutation\": false, \"dead_code_elimination\": true, \"disable\": false, \"do_not_emit_runtime_asserts\": false, \"dynamic_shapes\": true, \"enable_compiler_collectives\": false, \"enable_cpp_framelocals_guard_eval\": true, \"enable_cpp_guard_manager\": true, \"enable_cpp_symbolic_shape_guards\": false, \"enable_faithful_generator_behavior\": true, \"enable_trace_contextlib\": true, \"error_on_nested_fx_trace\": true, \"error_on_nested_jit_trace\": true, \"error_on_recompile\": false, \"fail_on_recompile_limit_hit\": false, \"fake_tensor_cache_crosscheck_enabled\": false, \"fake_tensor_cache_enabled\": true, \"force_nn_module_property_static_shapes\": true, \"force_parameter_static_shapes\": true, \"force_unspec_int_unbacked_size_like_on_torchrec_kjt\": false, \"guard_nn_modules\": true, \"guard_nn_modules_using_dict_tags\": true, \"inline_inbuilt_nn_modules\": true, \"issue_3_13_0_warning\": true, \"minimum_call_count\": 1, \"numpy_default_complex\": \"complex128\", \"numpy_default_float\": \"float64\", \"numpy_default_int\": \"int64\", \"only_allow_pt2_compliant_ops\": false, \"optimize_ddp\": true, \"optimize_ddp_lazy_compile\": false, \"prefer_deferred_runtime_asserts_over_guards\": true, \"prepare_freezing\": false, \"raise_on_ctx_manager_usage\": true, \"raise_on_unsafe_aot_autograd\": false, \"recompile_limit\": 8, \"record_compile_time_instruction_count\": false, \"replay_record_enabled\": false, \"report_guard_failures\": true, \"rewrite_assert_with_torch_assert\": true, \"run_gc_after_compile\": true, \"skip_code_recursive_on_recompile_limit_hit\": true, \"skip_fsdp_guards\": true, \"skip_fsdp_hooks\": true, \"skip_nnmodule_hook_guards\": true, \"skip_no_tensor_aliasing_guards_on_parameters\": true, \"skip_tensor_guards_with_matching_dict_tags\": true, \"skip_torchrec\": true, \"skipfiles_inline_module_allowlist\": {}, \"specialize_float\": true, \"specialize_int\": true, \"suppress_errors\": false, \"trace_numpy\": true, \"track_nodes_for_deduplication\": false, \"use_graph_deduplication\": false, \"use_lazy_graph_module\": true, \"use_numpy_random_stream\": false, \"verify_correctness\": false}", "is_forward": true, "num_triton_bundles": null, "remote_fx_graph_cache_get_time_ms": null, "remote_fx_graph_cache_put_time_ms": null, "start_time_us": 1739470003634051, "duration_us": 63434, "dynamo_cumulative_compile_time_us": 54591, "aot_autograd_cumulative_compile_time_us": 1389, "inductor_cumulative_compile_time_us": null, "inductor_code_gen_cumulative_compile_time_us": null, "triton_compile_time_us": null, "runtime_cudagraphify_time_us": null, "runtime_triton_autotune_time_us": null, "dynamo_compile_time_before_restart_us": 0, "cuda_synchronize_time_us": null, "distributed_ephemeral_timeout_us": null, "structured_logging_overhead_us": 15496, "remote_fx_graph_cache_get_time_us": null, "remote_fx_graph_cache_put_time_us": null, "backward_cumulative_compile_time_us": null, "end_time_us": 1739470003697485, "pre_grad_pass_time_us": null, "post_grad_pass_time_us": null, "joint_graph_pass_time_us": null, "log_format_version": 3, "inductor_config": "{\"TYPE_CHECKING\": false, \"_cache_config_ignore_prefix\": [\"trace\", \"cuda.cutlass_dir\", \"worker_start_method\", \"compile_threads\", \"post_grad_custom_post_pass\", \"post_grad_custom_pre_pass\", \"always_complex_memory_overlap_TESTING_ONLY\"], \"_collective.auto_select\": false, \"_collective.one_shot_all_reduce_threshold_bytes\": 131072, \"_fuse_ddp_bucket_size\": 25, \"_fuse_ddp_communication\": false, \"_fuse_ddp_communication_passes\": [\"fuse_ddp_with_concat_op\", \"schedule_comm_wait\"], \"_micro_pipeline_tp\": false, \"_pre_fusion_custom_pass\": null, \"_profile_var\": \"\", \"_raise_error_for_testing\": false, \"_save_config_ignore\": [\"trace.upload_tar\", \"joint_custom_pre_pass\", \"joint_custom_post_pass\", \"pre_grad_custom_pass\", \"aot_inductor.repro_level\", \"aot_inductor.dump_aoti_minifier\"], \"aggressive_fusion\": false, \"allow_buffer_reuse\": true, \"always_complex_memory_overlap_TESTING_ONLY\": false, \"always_keep_tensor_constants\": false, \"annotate_training\": false, \"aot_inductor.allow_stack_allocation\": false, \"aot_inductor.compile_wrapper_with_O0\": false, \"aot_inductor.debug_compile\": false, \"aot_inductor.debug_intermediate_value_printer\": \"0\", \"aot_inductor.dump_aoti_minifier\": false, \"aot_inductor.filtered_kernel_names\": null, \"aot_inductor.force_mmap_weights\": false, \"aot_inductor.metadata\": {}, \"aot_inductor.output_path\": \"\", \"aot_inductor.package\": false, \"aot_inductor.package_constants_in_so\": true, \"aot_inductor.package_cpp_only\": false, \"aot_inductor.presets\": {}, \"aot_inductor.raise_error_on_ignored_optimization\": true, \"aot_inductor.repro_level\": 2, \"aot_inductor.serialized_in_spec\": \"\", \"aot_inductor.serialized_out_spec\": \"\", \"aot_inductor.use_minimal_arrayref_interface\": false, \"aot_inductor.use_runtime_constant_folding\": false, \"assert_indirect_indexing\": true, \"assume_aligned_inputs\": false, \"autoheuristic_collect\": \"\", \"autoheuristic_log_path\": \"DEFAULT\", \"autoheuristic_use\": \"mixed_mm\", \"autotune_fallback_to_aten\": true, \"autotune_in_subproc\": false, \"autotune_local_cache\": true, \"autotune_multi_device\": false, \"autotune_num_choices_displayed\": 10, \"autotune_remote_cache\": null, \"b2b_gemm_pass\": false, \"batch_fusion\": true, \"benchmark_combo_kernel\": false, \"benchmark_epilogue_fusion\": true, \"benchmark_fusion\": false, \"benchmark_harness\": true, \"benchmark_kernel\": false, \"bundle_triton_into_fx_graph_cache\": null, \"bundled_autotune_remote_cache\": null, \"bw_outputs_user_visible\": true, \"can_inplace_pad_graph_input\": false, \"check_stack_no_cycles_TESTING_ONLY\": false, \"combo_kernel_allow_mixed_sizes\": 1, \"combo_kernel_foreach_dynamic_shapes\": false, \"combo_kernels\": false, \"combo_kernels_autotune\": 1, \"comment_origin\": false, \"compile_threads\": null, \"comprehensive_padding\": true, \"compute_all_bounds\": false, \"constant_and_index_propagation\": true, \"conv_1x1_as_mm\": false, \"coordinate_descent_check_all_directions\": false, \"coordinate_descent_search_radius\": 1, \"coordinate_descent_tuning\": false, \"cpp.cxx\": [null, \"g++\"], \"cpp.descriptive_names\": \"original_aten\", \"cpp.dynamic_threads\": false, \"cpp.enable_concat_linear\": false, \"cpp.enable_floating_point_contract_flag\": \"off\", \"cpp.enable_grouped_gemm_template\": false, \"cpp.enable_kernel_profile\": false, \"cpp.enable_loop_tail_vec\": true, \"cpp.enable_tiling_heuristics\": true, \"cpp.enable_unsafe_math_opt_flag\": false, \"cpp.fallback_scatter_reduce_sum\": true, \"cpp.gemm_cache_blocking\": null, \"cpp.gemm_max_k_slices\": 1, \"cpp.gemm_thread_factors\": null, \"cpp.inject_log1p_bug_TESTING_ONLY\": null, \"cpp.inject_relu_bug_TESTING_ONLY\": null, \"cpp.max_horizontal_fusion_size\": 16, \"cpp.min_chunk_size\": 4096, \"cpp.no_redundant_loops\": true, \"cpp.simdlen\": null, \"cpp.threads\": -1, \"cpp.vec_isa_ok\": null, \"cpp.weight_prepack\": true, \"cpp_wrapper\": false, \"cpu_backend\": \"cpp\", \"cuda.arch\": null, \"cuda.compile_opt_level\": \"-O1\", \"cuda.cuda_cxx\": null, \"cuda.cutlass_backend_min_gemm_size\": 1, \"cuda.cutlass_dir\": \"/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/third_party/cutlass\", \"cuda.cutlass_instantiation_level\": \"0\", \"cuda.cutlass_max_profiling_configs\": null, \"cuda.cutlass_max_profiling_swizzle_options\": [2], \"cuda.cutlass_op_allowlist_regex\": null, \"cuda.cutlass_op_denylist_regex\": null, \"cuda.enable_cuda_lto\": false, \"cuda.enable_debug_info\": false, \"cuda.enable_ptxas_info\": false, \"cuda.generate_test_runner\": false, \"cuda.use_fast_math\": false, \"cuda.version\": null, \"cuda_backend\": \"triton\", \"custom_op_default_layout_constraint\": \"needs_fixed_stride_order\", \"dce\": false, \"debug\": false, \"debug_fusion\": false, \"debug_index_asserts\": false, \"debug_ir_traceback\": false, \"decompose_mem_bound_mm\": false, \"developer_warnings\": true, \"disable_cpp_codegen\": false, \"disable_padding_cpu\": true, \"disable_progress\": true, \"dynamic_scale_rblock\": true, \"efficient_conv_bn_eval_fx_passes\": false, \"emulate_precision_casts\": false, \"enable_auto_functionalized_v2\": true, \"enable_linear_binary_folding\": false, \"enabled_metric_tables\": \"\", \"epilogue_fusion\": true, \"epilogue_fusion_first\": false, \"estimate_op_runtime\": \"default\", \"external_matmul\": [], \"fallback_random\": false, \"force_disable_caches\": false, \"force_fuse_int_mm_with_mul\": false, \"force_layout_optimization\": false, \"force_pointwise_cat\": false, \"force_same_precision\": true, \"force_shape_pad\": false, \"freezing\": false, \"freezing_discard_parameters\": false, \"fx_graph_cache\": true, \"fx_graph_remote_cache\": null, \"fx_passes_numeric_check\": {\"num_iterations\": 1, \"pre_grad\": false, \"precision\": 0.0001, \"requires_optimizer\": true}, \"generate_intermediate_hooks\": false, \"global_cache_dir\": null, \"group_fusion\": false, \"halide.asserts\": false, \"halide.cpu_target\": \"host\", \"halide.debug\": false, \"halide.gpu_target\": \"host-cuda\", \"halide.scan_kernels\": false, \"halide.scheduler_cpu\": \"Adams2019\", \"halide.scheduler_cuda\": \"Anderson2021\", \"implicit_fallbacks\": true, \"inplace_buffers\": true, \"inplace_padding\": true, \"inter_node_bw\": 25, \"intra_node_bw\": 300, \"is_nightly_or_source\": false, \"is_predispatch\": false, \"joint_custom_post_pass\": null, \"joint_custom_pre_pass\": null, \"joint_graph_constant_folding\": true, \"keep_output_stride\": true, \"kernel_name_max_ops\": 10, \"layout_opt_default\": \"1\", \"layout_optimization\": true, \"loop_ordering_after_fusion\": false, \"max_autotune\": false, \"max_autotune_conv_backends\": \"ATEN,TRITON\", \"max_autotune_gemm\": false, \"max_autotune_gemm_backends\": \"ATEN,TRITON,CPP\", \"max_autotune_gemm_search_space\": \"DEFAULT\", \"max_autotune_pointwise\": false, \"max_autotune_subproc_graceful_timeout_seconds\": 1.0, \"max_autotune_subproc_result_timeout_seconds\": 60.0, \"max_autotune_subproc_terminate_timeout_seconds\": 2.0, \"max_epilogue_benchmarked_choices\": 1, \"max_fusion_size\": 64, \"max_pointwise_cat_inputs\": 8, \"memory_planning\": false, \"memory_pool\": \"intermediates\", \"mixed_mm_choice\": \"heuristic\", \"nan_asserts\": false, \"optimize_scatter_upon_const_tensor\": true, \"pad_channels_last\": false, \"pad_outputs\": false, \"padding_alignment_bytes\": 128, \"padding_stride_threshold\": 1024, \"pattern_matcher\": true, \"permute_fusion\": false, \"pick_loop_orders\": true, \"post_grad_custom_post_pass\": null, \"post_grad_custom_pre_pass\": null, \"post_grad_fusion_options\": {}, \"pre_grad_custom_pass\": null, \"pre_grad_fusion_options\": {}, \"profile_bandwidth\": false, \"profile_bandwidth_output\": null, \"profile_bandwidth_regex\": \"\", \"profile_bandwidth_with_do_bench_using_profiling\": false, \"profiler_mark_wrapper_call\": false, \"prologue_fusion\": false, \"realize_acc_reads_threshold\": 8, \"realize_opcount_threshold\": 30, \"realize_reads_threshold\": 4, \"reorder_for_compute_comm_overlap\": false, \"reorder_for_compute_comm_overlap_passes\": [\"reorder_compute_for_overlap\", \"sink_waits\", \"raise_comms\"], \"reorder_for_locality\": true, \"reorder_for_peak_memory\": true, \"rocm.arch\": [], \"rocm.ck_dir\": null, \"rocm.ck_supported_arch\": [\"gfx90a\", \"gfx940\", \"gfx941\", \"gfx942\"], \"rocm.compile_opt_level\": \"-O2\", \"rocm.flush_denormals\": true, \"rocm.generate_test_runner\": false, \"rocm.is_debug\": false, \"rocm.n_max_profiling_configs\": null, \"rocm.print_kernel_resource_usage\": false, \"rocm.rocm_home\": null, \"rocm.save_temps\": false, \"rocm.use_fast_math\": true, \"rocm.use_preselected_instances\": false, \"save_args\": false, \"score_fusion_memory_threshold\": 10, \"search_autotune_cache\": false, \"shape_padding\": true, \"size_asserts\": true, \"sleep_sec_TESTING_ONLY\": null, \"split_cat_fx_passes\": true, \"split_reductions\": true, \"static_weight_shapes\": true, \"test_configs.autotune_choice_desc_regex\": null, \"test_configs.autotune_choice_name_regex\": null, \"test_configs.force_extern_kernel_in_multi_template\": false, \"test_configs.max_mm_configs\": null, \"test_configs.runtime_triton_dtype_assert\": false, \"trace.compile_profile\": false, \"trace.debug_dir\": null, \"trace.debug_log\": false, \"trace.dot_graph_shape\": null, \"trace.draw_orig_fx_graph\": false, \"trace.enabled\": true, \"trace.fx_graph\": true, \"trace.fx_graph_transformed\": true, \"trace.graph_diagram\": false, \"trace.info_log\": false, \"trace.ir_post_fusion\": true, \"trace.ir_pre_fusion\": true, \"trace.log_autotuning_results\": false, \"trace.log_inductor_triton_kernel_to_post_grad_node_info\": true, \"trace.log_url_for_graph_xform\": null, \"trace.output_code\": true, \"trace.save_real_tensors\": false, \"trace.upload_tar\": null, \"triton.autotune_at_compile_time\": null, \"triton.autotune_cublasLt\": true, \"triton.autotune_pointwise\": true, \"triton.codegen_upcast_to_fp32\": true, \"triton.cooperative_reductions\": false, \"triton.cudagraph_dynamic_shape_warn_limit\": 50, \"triton.cudagraph_skip_dynamic_graphs\": false, \"triton.cudagraph_support_input_mutation\": false, \"triton.cudagraph_trees\": true, \"triton.cudagraph_trees_history_recording\": false, \"triton.cudagraph_unexpected_rerecord_limit\": 128, \"triton.cudagraphs\": false, \"triton.debug_sync_graph\": false, \"triton.debug_sync_kernel\": false, \"triton.dense_indexing\": false, \"triton.descriptive_names\": \"original_aten\", \"triton.divisible_by_16\": true, \"triton.enable_persistent_tma_matmul\": false, \"triton.fast_path_cudagraph_asserts\": false, \"triton.force_cooperative_reductions\": false, \"triton.force_cudagraph_sync\": false, \"triton.force_cudagraphs_warmup\": false, \"triton.inject_relu_bug_TESTING_ONLY\": null, \"triton.max_tiles\": 2, \"triton.min_split_scan_rblock\": 256, \"triton.multi_kernel\": 0, \"triton.persistent_reductions\": true, \"triton.prefer_nd_tiling\": false, \"triton.skip_cudagraph_warmup\": false, \"triton.skip_l1_cache\": false, \"triton.slow_path_cudagraph_asserts\": true, \"triton.spill_threshold\": 16, \"triton.store_cubin\": false, \"triton.tile_reductions\": false, \"triton.tiling_prevents_pointwise_fusion\": true, \"triton.tiling_prevents_reduction_fusion\": true, \"triton.unique_kernel_names\": true, \"triton.use_block_ptr\": false, \"triton_kernel_default_layout_constraint\": \"needs_fixed_stride_order\", \"unbacked_symint_fallback\": 8192, \"unroll_reductions_threshold\": 8, \"unsafe_ignore_unsupported_triton_autotune_args\": false, \"use_experimental_benchmarker\": false, \"use_fast_math\": false, \"use_mixed_mm\": true, \"verbose_progress\": false, \"warn_mix_layout\": false, \"worker_start_method\": \"subprocess\"}", "remote_cache_version": 14, "inductor_fx_remote_cache_hit_count": null, "inductor_fx_remote_cache_miss_count": null, "inductor_fx_remote_cache_backend_type": "_ManifoldCache", "inductor_fx_remote_cache_hit_keys": null, "inductor_fx_remote_cache_miss_keys": null, "cuda_version": "12.4.0", "triton_version": "3.2.0", "feature_usage": null, "compile_time_autotune_time_us": null, "is_runtime": false, "gc_time_us": 1636, "tensorify_float_attempt": null, "tensorify_float_success": null, "tensorify_float_failure": null, "guard_latency_us": null, "recompile_reason": null}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0}
+V0213 10:06:43.722000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "f8df32b7fa743bacc15d3b2e5ebc59c2"}
+	{
+	"name": "dynamo",
+	"ts": 1739470003722659.5,
+	"args": {
+	"compile_id": "0/0",
+	"frame_key": "1",
+	"co_name": "forward",
+	"co_filename": "/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py",
+	"co_firstlineno": 30,
+	"cache_size": 0,
+	"accumulated_cache_size": 0,
+	"guard_count": 11,
+	"shape_env_guard_count": 0,
+	"graph_op_count": 3,
+	"graph_node_count": 5,
+	"graph_input_count": 1,
+	"fail_type": null,
+	"fail_reason": null,
+	"fail_user_frame_filename": null,
+	"fail_user_frame_lineno": null,
+	"non_compliant_ops": [],
+	"compliant_custom_ops": [],
+	"restart_reasons": [],
+	"dynamo_time_before_restart_s": 0.0,
+	"has_guarded_code": true,
+	"dynamo_config": "{\"_autograd_backward_strict_mode_conditional_banned_ops\": [\"stride\", \"storage_offset\", \"is_contiguous\"], \"_ddp_optimization_mode\": [\"ddp_optimizer\", \"python_reducer\", \"python_reducer_without_compiled_forward\", \"no_optimization\"], \"_unsafe_skip_fsdp_module_guards\": false, \"accumulated_recompile_limit\": 256, \"allow_complex_guards_as_runtime_asserts\": false, \"allow_empty_graphs\": false, \"allow_ignore_mark_dynamic\": false, \"allow_rnn\": true, \"allow_unspec_int_on_nn_module\": false, \"allowed_functions_module_string_ignorelist\": [\"torch._decomp\", \"torch._prims\", \"torch._refs\", \"torch.distributions\", \"torch.testing\"], \"assume_static_by_default\": true, \"automatic_dynamic_local_pgo\": true, \"automatic_dynamic_remote_pgo\": null, \"automatic_dynamic_shapes\": false, \"automatic_dynamic_shapes_mark_as\": \"dynamic\", \"capture_autograd_function\": true, \"capture_dynamic_output_shape_ops\": true, \"capture_func_transforms\": true, \"capture_scalar_outputs\": true, \"capture_sparse_compute\": false, \"compiled_autograd\": false, \"compiled_autograd_kwargs_override\": {}, \"cprofile\": false, \"cudagraph_backend_keep_input_mutation\": false, \"cudagraph_backend_support_input_mutation\": false, \"dead_code_elimination\": true, \"disable\": false, \"do_not_emit_runtime_asserts\": false, \"dynamic_shapes\": true, \"enable_compiler_collectives\": false, \"enable_cpp_framelocals_guard_eval\": true, \"enable_cpp_guard_manager\": true, \"enable_cpp_symbolic_shape_guards\": false, \"enable_faithful_generator_behavior\": true, \"enable_trace_contextlib\": true, \"error_on_nested_fx_trace\": true, \"error_on_nested_jit_trace\": true, \"error_on_recompile\": false, \"fail_on_recompile_limit_hit\": false, \"fake_tensor_cache_crosscheck_enabled\": false, \"fake_tensor_cache_enabled\": true, \"force_nn_module_property_static_shapes\": true, \"force_parameter_static_shapes\": true, \"force_unspec_int_unbacked_size_like_on_torchrec_kjt\": false, \"guard_nn_modules\": true, \"guard_nn_modules_using_dict_tags\": true, \"inline_inbuilt_nn_modules\": true, \"issue_3_13_0_warning\": true, \"minimum_call_count\": 1, \"numpy_default_complex\": \"complex128\", \"numpy_default_float\": \"float64\", \"numpy_default_int\": \"int64\", \"only_allow_pt2_compliant_ops\": false, \"optimize_ddp\": true, \"optimize_ddp_lazy_compile\": false, \"prefer_deferred_runtime_asserts_over_guards\": true, \"prepare_freezing\": false, \"raise_on_ctx_manager_usage\": true, \"raise_on_unsafe_aot_autograd\": false, \"recompile_limit\": 8, \"record_compile_time_instruction_count\": false, \"replay_record_enabled\": false, \"report_guard_failures\": true, \"rewrite_assert_with_torch_assert\": true, \"run_gc_after_compile\": true, \"skip_code_recursive_on_recompile_limit_hit\": true, \"skip_fsdp_guards\": true, \"skip_fsdp_hooks\": true, \"skip_nnmodule_hook_guards\": true, \"skip_no_tensor_aliasing_guards_on_parameters\": true, \"skip_tensor_guards_with_matching_dict_tags\": true, \"skip_torchrec\": true, \"skipfiles_inline_module_allowlist\": {}, \"specialize_float\": true, \"specialize_int\": true, \"suppress_errors\": false, \"trace_numpy\": true, \"track_nodes_for_deduplication\": false, \"use_graph_deduplication\": false, \"use_lazy_graph_module\": true, \"use_numpy_random_stream\": false, \"verify_correctness\": false}"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:45.422000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:1917] {"inductor_pre_grad_graph": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "c11229293a126f817cae1199c1d728e9"}
+	class GraphModule(torch.nn.Module):
+	    def forward(self, x: "f32[8, 10][10, 1]cuda:0", y: "f32[8, 10][10, 1]cuda:0"):
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cuda:0" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cuda:0" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:31 in forward, code: x = self.fc1(x)
+	        linear: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.linear.default(x, fc1_weight, fc1_bias);  x = fc1_weight = fc1_bias = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: x = self.relu(x)
+	        relu: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.relu.default(linear);  linear = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: x = self.sigmoid(x)
+	        sigmoid: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        return (sigmoid,)
+	        
+	
+	 # graph id: 140226366523760
+V0213 10:06:45.425000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "ef4309046cba5a4a110e5faae35341f2"}
+	{
+	"name": "_recursive_pre_grad_passes",
+	"ts": 1739470005425028.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.446000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "8626f5835186e5ea53bd516c7912a591"}
+	{
+	"name": "_recursive_pre_grad_passes",
+	"ts": 1739470006446231.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.450000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "b7600b1631cfebbcd8d8b776ea39a533"}
+	{
+	"name": "create_aot_dispatcher_function",
+	"ts": 1739470006450827.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.490000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py:214] {"artifact": {"name": "aot_forward_graph_fw_metadata", "encoding": "string"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "08abad34ef623f7fda57b39a4ce21e13"}
+	ViewAndMutationMeta(input_info=[InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=True,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=True,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=False,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=False,
+	                                              keep_input_mutations=False)],
+	                    output_info=[OutputAliasInfo(output_type=<OutputType.non_alias: 1>,
+	                                                raw_type=<class 'torch._subclasses.functional_tensor.FunctionalTensor'>,
+	                                                base_idx=None,
+	                                                dynamic_dims=set(),
+	                                                requires_grad=False,
+	                                                functional_tensor=None)],
+	                    num_intermediate_bases=0,
+	                    keep_input_mutations=False,
+	                    traced_tangents=[],
+	                    subclass_inp_meta=[PlainTensorMeta(unwrapped_idx=0,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=1,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=2,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=3,
+	                                                      memory_format=None)],
+	                    subclass_fw_graph_out_meta=[PlainTensorMeta(unwrapped_idx=0,
+	                                                               memory_format=None)],
+	                    subclass_tangent_meta=[],
+	                    is_train=False,
+	                    traced_tangent_metas=None,
+	                    num_symints_saved_for_bw=None,
+	                    grad_enabled_mutation=None,
+	                    deterministic=None,
+	                    static_input_indices=[],
+	                    tokens={},
+	                    indices_of_inputs_that_requires_grad_with_mutations_in_bw=[],
+	                    bw_donated_idxs=None,
+	                    num_backward_tokens=0)
+V0213 10:06:46.492000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py:232] {"aot_inference_graph": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "f0533770d65bc6c53bcea908c21cdc24"}
+	class <lambda>(torch.nn.Module):
+	    def forward(self, arg0_1: "f32[16, 10][10, 1]cuda:0", arg1_1: "f32[16][1]cuda:0", arg2_1: "f32[8, 10][10, 1]cuda:0", arg3_1: "f32[8, 10][10, 1]cuda:0"):
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:31 in forward, code: x = self.fc1(x)
+	        permute: "f32[10, 16][1, 10]cuda:0" = torch.ops.aten.permute.default(arg0_1, [1, 0]);  arg0_1 = None
+	        addmm: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.addmm.default(arg1_1, arg2_1, permute);  arg1_1 = arg2_1 = permute = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: x = self.relu(x)
+	        relu: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.relu.default(addmm);  addmm = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: x = self.sigmoid(x)
+	        sigmoid: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        return (sigmoid,)
+	        
+V0213 10:06:46.496000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "b9c2f5429d306e08ee53c8c03691edc5"}
+	{
+	"name": "create_aot_dispatcher_function",
+	"ts": 1739470006496217.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.498000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "10a2caea4dabc26d6518ce65704c761d"}
+	{
+	"name": "compile_fx.<locals>.fw_compiler_base",
+	"ts": 1739470006498870.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.499000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "ebaf33c7d9a820229016b3c0e5d75781"}
+	{
+	"name": "_recursive_joint_graph_passes",
+	"ts": 1739470006499729.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.690000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "7db5597e4dd0e10621257d440e6fc8df"}
+	{
+	"name": "pad_mm_benchmark",
+	"ts": 1739470006690189.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.692000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "ddaead9f424e392571f154185b14cfaf"}
+	{
+	"name": "pad_mm_benchmark_get_do_bench",
+	"ts": 1739470006692014.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:46.693000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "8156f5997cad2bdf911b631d7e2563be"}
+	{
+	"name": "pad_mm_benchmark_get_do_bench",
+	"ts": 1739470006693572.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.476000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "a6b01932b479b020a3a466e8116a4aa6"}
+	{
+	"name": "TritonBenchmarker.benchmark_gpu",
+	"ts": 1739470007476532.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.654000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "5ff3df0385f9c7f5aa3538782bd0b2a8"}
+	{
+	"name": "TritonBenchmarker.benchmark_gpu",
+	"ts": 1739470007654361.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.657000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "b9040f5ceeb3ee1048747ac62e585ba7"}
+	{
+	"name": "TritonBenchmarker.benchmark_gpu",
+	"ts": 1739470007657114.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.801000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "8cd0a2b800882a29fee9f49e3fb33154"}
+	{
+	"name": "TritonBenchmarker.benchmark_gpu",
+	"ts": 1739470007801626.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.805000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "e7eb86c4355474816509513f4fe06ab4"}
+	{
+	"name": "pad_mm_benchmark",
+	"ts": 1739470007804908.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.807000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "ac80ca82560849141fa2bfd46586e702"}
+	{
+	"name": "_recursive_joint_graph_passes",
+	"ts": 1739470007806972.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.808000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "7426573358f065667fc889240ff9e7aa"}
+	{
+	"name": "inductor_compile",
+	"ts": 1739470007808676.2,
+	"args": {
+	"fn_name": "compile_fx_inner",
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:47.820000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:923] {"artifact": {"name": "fx_graph_runnable", "encoding": "string"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "5d01e2e5d7f49d7bbed81cd272bc2dd2"}
+	
+	import os
+	os.environ['TORCH_TRACE'] = '/home/shangdiy/my_trace_log_dir'
+	os.environ['TORCH_COMPILE_DEBUG'] = '1'
+	os.environ['TORCH_LOGS'] = '+inductor'
+	os.environ['PYTORCH_DDP_USE_SIDE_STREAM'] = '0'
+	os.environ['TRITON_CACHE_MANAGER'] = 'triton.runtime.cache:RemoteCacheManager'
+	os.environ['TRITON_REMOTE_CACHE_BACKEND'] = 'triton.fb.fb_memcache:FbMemcacheRemoteKernelCache'
+	os.environ['TORCHINDUCTOR_CACHE_DIR'] = '/tmp/torchinductor_shangdiy'
+	
+	import torch
+	from torch import tensor, device
+	import torch.fx as fx
+	from torch._dynamo.testing import rand_strided
+	from math import inf
+	import torch._inductor.inductor_prims
+	
+	import torch._dynamo.config
+	import torch._inductor.config
+	import torch._functorch.config
+	import torch.fx.experimental._config
+	torch._dynamo.config.specialize_int = False
+	torch._dynamo.config.specialize_float = False
+	torch._dynamo.config.assume_static_by_default = True
+	torch._dynamo.config.automatic_dynamic_shapes = True
+	torch._dynamo.config.capture_scalar_outputs = False
+	torch._dynamo.config.capture_dynamic_output_shape_ops = False
+	torch._dynamo.config.prefer_deferred_runtime_asserts_over_guards = False
+	torch._dynamo.config.allow_complex_guards_as_runtime_asserts = False
+	torch._dynamo.config.allow_rnn = False
+	torch._inductor.config.cpp_wrapper = True
+	torch._inductor.config.triton.cudagraphs = False
+	torch._inductor.config.triton.autotune_cublasLt = False
+	torch._inductor.config.triton.autotune_at_compile_time = True
+	torch._inductor.config.triton.store_cubin = True
+	torch._inductor.config.aot_inductor.output_path = 'clfxsfxv4tjfonuwp2w6qbwpgbdh7xotkmm5r6jfm6i6nvldgzlp'
+	torch._inductor.config.aot_inductor.serialized_in_spec = '[1, {"type": "builtins.tuple", "context": "null", "children_spec": [{"type": "builtins.tuple", "context": "null", "children_spec": [{"type": null, "context": null, "children_spec": []}, {"type": null, "context": null, "children_spec": []}]}, {"type": "builtins.dict", "context": "[]", "children_spec": []}]}]'
+	torch._inductor.config.aot_inductor.serialized_out_spec = '[1, {"type": null, "context": null, "children_spec": []}]'
+	torch._inductor.config.aot_inductor.package = True
+	torch._functorch.config.functionalize_rng_ops = False
+	torch._functorch.config.fake_tensor_allow_unsafe_data_ptr_access = True
+	torch._functorch.config.unlift_effect_tokens = False
+	
+	
+	
+	isolate_fails_code_str = None
+	
+	torch.ops.load_library("//caffe2/torch/fb/sparsenn:sparsenn_operators_gpu")
+	torch.ops.load_library("//caffe2/torch/fb/sparsenn:sparsenn_operators")
+	torch.ops.load_library("//deeplearning/fbgemm/fbgemm_gpu:sparse_ops_cpu")
+	torch.ops.load_library("//deeplearning/fbgemm/fbgemm_gpu:sparse_ops")
+	
+	"""
+	To run this script in fbcode:
+	- Create a directory (//scripts/{your_unixname}/repro)
+	- Put this file in scripts/{your_unixname}/repro/fx_graph_runnable.py
+	- Add a TARGETS file that looks like the following
+	- `buck2 run //scripts/{your_unixname}/repro:repro`
+	
+	NOTE: you may need additional deps to actually be able to run the script.
+	```
+	# Contents of TARGETS file
+	load("@fbcode_macros//build_defs:python_binary.bzl", "python_binary")
+	
+	python_binary(
+	    name = "repro",
+	    main_src = "fx_graph_runnable.py",
+	    deps = [
+	        "//caffe2:torch",
+	        "//caffe2/torch/fb/sparsenn:sparsenn_operators_gpu",
+	        "//caffe2/torch/fb/sparsenn:sparsenn_operators",
+	        "//deeplearning/fbgemm/fbgemm_gpu:sparse_ops_cpu",
+	        "//deeplearning/fbgemm/fbgemm_gpu:sparse_ops",
+	    ],
+	)
+	```
+	"""
+	
+	# torch version: 2.7.0a0+fb
+	# torch cuda version: 12.4.0
+	# CUDA Info: 
+	# nvcc: NVIDIA (R) Cuda compiler driver 
+	# Copyright (c) 2005-2023 NVIDIA Corporation 
+	# Built on Fri_Jan__6_16:45:21_PST_2023 
+	# Cuda compilation tools, release 12.0, V12.0.140 
+	# Build cuda_12.0.r12.0/compiler.32267302_0 
+	
+	# GPU Hardware Info: 
+	# NVIDIA PG509-210 : 8 
+	
+	
+	from torch.nn import *
+	class Repro(torch.nn.Module):
+	    def __init__(self) -> None:
+	        super().__init__()
+	        self.fc1 = Module().cuda()
+	
+	    
+	    
+	    def forward(self):
+	        arg2_1, arg3_1, = fx_pytree.tree_flatten_spec([], self._in_spec)
+	        fc1_weight = self.fc1.weight
+	        fc1_bias = self.fc1.bias
+	        permute = torch.ops.aten.permute.default(fc1_weight, [1, 0]);  fc1_weight = None
+	        addmm = torch.ops.aten.addmm.default(fc1_bias, arg2_1, permute);  fc1_bias = arg2_1 = permute = None
+	        relu = torch.ops.aten.relu.default(addmm);  addmm = None
+	        sigmoid = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        return (sigmoid,)
+	        
+	def load_args(reader):
+	    buf0 = reader.storage(None, 320, device=device(type='cuda', index=0))
+	    reader.tensor(buf0, (8, 10), is_leaf=True)  # arg2_1
+	    buf1 = reader.storage(None, 320, device=device(type='cuda', index=0))
+	    reader.tensor(buf1, (8, 10), is_leaf=True)  # arg3_1
+	load_args._version = 0
+	mod = Repro()
+	if __name__ == '__main__':
+	    from torch._dynamo.repro.after_aot import run_repro
+	    with torch.no_grad():
+	        run_repro(mod, load_args, accuracy=False, command='run', save_dir=None, tracing_mode='real', check_str=None)
+	        # To run it separately, do 
+	        # mod, args = run_repro(mod, load_args, accuracy=False, command='get_args', save_dir=None, tracing_mode='real', check_str=None)
+	        # mod(*args)
+V0213 10:06:47.831000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "1154151d9a689da1d9e1a4e8451e1d14"}
+	{
+	"name": "_recursive_post_grad_passes",
+	"ts": 1739470007831592.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.304000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "3b3e2da7397d9d0018f1bc37ca3328ac"}
+	{
+	"name": "_recursive_post_grad_passes",
+	"ts": 1739470008304419.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.309000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:986] {"inductor_post_grad_graph": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "924b310c3f181a771d10c9e540fd375c"}
+	class <lambda>(torch.nn.Module):
+	    def forward(self):
+	        arg2_1: "f32[8, 10][10, 1]cuda:0"; arg3_1: "f32[8, 10][10, 1]cuda:0"; 
+	    
+	        arg2_1, arg3_1, = fx_pytree.tree_flatten_spec([], self._in_spec)
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cuda:0" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cuda:0" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:31 in forward, code: x = self.fc1(x)
+	        permute: "f32[10, 16][1, 10]cuda:0" = torch.ops.aten.permute.default(fc1_weight, [1, 0]);  fc1_weight = None
+	        
+	        # No stacktrace found for following nodes
+	        mm_default: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.mm.default(arg2_1, permute);  arg2_1 = permute = None
+	        add_tensor: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.add.Tensor(mm_default, fc1_bias);  mm_default = fc1_bias = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: x = self.relu(x)
+	        relu: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.relu.default(add_tensor);  add_tensor = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/7adc9a57403be96c/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: x = self.sigmoid(x)
+	        sigmoid: "f32[8, 16][16, 1]cuda:0" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        return (sigmoid,)
+	        
+V0213 10:06:48.310000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:996] {"artifact": {"name": "inductor_post_to_pre_grad_nodes", "encoding": "json"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "0bd866df1128fc8c7c07e4714969e2fb"}
+	{"permute": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}], "mm_default": [{"name": "", "target": "", "graph_id": -1, "pass_name": "pass_pattern_2", "action": "create", "from_node": []}, {"name": "", "target": "", "graph_id": -1, "pass_name": "pattern_matcher", "action": "create", "from_node": []}, {"name": "mm", "target": "aten.mm.default", "graph_id": 140222167002960, "pass_name": "Interpreter_Replacer", "action": "replace", "from_node": [{"name": "addmm", "target": "aten.addmm.default", "graph_id": 140222179352896, "pass_name": "replace_by_example", "action": "replace", "from_node": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}]}]}], "add_tensor": [{"name": "add", "target": "aten.add.Tensor", "graph_id": 140222167002960, "pass_name": "Interpreter_Replacer", "action": "replace", "from_node": [{"name": "addmm", "target": "aten.addmm.default", "graph_id": 140222179352896, "pass_name": "replace_by_example", "action": "replace", "from_node": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}]}]}, {"name": "addmm", "target": "aten.addmm.default", "graph_id": 140222179352896, "pass_name": "pass_pattern_2", "action": "replace+create", "from_node": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}]}, {"name": "addmm", "target": "aten.addmm.default", "graph_id": 140222179352896, "pass_name": "pattern_matcher", "action": "replace+create", "from_node": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x", "target": "L__self___fc1", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}]}], "relu": [{"name": "relu", "target": "aten.relu.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x_1", "target": "L__self___relu", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x_1", "target": "L__self___relu", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}], "sigmoid": [{"name": "sigmoid", "target": "aten.sigmoid.default", "graph_id": 140226366523760, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x_2", "target": "L__self___sigmoid", "graph_id": 140222956053664, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": [{"name": "x_2", "target": "L__self___sigmoid", "graph_id": 140222956060000, "pass_name": "Interpreter_FlattenInputOutputSignature", "action": "create", "from_node": []}]}]}]}
+V0213 10:06:48.331000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "52d0694516195e4ec682da93b2c2f054"}
+	{
+	"name": "GraphLowering.run",
+	"ts": 1739470008331076.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.393000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "1e66896da2636007232a7df271df7dfe"}
+	{
+	"name": "GraphLowering.run",
+	"ts": 1739470008393228.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.394000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "5753309613d0a95edbc19fd08dd4c3c0"}
+	{
+	"name": "GraphLowering.compile_to_fn",
+	"ts": 1739470008394681.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.395000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "a35750baf4de041557e6d03111fc1206"}
+	{
+	"name": "GraphLowering.codegen",
+	"ts": 1739470008395650.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.400000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "2ab36575205b7fbf9645db025940d19a"}
+	{
+	"name": "Scheduler.__init__",
+	"ts": 1739470008400137.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.422000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "d582532d29e00a92a46b1e09aa7c3ed8"}
+	{
+	"name": "Scheduler.fused_nodes",
+	"ts": 1739470008422671.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.424000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "4958fe58fb2c78cd8d8889e27c0a9531"}
+	{
+	"name": "Scheduler.fused_nodes",
+	"ts": 1739470008424098.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.434000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "27b6a751bf55d4f42f1ddab3b1ad1ac1"}
+	{
+	"name": "Scheduler.__init__",
+	"ts": 1739470008434153.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.435000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "b1ccbda858ac7626772c21ad899d7fa4"}
+	{
+	"name": "Scheduler.codegen",
+	"ts": 1739470008435035.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.685000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "47815af02f215d27f949e2e2e4b07fe7"}
+	{
+	"name": "Scheduler.codegen",
+	"ts": 1739470008685083.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.688000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/graph.py:1925] {"artifact": {"name": "inductor_triton_kernel_to_post_grad_nodes", "encoding": "json"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "0867dfef8c4c46386e8d230bab125d98"}
+	{"triton_poi_fused_addmm_relu_sigmoid_0": ["sigmoid", "relu", "add_tensor"]}
+V0213 10:06:48.689000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/graph.py:1933] {"artifact": {"name": "inductor_provenance_tracking_node_mappings", "encoding": "json"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "d81c22c958817f085f2f26be1f905dbc"}
+	{"preToPost": {"linear": ["permute", "mm_default", "add_tensor"], "relu": ["relu"], "sigmoid": ["sigmoid"]}, "postToPre": {"permute": ["linear"], "mm_default": ["linear"], "add_tensor": ["linear"], "relu": ["relu"], "sigmoid": ["sigmoid"]}, "cppCodeToPost": {"triton_poi_fused_addmm_relu_sigmoid_0": ["sigmoid", "relu", "add_tensor"]}, "postToCppCode": {"sigmoid": ["triton_poi_fused_addmm_relu_sigmoid_0"], "relu": ["triton_poi_fused_addmm_relu_sigmoid_0"], "add_tensor": ["triton_poi_fused_addmm_relu_sigmoid_0"]}}
+V0213 10:06:48.690000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "62de1311209961c125f39e263b09243b"}
+	{
+	"name": "CppWrapperGpu.generate",
+	"ts": 1739470008690039.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.691000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "8a597a7bc6d63e9391cb682a86e9912e"}
+	{
+	"name": "CppWrapperCpu.generate",
+	"ts": 1739470008691048.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.693000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "d098e187ad746036952ed2f285b3721c"}
+	{
+	"name": "PythonWrapperCodegen.generate",
+	"ts": 1739470008693121.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.696000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "6f2ee74d031355fadb346ee29218a83c"}
+	{
+	"name": "inductor_codecache_torch_key",
+	"ts": 1739470008696474.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.697000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "4167b342fb5ab1dd5797d8689aea3811"}
+	{
+	"name": "inductor_codecache_torch_key",
+	"ts": 1739470008697601.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.699000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "4ef840c853171f20b8e4f3814a9b7998"}
+	{
+	"name": "async_compile.precompile",
+	"ts": 1739470008699284.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.854000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "6de2d3abd7fd43c02fb93b9a68ac2c21"}
+	{
+	"name": "async_compile.precompile",
+	"ts": 1739470008854410.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.856000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "67a0f122bbb9fca97d997d01255a0a1e"}
+	{
+	"name": "async_compile.wait",
+	"ts": 1739470008856445.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.857000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "38df28114718132bb1a890b634ac30e8"}
+	{
+	"name": "async_compile.wait",
+	"ts": 1739470008857700.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.861000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "59f304eb3942aa0d53499e3da724fa49"}
+	{
+	"name": "PythonWrapperCodegen.generate",
+	"ts": 1739470008861715.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.862000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "4c88dd39835b6ed6fe93ae6512a332eb"}
+	{
+	"name": "CppWrapperCpu.generate",
+	"ts": 1739470008862577.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.864000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "24ca28ae0e61f586ba6b54d4d2d8e21c"}
+	{
+	"name": "CppWrapperGpu.generate",
+	"ts": 1739470008864021.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.865000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "88c57a676c6fbab1d0b1e5a2259fd9dc"}
+	{
+	"name": "GraphLowering.codegen",
+	"ts": 1739470008865428.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:06:48.867000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "dfc2d9b891d5d22e9955b6fbcd6b70fc"}
+	{
+	"name": "AotCodeCompiler.compile",
+	"ts": 1739470008866952.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:37.366000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/codecache.py:1454] {"graph_dump": {"name": "inductor_aot_code", "type": "cpp", "filename": "/tmp/torchinductor_shangdiy/clfxsfxv4tjfonuwp2w6qbwpgbdh7xotkmm5r6jfm6i6nvldgzlp/czume3d3cqqc2dah3tvs4rqn3rrpusdvbhn4j3diiq62spva6qwn.cpp"}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "e87150cbea2d8a8fb4a32a6d4664ba1b"}
+	
+	#include <torch/csrc/inductor/aoti_include/cuda.h>
+	// Definition of AOTI runtime interface functions
+	
+	#include <torch/csrc/inductor/aoti_runtime/interface.h>
+	#include <torch/csrc/inductor/aoti_runtime/model_container.h>
+	
+	#include <iostream>
+	#include <sstream>
+	#include <stdexcept>
+	#include <vector>
+	
+	#define CONVERT_EXCEPTION_TO_ERROR_CODE(...)                 \
+	  try {                                                      \
+	    __VA_ARGS__                                              \
+	  } catch (const std::exception& e) {                        \
+	    std::cerr << "Error: " << e.what() << std::endl;         \
+	    return AOTI_RUNTIME_FAILURE;                             \
+	  } catch (...) {                                            \
+	    std::cerr << "Unknown exception occurred." << std::endl; \
+	    return AOTI_RUNTIME_FAILURE;                             \
+	  }                                                          \
+	  return AOTI_RUNTIME_SUCCESS;
+	
+	#define AOTI_VECTOR_SIZE_CHECK(actual_size, expected_size, name)  \
+	  do {                                                            \
+	    AOTI_RUNTIME_CHECK(                                           \
+	        actual_size == expected_size,                             \
+	        "expected " + std::string(name) + " vector size to be " + \
+	            std::to_string(expected_size) + ", but got " +        \
+	            std::to_string(actual_size));                         \
+	  } while (0)
+	
+	// AOTInductor uses at::addmm_out, which doesn't supports
+	// arguments that requires gradient. For this reason, we
+	// enforce no_grad context for run APIs.
+	//
+	// A RAII, thread local (!) guard that enables or disables grad mode upon
+	// construction, and sets it back to the original value upon destruction.
+	struct AOTINoGradGuard {
+	  AOTINoGradGuard() : prev_mode(aoti_torch_grad_mode_is_enabled()) {
+	    aoti_torch_grad_mode_set_enabled(false);
+	  }
+	  ~AOTINoGradGuard() {
+	    aoti_torch_grad_mode_set_enabled(prev_mode);
+	  }
+	  bool prev_mode;
+	};
+	
+	extern "C" {
+	
+	AOTIRuntimeError AOTInductorModelContainerCreate(
+	    AOTInductorModelContainerHandle* container_handle,
+	    size_t num_models,
+	    bool is_cpu,
+	    const char* cubin_dir) {
+	      return AOTInductorModelContainerCreateWithDevice(
+	        container_handle,
+	        num_models,
+	        is_cpu ? "cpu" : "cuda",
+	        cubin_dir);
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerCreateWithDevice(
+	    AOTInductorModelContainerHandle* container_handle,
+	    size_t num_models,
+	    const char* device_str,
+	    const char* cubin_dir) {
+	  if (num_models == 0) {
+	    std::cerr << "Error: num_models must be positive, but got 0" << std::endl;
+	    return AOTI_RUNTIME_FAILURE;
+	  }
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    std::optional<std::string> cubin_dir_opt;
+	    if (cubin_dir != nullptr) {
+	      cubin_dir_opt.emplace(cubin_dir);
+	    }
+	    auto* container = new torch::aot_inductor::AOTInductorModelContainer(
+	        num_models, std::string(device_str), cubin_dir_opt);
+	    *container_handle =
+	        reinterpret_cast<AOTInductorModelContainerHandle>(container);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerDelete(
+	    AOTInductorModelContainerHandle container_handle) {
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    auto* container =
+	        reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	            container_handle);
+	    delete container;
+	  });
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerRun(
+	    AOTInductorModelContainerHandle container_handle,
+	    AtenTensorHandle* input_handles, // array of input AtenTensorHandle; handles
+	                                     // are stolen; the array itself is borrowed
+	    size_t num_inputs,
+	    AtenTensorHandle*
+	        output_handles, // array for writing output AtenTensorHandle; handles
+	                        // will be stolen by the caller; the array itself is
+	                        // borrowed
+	    size_t num_outputs,
+	    AOTInductorStreamHandle stream_handle,
+	    AOTIProxyExecutorHandle proxy_executor_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  AOTI_VECTOR_SIZE_CHECK(num_inputs, container->num_inputs(), "inputs");
+	  AOTI_VECTOR_SIZE_CHECK(num_outputs, container->num_outputs(), "outputs");
+	
+	  auto stream =
+	      reinterpret_cast<torch::aot_inductor::DeviceStreamType>(stream_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    container->run(
+	        input_handles, output_handles, stream, proxy_executor_handle);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetNumConstants(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t* num_constants) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *num_constants = container->num_constants(); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantName(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    const char** name) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *name = container->constant_name(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantOriginalFQN(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    const char** original_fqn) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *original_fqn = container->constant_original_fqn(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantFromFolded(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    bool* from_folded) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({ *from_folded = container->constant_from_folded(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantType(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    int32_t* type) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({ *type = container->constant_type(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantDtype(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    int32_t* dtype) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *dtype = container->constant_dtype(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerUpdateConstantBuffer(
+	    AOTInductorModelContainerHandle container_handle,
+	    AOTInductorConstantMapHandle constant_map_handle,
+	    bool use_inactive,
+	    bool validate_full_update) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  auto input_map = reinterpret_cast<std::unordered_map<std::string, AtenTensorHandle>*>(constant_map_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    container->update_constant_buffer(
+	        *input_map, use_inactive, validate_full_update);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerUpdateInactiveConstantBuffer(
+	    AOTInductorModelContainerHandle container_handle,
+	    AOTInductorConstantMapHandle constant_map_handle) {
+	  return AOTInductorModelContainerUpdateConstantBuffer(container_handle,
+	          constant_map_handle,
+	          /*use_inactive*/ true,
+	          /*validate_full_update*/ true);
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerRunConstantFolding(
+	    AOTInductorModelContainerHandle container_handle,
+	    bool use_inactive,
+	    AOTInductorStreamHandle stream_handle,
+	    AOTIProxyExecutorHandle proxy_executor_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  auto stream =
+	      reinterpret_cast<torch::aot_inductor::DeviceStreamType>(stream_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    container->run_const_fold(use_inactive, stream, proxy_executor_handle);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerSwapConstantBuffer(
+	    AOTInductorModelContainerHandle container_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    container->swap_constant_buffer();
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetNumInputs(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t* ret_num_inputs) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_num_inputs = container->num_inputs(); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetInputName(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t input_idx,
+	    const char** ret_input_names) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_input_names = container->input_name(input_idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetNumOutputs(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t* ret_num_outputs) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_num_outputs = container->num_outputs(); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetOutputName(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t output_idx,
+	    const char** ret_output_names) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_output_names = container->output_name(output_idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetCallSpec(
+	    AOTInductorModelContainerHandle container_handle,
+	    const char** in_spec,
+	    const char** out_spec) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    *in_spec = container->get_in_spec();
+	    *out_spec = container->get_out_spec();
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelCreate(
+	    AOTInductorModelHandle* model_handle,
+	    AOTInductorConstantMapHandle constant_map_handle){
+	    CONVERT_EXCEPTION_TO_ERROR_CODE({
+	      auto constant_map = std::make_shared<torch::aot_inductor::ConstantMap>();
+	      auto constant_array = std::make_shared<std::vector<torch::aot_inductor::ConstantHandle>>();
+	      auto input_map = reinterpret_cast<std::unordered_map<std::string, AtenTensorHandle>*>(constant_map_handle);
+	
+	      auto model = new torch::aot_inductor::AOTInductorModel(
+	          constant_map,
+	          constant_array,
+	          "cpu", // device_str is hardcoded, as AOTInductorModelCreate is only use for CPU models
+	          ""
+	      );
+	
+	      if (input_map) {
+	        for (auto const& kv : *input_map) {
+	          constant_map->emplace(kv.first, kv.second);
+	        }
+	      } else {
+	        model->load_constants();
+	      }
+	
+	      *model_handle = reinterpret_cast<AOTInductorModelHandle>(model);
+	    })}
+	
+	AOTIRuntimeError AOTInductorModelRun(
+	    AOTInductorModelHandle model_handle,
+	    AtenTensorHandle* input_handles,
+	    AtenTensorHandle* output_handles) {
+	  auto model =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(model_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    model->run_impl(
+	        input_handles,
+	        output_handles,
+	        (torch::aot_inductor::DeviceStreamType) nullptr,
+	        nullptr);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelDelete(AOTInductorModelHandle model_handle){
+	    CONVERT_EXCEPTION_TO_ERROR_CODE({
+	      auto model = reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(
+	          model_handle);
+	      delete model;
+	    })}
+	
+	AOTIRuntimeError AOTInductorModelGetNumOutputs(
+	    AOTInductorModelHandle model_handle,
+	    size_t* ret_num_outputs) {
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	      auto model = reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(model_handle);
+	      *ret_num_outputs = model->num_outputs();
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelUpdateConstantsMap(
+	    AOTInductorModelHandle model_handle,
+	    AOTInductorConstantMapHandle constant_map_handle) {
+	  auto model =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(model_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    auto constant_map = std::make_shared<torch::aot_inductor::ConstantMap>();
+	    auto input_map =
+	        reinterpret_cast<std::unordered_map<std::string, AtenTensorHandle>*>(
+	            constant_map_handle);
+	
+	    for (auto const& kv : *input_map) {
+	      constant_map->emplace(kv.first, kv.second);
+	    }
+	    model->update_constants_map(std::move(constant_map));
+	  })
+	}
+	
+	} // extern "C"
+	
+	#define CUDA_DRIVER_CHECK(EXPR)                    \
+	do {                                               \
+	    CUresult code = EXPR;                          \
+	    const char *msg;                               \
+	    CUresult code_get_error = cuGetErrorString(code, &msg); \
+	    if (code_get_error != CUDA_SUCCESS) {          \
+	        throw std::runtime_error(                  \
+	            std::string("CUDA driver error: ") +   \
+	            std::string("invalid error code!"));   \
+	    }                                              \
+	    if (code != CUDA_SUCCESS) {                    \
+	        throw std::runtime_error(                  \
+	            std::string("CUDA driver error: ") +   \
+	            std::string(msg));                     \
+	    }                                              \
+	} while (0);
+	
+	namespace {
+	
+	struct Grid {
+	    Grid(uint32_t x, uint32_t y, uint32_t z)
+	      : grid_x(x), grid_y(y), grid_z(z) {}
+	    uint32_t grid_x;
+	    uint32_t grid_y;
+	    uint32_t grid_z;
+	
+	    bool is_non_zero() {
+	        return grid_x > 0 && grid_y > 0 && grid_z > 0;
+	    }
+	};
+	
+	}  // anonymous namespace
+	
+	static inline CUfunction loadKernel(
+	        std::string filePath,
+	        const std::string &funcName,
+	        uint32_t sharedMemBytes,
+	        const std::optional<std::string> &cubinDir = std::nullopt) {
+	    if (cubinDir) {
+	        std::filesystem::path p1{*cubinDir};
+	        std::filesystem::path p2{filePath};
+	        filePath = (p1 / p2.filename()).string();
+	    }
+	
+	    CUmodule mod;
+	    CUfunction func;
+	    CUDA_DRIVER_CHECK(cuModuleLoad(&mod, filePath.c_str()));
+	    CUDA_DRIVER_CHECK(cuModuleGetFunction(&func, mod, funcName.c_str()));
+	    if (sharedMemBytes > 0) {
+	        CUDA_DRIVER_CHECK(cuFuncSetAttribute(
+	            func,
+	            CU_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES,
+	            sharedMemBytes
+	        ))
+	    }
+	    return func;
+	}
+	
+	static inline void launchKernel(
+	        CUfunction func,
+	        uint32_t gridX,
+	        uint32_t gridY,
+	        uint32_t gridZ,
+	        uint32_t numWarps,
+	        uint32_t sharedMemBytes,
+	        void* args[],
+	        cudaStream_t stream) {
+	    CUDA_DRIVER_CHECK(cuLaunchKernel(
+	        func, gridX, gridY, gridZ, 32*numWarps, 1, 1, sharedMemBytes, stream, args, nullptr
+	    ));
+	}
+	CACHE_TORCH_DTYPE(float32);
+	CACHE_TORCH_DEVICE(cuda);
+	CACHE_TORCH_LAYOUT(strided);
+	namespace torch::aot_inductor {
+	
+	namespace {
+	class AOTInductorModelKernels : public AOTInductorModelKernelsBase {
+	  public:
+	    CUfunction triton_poi_fused_addmm_relu_sigmoid_0{nullptr};
+	};
+	}  // namespace
+	
+	AOTInductorModel::AOTInductorModel(std::shared_ptr<ConstantMap> constants_map,
+	                                   std::shared_ptr<std::vector<ConstantHandle>> constants_array,
+	                                   const std::string& device_str,
+	                                   std::optional<std::string> cubin_dir,
+	                                   bool include_weights)
+	    : AOTInductorModelBase(2, 1, 2, device_str, cubin_dir, true) {
+	    inputs_info_[0].name = "arg2_1";
+	    inputs_info_[1].name = "arg3_1";
+	    constants_info_[0].name = "fc1_weight";
+	    constants_info_[0].dtype = static_cast<int32_t>(cached_torch_dtype_float32);
+	    constants_info_[0].offset = 0;
+	    constants_info_[0].data_size = 640;
+	    constants_info_[0].from_folded = false;
+	    constants_info_[0].type = static_cast<int32_t>(torch::aot_inductor::ConstantType::Parameter);
+	    constants_info_[0].shape = {16, 10};
+	    constants_info_[0].stride = {10, 1};
+	    constants_info_[0].layout = static_cast<int32_t>(cached_torch_layout_strided);
+	    constants_info_[0].original_fqn = "fc1.weight";
+	    constants_info_[1].name = "fc1_bias";
+	    constants_info_[1].dtype = static_cast<int32_t>(cached_torch_dtype_float32);
+	    constants_info_[1].offset = 0;
+	    constants_info_[1].data_size = 64;
+	    constants_info_[1].from_folded = false;
+	    constants_info_[1].type = static_cast<int32_t>(torch::aot_inductor::ConstantType::Parameter);
+	    constants_info_[1].shape = {16};
+	    constants_info_[1].stride = {1};
+	    constants_info_[1].layout = static_cast<int32_t>(cached_torch_layout_strided);
+	    constants_info_[1].original_fqn = "fc1.bias";
+	    update_constants_map(std::move(constants_map));
+	    update_constants_array(std::move(constants_array));
+	    in_spec_ = "[1, {\"type\": \"builtins.tuple\", \"context\": \"null\", \"children_spec\": [{\"type\": \"builtins.tuple\", \"context\": \"null\", \"children_spec\": [{\"type\": null, \"context\": null, \"children_spec\": []}, {\"type\": null, \"context\": null, \"children_spec\": []}]}, {\"type\": \"builtins.dict\", \"context\": \"[]\", \"children_spec\": []}]}]";
+	    out_spec_ = "[1, {\"type\": null, \"context\": null, \"children_spec\": []}]";
+	    outputs_info_[0].name = "output0";
+	    this->kernels_ = std::make_unique<AOTInductorModelKernels>();
+	}
+	
+	std::unordered_map<std::string, AtenTensorHandle> AOTInductorModel::const_run_impl(
+	    DeviceStreamType stream,
+	    AOTIProxyExecutorHandle proxy_executor,
+	    bool initialization
+	) {
+	
+	    if (!initialization) {
+	        std::cerr << "[WARNING] Calling constant_folding in model, but compiled with config: "
+	                  << "aot_inductor.use_runtime_constant_folding=False\n";
+	    }
+	    return {};
+	}
+	
+	void AOTInductorModel::_const_run_impl(
+	    std::vector<AtenTensorHandle>& output_handles,
+	    DeviceStreamType stream,
+	    AOTIProxyExecutorHandle proxy_executor
+	) {}
+	
+	void AOTInductorModel::run_impl(
+	    AtenTensorHandle*
+	        input_handles, // array of input AtenTensorHandle; handles
+	                        // are stolen; the array itself is borrowed
+	    AtenTensorHandle*
+	        output_handles, // array for writing output AtenTensorHandle; handles
+	                        // will be stolen by the caller; the array itself is
+	                        // borrowed
+	    DeviceStreamType stream,
+	    AOTIProxyExecutorHandle proxy_executor
+	) {
+	
+	    auto inputs = steal_from_raw_handles_to_raii_handles(input_handles, 2);
+	    auto arg2_1 = std::move(inputs[0]);
+	    auto arg3_1 = std::move(inputs[1]);
+	    [[maybe_unused]] auto fc1_weight = constants_->at(0);
+	    [[maybe_unused]] auto fc1_bias = constants_->at(1);
+	    inputs.clear();
+	    auto& kernels = static_cast<AOTInductorModelKernels&>(*this->kernels_.get());
+	
+	    AOTICudaStreamGuard stream_guard(stream, this->device_idx_);
+	    static constexpr int64_t int_array_2[] = {8L, 16L};
+	    static constexpr int64_t int_array_3[] = {16L, 1L};
+	    AtenTensorHandle buf0_handle;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_empty_strided(2, int_array_2, int_array_3, cached_torch_dtype_float32, cached_torch_device_type_cuda, this->device_idx_, &buf0_handle));
+	    RAIIAtenTensorHandle buf0(buf0_handle);
+	    // Topologically Sorted Source Nodes: [], Original ATen: [aten.addmm]
+	    static constexpr int64_t int_array_0[] = {10L, 16L};
+	    static constexpr int64_t int_array_1[] = {1L, 10L};
+	    auto tmp_tensor_handle_0 = reinterpret_tensor_wrapper(fc1_weight, 2, int_array_0, int_array_1, 0L);
+	    RAIIAtenTensorHandle tmp_tensor_handle_0_raii(tmp_tensor_handle_0);
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_cuda_mm_out(buf0, arg2_1, tmp_tensor_handle_0_raii));
+	    arg2_1.reset();
+	    auto buf1 = std::move(buf0);  // reuse
+	    // Topologically Sorted Source Nodes: [add, relu, sigmoid], Original ATen: [aten.addmm, aten.relu, aten.sigmoid]
+	    if (kernels.triton_poi_fused_addmm_relu_sigmoid_0 == nullptr) {
+	        kernels.triton_poi_fused_addmm_relu_sigmoid_0 = loadKernel("/tmp/torchinductor_shangdiy/clfxsfxv4tjfonuwp2w6qbwpgbdh7xotkmm5r6jfm6i6nvldgzlp/cgtwzymffpxo3wova6pv7gfh3t4tcgubjsugq6uw6vksmob4mmh4.cubin", "triton_poi_fused_addmm_relu_sigmoid_0", 0, this->cubin_dir_);
+	    }
+	    CUdeviceptr var_0 = reinterpret_cast<CUdeviceptr>(buf1.data_ptr());
+	    CUdeviceptr var_1 = reinterpret_cast<CUdeviceptr>(fc1_bias.data_ptr());
+	    int var_2 = 128L;
+	    void* kernel_args_var_0[] = {&var_0, &var_1, &var_2};
+	    Grid triton_poi_fused_addmm_relu_sigmoid_0_grid_0 = Grid(1L, 1L, 1L);
+	    if (triton_poi_fused_addmm_relu_sigmoid_0_grid_0.is_non_zero()) {
+	        launchKernel(kernels.triton_poi_fused_addmm_relu_sigmoid_0, triton_poi_fused_addmm_relu_sigmoid_0_grid_0.grid_x, triton_poi_fused_addmm_relu_sigmoid_0_grid_0.grid_y, triton_poi_fused_addmm_relu_sigmoid_0_grid_0.grid_z, 4, 0, kernel_args_var_0, stream);
+	    }
+	    output_handles[0] = buf1.release();
+	} // AOTInductorModel::run_impl
+	} // namespace torch::aot_inductor
+	
+	
+	
+	
+V0213 10:07:37.374000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "96dfc667b274e18ec890d51917192023"}
+	{
+	"name": "run_command_and_check",
+	"ts": 1739470057374550.8,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.751000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "5c20f71e44e14eaf053cf21e3d543355"}
+	{
+	"name": "run_command_and_check",
+	"ts": 1739470062750896.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.756000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "15bc205dcc80c1c003a45f70511e3f90"}
+	{
+	"name": "run_command_and_check",
+	"ts": 1739470062756090.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.786000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "7a53447f8a78a931dd19e9c9f87d8ea5"}
+	{
+	"name": "run_command_and_check",
+	"ts": 1739470062786837.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.790000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "8c87ad1d1d55851320294e5369443222"}
+	{
+	"name": "run_command_and_check",
+	"ts": 1739470062790890.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.854000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "fea96f8abe0b008e5def6ed94b14e0f0"}
+	{
+	"name": "run_command_and_check",
+	"ts": 1739470062854503.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.857000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "06cd5b221ce26a2f10914180aca000e4"}
+	{
+	"name": "AotCodeCompiler.compile",
+	"ts": 1739470062857147.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.858000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "674dbec102eed13df4c250024d74f2b3"}
+	{
+	"name": "GraphLowering.compile_to_fn",
+	"ts": 1739470062858643.5,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.860000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1801] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "b9b0dd76320d1fca9a405368d810bf12"}
+	{
+	"name": "fx_graph_cache_disabled",
+	"ts": 1739470007811179.2,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "i",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0,
+	"s": "p"
+	}
+V0213 10:07:42.862000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "3c04c53394ffa6341132d9637e4717f2"}
+	{
+	"name": "inductor_compile",
+	"ts": 1739470062862185.0,
+	"args": {
+	"fn_name": "compile_fx_inner",
+	"compile_id": "0/0",
+	"is_backward": false,
+	"cache_state": "disabled",
+	"cache_event_time": 1739470007811179289,
+	"key": null,
+	"components": null,
+	"cache_bypass_reason": "cache not enabled",
+	"remote_cache_enabled": true,
+	"local_cache_enabled": true
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0213 10:07:42.863000 132701 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1762] {"chromium_event": {}, "frame_id": 0, "frame_compile_id": 0, "attempt": 0, "has_payload": "e02beb947c69f7e18a78a2c7f3da1161"}
+	{
+	"name": "compile_fx.<locals>.fw_compiler_base",
+	"ts": 1739470062863651.0,
+	"args": {
+	"compile_id": "0/0"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}

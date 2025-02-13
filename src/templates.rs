@@ -194,6 +194,14 @@ Build products below:
 </ul>
 </div>
 
+
+{{ if has_inductor_provenance }}
+<h2>Provenance Tracking</h2>
+<p>
+View detailed <a href='provenance_tracking.html'>provenance tracking information</a> for this compilation.
+</p>
+{{ endif }}
+
 {{ if has_unknown_stack_trie }}
 <div>
 <h2>Unknown stacks</h2>
@@ -512,3 +520,7 @@ pub static TEMPLATE_SYMBOLIC_GUARD_INFO: &str = r#"
 </body>
 </html>
 "#;
+
+pub static PROVENANCE_CSS: &str = include_str!("provenance.css");
+pub static PROVENANCE_JS: &str = include_str!("provenance.js");
+pub static TEMPLATE_PROVENANCE_TRACKING: &str = include_str!("provenance.html");

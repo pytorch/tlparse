@@ -1,0 +1,152 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.url-inputs {
+    display: flex;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.url-input {
+    flex: 1;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.url-input input {
+    width: 100%;
+    padding: 5px;
+}
+
+.editor-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.editor {
+    height: 100%;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+    flex: 1;
+    font-family: monospace;
+}
+
+.line {
+    padding: 2px 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.highlight {
+    background-color: yellow;
+    transition: background-color 0.2s ease;
+}
+
+.mapped-line {
+    font-weight: bold;
+}
+
+.line-number {
+    color: #888;
+    display: inline-block;
+    width: 30px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.divider {
+    width: 10px;
+    background-color: #ccc;
+    cursor: col-resize;
+}
+
+.line-content {
+    white-space: pre;
+    display: inline;
+}
+
+.json-popup {
+    display: none;
+    position: fixed;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    max-height: 300px;
+    overflow: auto;
+    z-index: 1000;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.json-popup .close-button {
+    position: sticky;
+    float: right;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: 20px;
+    background: white;
+    padding: 0 5px;
+    margin-left: 10px;
+}
+
+#jsonContent {
+    margin-top: 10px;
+}
+
+.toggle-container {
+    margin-left: 20px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    min-width: 200px;
+    white-space: nowrap;
+}
+
+.toggle-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.file-input {
+    display: none;
+}
+
+.url-input {
+    flex: 1;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-label {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-label:hover {
+    background-color: #e0e0e0;
+}
+
+.has-match {
+    font-weight: bold;
+} 

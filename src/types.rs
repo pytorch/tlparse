@@ -730,6 +730,7 @@ pub struct IndexContext {
     pub custom_header_html: String,
     pub has_chromium_events: bool,
     pub qps: &'static str,
+    pub has_inductor_provenance: bool,
 }
 
 #[derive(Debug, Serialize)]
@@ -759,4 +760,15 @@ pub struct GuardAddedFastContext {
     pub expr: String,
     pub user_stack_html: String,
     pub stack_html: String,
+}
+
+#[derive(Serialize)]
+pub struct ProvenanceContext<'a> {
+    pub css: &'a str,
+    pub js: &'a str,
+    pub pre_grad_graph_content: String,
+    pub post_grad_graph_content: String,
+    pub output_code_content: String,
+    pub aot_code_content: String,
+    pub node_mappings_content: String,
 }
