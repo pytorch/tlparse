@@ -469,8 +469,8 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             metrics_index.entry(cid).or_default().push(m.clone());
         }
 
-        if let Some(ref guard) = e.propagate_real_tensors_provenance {
-            if config.export {
+        if config.export {
+            if let Some(ref guard) = e.propagate_real_tensors_provenance {
                 let failure_type = "Data Dependent Error";
 
                 let reason = format!(
@@ -521,6 +521,62 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     additional_info: additional_info,
                 });
             }
+
+            if let Some(fake_kernel) = e.missing_fake_kernel {
+                let failure_type = "Missing Fake Kernel";
+
+                let reason = format!(
+                    "<code>torch.ops.{}</code> is missing a fake kernel implementation",
+                    fake_kernel.op.unwrap()
+                );
+
+                let additional_info = "Please refer to <a href='https://docs.google.com/document/d/1_W62p8WJOQQUzPsJYa7s701JXt0qf2OfLub2sbkHOaU/edit#heading=h.ahugy69p2jmz'>this doc</a> for more detailed instructions on how to write a fake kernel.";
+
+                export_failures.push(ExportFailure {
+                    failure_type: failure_type.to_string(),
+                    reason: reason,
+                    additional_info: additional_info.to_string(),
+                });
+            }
+
+            if let Some(fake_kernel) = e.mismatched_fake_kernel {
+                let failure_type = "Mismatched Fake Kernel";
+
+                let reason = format!(
+                    "<code>torch.ops.{}</code> has a fake kernel implementation,
+                    but it has incorrect behavior, based on the real kernel.<br>
+                    The reason for the mismatch is: {}",
+                    fake_kernel.op.unwrap(),
+                    fake_kernel.reason.unwrap(),
+                );
+
+                let additional_info = "Please refer to <a href='https://docs.google.com/document/d/1_W62p8WJOQQUzPsJYa7s701JXt0qf2OfLub2sbkHOaU/edit#heading=h.ahugy69p2jmz'>this doc</a> for more detailed instructions on how to write a fake kernel.";
+
+                export_failures.push(ExportFailure {
+                    failure_type: failure_type.to_string(),
+                    reason: reason,
+                    additional_info: additional_info.to_string(),
+                });
+            }
+
+            if let Some(sym_expr_info) = e.expression_created {
+                sym_expr_info_index
+                    .borrow_mut()
+                    .insert(sym_expr_info.result_id.unwrap(), sym_expr_info);
+            }
+
+            if let Some(unbacked_symbol) = e.create_unbacked_symbol {
+                sym_expr_info_index.borrow_mut().insert(
+                    unbacked_symbol.node_id.unwrap(),
+                    SymExprInfoMetadata {
+                        result: unbacked_symbol.symbol.clone(),
+                        result_id: unbacked_symbol.node_id.clone(),
+                        user_stack: unbacked_symbol.user_stack.clone(),
+                        stack: unbacked_symbol.stack.clone(),
+                        ..Default::default()
+                    },
+                );
+            }
         }
 
         if let Some(stack) = e.stack {
@@ -555,66 +611,6 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 stack_trie.insert(stack, e.compile_id.clone());
             };
         };
-
-        if let Some(fake_kernel) = e.missing_fake_kernel {
-            if config.export {
-                let failure_type = "Missing Fake Kernel";
-
-                let reason = format!(
-                    "<code>torch.ops.{}</code> is missing a fake kernel implementation",
-                    fake_kernel.op.unwrap()
-                );
-
-                let additional_info = "Please refer to <a href='https://docs.google.com/document/d/1_W62p8WJOQQUzPsJYa7s701JXt0qf2OfLub2sbkHOaU/edit#heading=h.ahugy69p2jmz'>this doc</a> for more detailed instructions on how to write a fake kernel.";
-
-                export_failures.push(ExportFailure {
-                    failure_type: failure_type.to_string(),
-                    reason: reason,
-                    additional_info: additional_info.to_string(),
-                });
-            }
-        }
-
-        if let Some(fake_kernel) = e.mismatched_fake_kernel {
-            if config.export {
-                let failure_type = "Mismatched Fake Kernel";
-
-                let reason = format!(
-                    "<code>torch.ops.{}</code> has a fake kernel implementation,
-                    but it has incorrect behavior, based on the real kernel.<br>
-                    The reason for the mismatch is: {}",
-                    fake_kernel.op.unwrap(),
-                    fake_kernel.reason.unwrap(),
-                );
-
-                let additional_info = "Please refer to <a href='https://docs.google.com/document/d/1_W62p8WJOQQUzPsJYa7s701JXt0qf2OfLub2sbkHOaU/edit#heading=h.ahugy69p2jmz'>this doc</a> for more detailed instructions on how to write a fake kernel.";
-
-                export_failures.push(ExportFailure {
-                    failure_type: failure_type.to_string(),
-                    reason: reason,
-                    additional_info: additional_info.to_string(),
-                });
-            }
-        }
-
-        if let Some(sym_expr_info) = e.expression_created {
-            sym_expr_info_index
-                .borrow_mut()
-                .insert(sym_expr_info.result_id.unwrap(), sym_expr_info);
-        }
-
-        if let Some(unbacked_symbol) = e.create_unbacked_symbol {
-            sym_expr_info_index.borrow_mut().insert(
-                unbacked_symbol.node_id.unwrap(),
-                SymExprInfoMetadata {
-                    result: unbacked_symbol.symbol.clone(),
-                    result_id: unbacked_symbol.node_id.clone(),
-                    user_stack: unbacked_symbol.user_stack.clone(),
-                    stack: unbacked_symbol.stack.clone(),
-                    ..Default::default()
-                },
-            );
-        }
     }
 
     if config.export {
