@@ -120,28 +120,21 @@ function convertNodeMappingsToLineNumbers() {
     }
 
     if (cppCodeData) {
+        let kernelNames = Object.keys(nodeMappings["cppCodeToPost"]);
+
         // Build generated cpp wrapper code lookup map
         for (let i = 0; i < cppCodeData.length; i++) {
             const line = cppCodeData[i];
-            if (validLine(line) && line.includes('== nullptr') && line.includes('kernels.')) {
-                const match = line.match(/kernels\.(\w+)/);
-                const kernelName = match ? match[1] : null;
-                if (kernelName) {
+            // check if the line include any of the kernel names
+            if (validLine(line) && kernelNames.some(kernelName => line.includes(kernelName + "("))) {
+                // let kernelName be the first match
+                const kernelName = kernelNames.find(kernelName => line.includes(kernelName + "("));
+                // create an array for the kernel name if it doesn't exist
+                if (!cppCodeToLines[kernelName]) {
                     cppCodeToLines[kernelName] = [];
-                    cppCodeToLines[kernelName].push(i + 1);  // 1-based line numbers
-                    
-                    let j = i + 1;
-                    while (j < cppCodeData.length) {
-                        cppCodeToLines[kernelName].push(j + 1);
-                        if (cppCodeData[j].includes('launchKernel(')) {
-                            if (j + 1 < cppCodeData.length) {
-                                cppCodeToLines[kernelName].push(j + 2);
-                            }
-                            break;
-                        }
-                        j++;
-                    }
                 }
+                // add the line number to the array
+                cppCodeToLines[kernelName].push(i + 1);
             }
         }
     }
