@@ -170,6 +170,34 @@ fn run_parser<'t>(
     }
 }
 
+fn directory_to_json(
+    directory: &FxIndexMap<Option<CompileId>, Vec<OutputFile>>,
+) -> serde_json::Value {
+    let mut json_map = serde_json::Map::new();
+
+    for (compile_id, output_files) in directory {
+        let key = compile_id
+            .as_ref()
+            .map_or_else(|| "unknown".to_string(), |cid| cid.to_string());
+
+        let artifacts: Vec<serde_json::Value> = output_files
+            .iter()
+            .map(|file| {
+                serde_json::json!({
+                    "url": file.url,
+                    // Strip away any leading directory names, that will just be in the url path anyway
+                    "name": file.name.split('/').last().unwrap_or(&file.name),
+                    "number": file.number,
+                    "suffix": file.suffix
+                })
+            })
+            .collect();
+
+        json_map.insert(key, serde_json::json!({"artifacts": artifacts}));
+    }
+    serde_json::Value::Object(json_map)
+}
+
 pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOutput> {
     let strict = config.strict;
     if !path.is_file() {
@@ -674,7 +702,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 .map_or("(unknown)".to_string(), |e| e.as_directory_name())
         })
         .collect();
-
+    output.push((
+        PathBuf::from("compile_directory.json"),
+        serde_json::to_string_pretty(&directory_to_json(&directory))?,
+    ));
     let index_context = IndexContext {
         css: CSS,
         javascript: JAVASCRIPT,

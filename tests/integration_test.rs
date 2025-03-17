@@ -14,6 +14,7 @@ fn test_parse_simple() {
         "-_0_0_0/aot_forward_graph",
         "-_0_0_0/dynamo_output_graph",
         "index.html",
+        "compile_directory.json",
         "failures_and_restarts.html",
         "-_0_0_0/inductor_post_grad_graph",
         "-_0_0_0/inductor_output_code",
@@ -49,6 +50,7 @@ fn test_parse_compilation_metrics() {
         "-_2_0_0/dynamo_output_graph",
         "-_2_0_0/compilation_metrics",
         "index.html",
+        "compile_directory.json",
         "failures_and_restarts.html",
     ];
     // Read the test file
@@ -78,6 +80,7 @@ fn test_parse_compilation_failures() {
         "-_0_0_0/dynamo_output_graph",
         "-_0_0_0/compilation_metrics",
         "index.html",
+        "compile_directory.json",
         "failures_and_restarts.html",
     ];
     // Read the test file
@@ -156,6 +159,7 @@ fn test_cache_hit_miss() {
         "-_1_0_0/fx_graph_cache_miss_33.json",
         "-_1_0_0/fx_graph_cache_miss_9.json",
         "-_1_0_0/fx_graph_cache_hit_20.json",
+        "compile_directory.json",
         "index.html",
     ];
     // Generated via TORCH_TRACE=~/trace_logs/test python test/inductor/test_codecache.py -k test_flex_attention_caching
