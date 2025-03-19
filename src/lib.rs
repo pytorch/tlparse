@@ -198,6 +198,61 @@ fn directory_to_json(
     serde_json::Value::Object(json_map)
 }
 
+fn handle_guard(
+    failure_type: &str,
+    reason: &str,
+    lineno: usize,
+    e: &Envelope,
+    payload: &str,
+    output_count: &mut i32,
+    output: &mut Vec<(PathBuf, String)>,
+    compile_directory: &mut Vec<OutputFile>,
+    multi: &MultiProgress,
+    stats: &mut Stats,
+    tt: &TinyTemplate,
+    sym_expr_info_index: &RefCell<SymExprInfoIndex>,
+    export_failures: &mut Vec<ExportFailure>,
+) {
+    let sym_expr_info_index_borrowed = sym_expr_info_index.borrow();
+    let parser: Box<dyn StructuredLogParser> =
+        Box::new(crate::parsers::PropagateRealTensorsParser {
+            tt,
+            sym_expr_info_index: &sym_expr_info_index_borrowed,
+        });
+    run_parser(
+        lineno,
+        &parser,
+        e,
+        payload,
+        output_count,
+        output,
+        compile_directory,
+        multi,
+        stats,
+    );
+
+    let filename = format!(
+        "symbolic_guard_information_{}.html",
+        (*output_count - 1).to_string()
+    );
+    let compile_id_dir: PathBuf = e
+        .compile_id
+        .as_ref()
+        .map_or(format!("unknown_{lineno}"), |cid| cid.as_directory_name())
+        .into();
+    let additional_info = format!(
+        "Please click <a href='{}/{}'>here</a> for more information.",
+        compile_id_dir.display(),
+        filename,
+    );
+
+    export_failures.push(ExportFailure {
+        failure_type: failure_type.to_string(),
+        reason: reason.to_string(),
+        additional_info,
+    });
+}
+
 pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOutput> {
     let strict = config.strict;
     if !path.is_file() {
@@ -498,6 +553,35 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         }
 
         if config.export {
+            if let Some(ref guard) = e.guard_added {
+                if guard.prefix.as_deref() != Some("eval") {
+                    continue;
+                }
+                let failure_type = "Guard Evaluated";
+
+                let reason = format!(
+                    "When exporting, the following guard was evaluated <code>{}</code>. This
+                    might've resulted in a constraint violation error.",
+                    guard.expr.clone().unwrap(),
+                );
+
+                handle_guard(
+                    failure_type,
+                    &reason,
+                    lineno,
+                    &e,
+                    &payload,
+                    &mut output_count,
+                    &mut output,
+                    compile_directory,
+                    &multi,
+                    &mut stats,
+                    &tt,
+                    &sym_expr_info_index,
+                    &mut export_failures,
+                );
+            }
+
             if let Some(ref guard) = e.propagate_real_tensors_provenance {
                 let failure_type = "Data Dependent Error";
 
@@ -510,15 +594,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     guard.result.clone().unwrap()
                 );
 
-                let sym_expr_info_index_borrowed = sym_expr_info_index.borrow();
-                let parser: Box<dyn StructuredLogParser> =
-                    Box::new(crate::parsers::PropagateRealTensorsParser {
-                        tt: &tt,
-                        sym_expr_info_index: &sym_expr_info_index_borrowed,
-                    });
-                run_parser(
+                handle_guard(
+                    failure_type,
+                    &reason,
                     lineno,
-                    &parser,
                     &e,
                     &payload,
                     &mut output_count,
@@ -526,28 +605,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     compile_directory,
                     &multi,
                     &mut stats,
+                    &tt,
+                    &sym_expr_info_index,
+                    &mut export_failures,
                 );
-
-                let filename = format!(
-                    "symbolic_guard_information_{}.html",
-                    (output_count - 1).to_string(),
-                );
-                let compile_id_dir: PathBuf = e
-                    .compile_id
-                    .as_ref()
-                    .map_or(format!("unknown_{lineno}"), |cid| cid.as_directory_name())
-                    .into();
-                let additional_info = format!(
-                    "Please click <a href='{}/{}'>here</a> for more information.",
-                    compile_id_dir.display(),
-                    filename,
-                );
-
-                export_failures.push(ExportFailure {
-                    failure_type: failure_type.to_string(),
-                    reason: reason,
-                    additional_info: additional_info,
-                });
             }
 
             if let Some(fake_kernel) = e.missing_fake_kernel {

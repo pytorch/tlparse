@@ -756,12 +756,16 @@ pub struct PropagateRealTensorsParser<'t> {
 }
 impl StructuredLogParser for PropagateRealTensorsParser<'_> {
     fn name(&self) -> &'static str {
-        "propagate_real_tensors_provenance"
+        "guard_added"
     }
     fn get_metadata<'e>(&self, e: &'e Envelope) -> Option<Metadata<'e>> {
-        e.propagate_real_tensors_provenance
-            .as_ref()
-            .map(|m| Metadata::SymbolicShapePropagateRealTensor(m))
+        if let Some(m) = e.propagate_real_tensors_provenance.as_ref() {
+            return Some(Metadata::SymbolicShapePropagateRealTensor(m));
+        }
+        if let Some(g) = e.guard_added.as_ref() {
+            return Some(Metadata::SymbolicShapePropagateRealTensor(g));
+        }
+        return None;
     }
     fn parse<'e>(
         &self,

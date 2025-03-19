@@ -400,8 +400,9 @@ pub struct SymbolicShapePropagateRealTensorMetadata {
     pub user_stack: Option<StackSummary>,
     pub stack: Option<StackSummary>,
     pub expr_node_id: Option<u64>,
-    pub symbol_to_sources: Option<FxHashMap<String, Vec<String>>>,
+    pub symbol_to_sources: Option<FxHashMap<String, String>>,
     pub frame_locals: Option<FrameLocals>,
+    pub prefix: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -606,6 +607,7 @@ pub struct Envelope {
     pub link: Option<LinkMetadata>,
     pub symbolic_shape_specialization: Option<SymbolicShapeSpecializationMetadata>,
     pub propagate_real_tensors_provenance: Option<SymbolicShapePropagateRealTensorMetadata>,
+    pub guard_added: Option<SymbolicShapePropagateRealTensorMetadata>,
     pub create_unbacked_symbol: Option<UnbackedSymbolMetadata>,
     pub expression_created: Option<SymExprInfoMetadata>,
     pub missing_fake_kernel: Option<FakeKernelMetadata>,
