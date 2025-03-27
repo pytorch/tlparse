@@ -400,9 +400,15 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
 
         stats.ok += 1;
 
-        // lol this clone, probably shouldn't use entry
+        // Some runtime compile ids don't have attempts. Collapse these entries into
+        // attempt 0 for now.
+        let mut compile_id_entry = e.compile_id.clone();
+        if let Some(ref mut entry) = compile_id_entry {
+            entry.attempt = Some(0);
+        }
+
         // TODO: output should be able to generate this without explicitly creating
-        let compile_directory = directory.entry(e.compile_id.clone()).or_default();
+        let compile_directory = directory.entry(compile_id_entry).or_default();
 
         for parser in &all_parsers {
             run_parser(
