@@ -370,22 +370,28 @@ pub struct SymbolicShapeSpecializationMetadata {
 
 #[derive(Debug, Deserialize, Serialize, Default)]
 pub struct FrameLocals {
-    pub locals: Option<FxHashMap<String, String>>,
-    pub symbols: Option<FxHashMap<String, String>>,
+    pub locals: Option<FxHashMap<String, Option<String>>>,
+    pub symbols: Option<FxHashMap<String, Option<String>>>,
 }
 impl Display for FrameLocals {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if let Some(locals) = &self.locals {
             write!(f, "Locals:<pre>\n")?;
             for (name, value) in locals {
-                write!(f, "    {}: {}\n", name, value)?;
+                match value {
+                    Some(v) => write!(f, "    {}: {}\n", name, v),
+                    None => Ok(()),
+                }?
             }
             write!(f, "</pre>")?;
         }
         if let Some(symbols) = &self.symbols {
             write!(f, "Symbols:<pre>\n")?;
             for (name, value) in symbols {
-                write!(f, "    {}: {}\n", name, value)?;
+                match value {
+                    Some(v) => write!(f, "    {}: {}\n", name, v),
+                    None => Ok(()),
+                }?
             }
             write!(f, "</pre>")?;
         }
