@@ -44,9 +44,6 @@ pub struct Cli {
     /// For export specific logs
     #[arg(short, long)]
     export: bool,
-    /// For inductor provenance tracking highlighter
-    #[arg(short, long)]
-    inductor_provenance: bool,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -96,7 +93,6 @@ fn main() -> anyhow::Result<()> {
         verbose: cli.verbose,
         plain_text: cli.plain_text,
         export: cli.export,
-        inductor_provenance: cli.inductor_provenance,
     };
 
     let output = parse_path(&path, config)?;

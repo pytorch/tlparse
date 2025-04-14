@@ -250,7 +250,6 @@ fn test_provenance_tracking() {
     // Read the test file
     let path = Path::new("tests/inputs/inductor_provenance_aot_cuda_log.txt").to_path_buf();
     let config = tlparse::ParseConfig {
-        inductor_provenance: true,
         ..Default::default()
     };
     let output = tlparse::parse_path(&path, config);
