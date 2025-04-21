@@ -446,10 +446,14 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 }
             }
             None => {
-                multi.suspend(|| {
-                    eprintln!("Detected rank: {:?}", e.rank);
-                });
-                expected_rank = Some(e.rank);
+                // Allow logs with no rank and then some rank to be processed
+                // Logs with no rank may be initialized before distributed rank is set
+                if e.rank.is_some() {
+                    multi.suspend(|| {
+                        eprintln!("Detected rank: {:?}", e.rank);
+                    });
+                    expected_rank = Some(e.rank);
+                }
             }
         };
 
