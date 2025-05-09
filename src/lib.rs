@@ -29,7 +29,6 @@ pub struct ParseConfig {
     pub verbose: bool,
     pub plain_text: bool,
     pub export: bool,
-    pub inductor_provenance: bool,
 }
 
 impl Default for ParseConfig {
@@ -42,7 +41,6 @@ impl Default for ParseConfig {
             verbose: false,
             plain_text: false,
             export: false,
-            inductor_provenance: false,
         }
     }
 }
@@ -797,7 +795,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         num_breaks: breaks.failures.len(),
         has_chromium_events: !chromium_events.is_empty(),
         qps: TEMPLATE_QUERY_PARAM_SCRIPT,
-        has_inductor_provenance: config.inductor_provenance,
+        has_inductor_provenance: output.iter().any(|(path, _)| {
+            path.to_string_lossy()
+                .contains("inductor_provenance_tracking_node_mappings")
+        }),
         directory_names: directory_names.clone(),
     };
     output.push((
@@ -826,57 +827,54 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         return Err(anyhow!("Some log entries did not have compile id"));
     }
 
-    if config.inductor_provenance {
-        // Helper function to get file content for a specific directory name
-        fn get_file_content(
-            output: &[(PathBuf, String)],
-            filename_pattern: &str,
-            directory_name: &str,
-        ) -> String {
-            // get the last file that include the filename_pattern in the output
-            output
-                .iter()
-                .rev()
-                .find(|(path, _)| {
-                    path.to_string_lossy()
-                        .contains(&format!("{}/{}", directory_name, filename_pattern))
-                })
-                .map(|(_, content)| content.clone())
-                .unwrap_or_default()
-        }
+    // Helper function to get file content for a specific directory name
+    fn get_file_content(
+        output: &[(PathBuf, String)],
+        filename_pattern: &str,
+        directory_name: &str,
+    ) -> String {
+        // get the last file that include the filename_pattern in the output
+        output
+            .iter()
+            .rev()
+            .find(|(path, _)| {
+                path.to_string_lossy()
+                    .contains(&format!("{}/{}", directory_name, filename_pattern))
+            })
+            .map(|(_, content)| content.clone())
+            .unwrap_or_default()
+    }
 
-        // Generate HTML for each directory name
-        for directory_name in &directory_names {
-            let pre_grad_graph_content =
-                get_file_content(&output, "inductor_pre_grad_graph", directory_name);
-            let post_grad_graph_content =
-                get_file_content(&output, "inductor_post_grad_graph", directory_name);
-            let output_code_content =
-                get_file_content(&output, "inductor_output_code", directory_name);
-            let aot_code_content =
-                get_file_content(&output, "inductor_aot_wrapper_code", directory_name);
-            let node_mappings_content = get_file_content(
-                &output,
-                "inductor_provenance_tracking_node_mappings",
-                directory_name,
-            );
+    // Generate Inductor Provenance Tracking HTML for each directory name
+    for directory_name in &directory_names {
+        let pre_grad_graph_content =
+            get_file_content(&output, "inductor_pre_grad_graph", directory_name);
+        let post_grad_graph_content =
+            get_file_content(&output, "inductor_post_grad_graph", directory_name);
+        let output_code_content = get_file_content(&output, "inductor_output_code", directory_name);
+        let aot_code_content =
+            get_file_content(&output, "inductor_aot_wrapper_code", directory_name);
+        let node_mappings_content = get_file_content(
+            &output,
+            "inductor_provenance_tracking_node_mappings",
+            directory_name,
+        );
 
-            output.push((
-                PathBuf::from(format!("provenance_tracking_{}.html", directory_name)),
-                tt.render(
-                    "provenance_tracking.html",
-                    &ProvenanceContext {
-                        css: PROVENANCE_CSS,
-                        js: PROVENANCE_JS,
-                        pre_grad_graph_content,
-                        post_grad_graph_content,
-                        output_code_content,
-                        aot_code_content,
-                        node_mappings_content,
-                    },
-                )?,
-            ));
-        }
+        output.push((
+            PathBuf::from(format!("provenance_tracking_{}.html", directory_name)),
+            tt.render(
+                "provenance_tracking.html",
+                &ProvenanceContext {
+                    css: PROVENANCE_CSS,
+                    js: PROVENANCE_JS,
+                    pre_grad_graph_content,
+                    post_grad_graph_content,
+                    output_code_content,
+                    aot_code_content,
+                    node_mappings_content,
+                },
+            )?,
+        ));
     }
 
     Ok(output)
