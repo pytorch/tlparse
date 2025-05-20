@@ -667,9 +667,16 @@ impl StructuredLogParser for ArtifactParser {
                     simple_file_output(&filename, lineno, compile_id, &payload)
                 }
                 "json" => {
-                    let filename = format!("{}.json", metadata.name);
-                    let value: Value = serde_json::from_str(&payload).unwrap();
-                    let pretty = serde_json::to_string_pretty(&value).unwrap();
+                    let filename: String = format!("{}.json", metadata.name);
+                    let pretty: String = match serde_json::from_str::<Value>(&payload) {
+                        Ok(value) => {
+                            serde_json::to_string_pretty(&value).unwrap()
+                        }
+                        Err(_) => {
+                            // If failed to parse json string, use the raw payload
+                            payload.to_string()
+                        }
+                    };
                     simple_file_output(&filename, lineno, compile_id, &pretty)
                 }
                 _ => Err(anyhow::anyhow!(
