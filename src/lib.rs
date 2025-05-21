@@ -848,9 +848,9 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         // Generate HTML for each directory name
         for directory_name in &directory_names {
             let pre_grad_graph_content =
-                get_file_content(&output, "inductor_pre_grad_graph", directory_name);
+                get_file_content(&output, "before_pre_grad_graph", directory_name);
             let post_grad_graph_content =
-                get_file_content(&output, "inductor_post_grad_graph", directory_name);
+                get_file_content(&output, "after_post_grad_graph", directory_name);
             let output_code_content =
                 get_file_content(&output, "inductor_output_code", directory_name);
             let aot_code_content =

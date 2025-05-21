@@ -47,6 +47,10 @@ body {
     padding: 2px 5px;
     cursor: pointer;
     white-space: nowrap;
+    display: flex;
+    width: 100%;
+    min-width: max-content; /* Ensure line fills horizontally beyond visible area */
+    box-sizing: border-box;
     transition: background-color 0.2s ease;
 }
 
@@ -68,7 +72,7 @@ body {
 }
 
 .divider {
-    width: 10px;
+    width: 3px;
     background-color: #ccc;
     cursor: col-resize;
 }

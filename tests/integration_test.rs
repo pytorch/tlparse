@@ -244,8 +244,10 @@ fn test_export_guard_report() {
 #[test]
 fn test_provenance_tracking() {
     let expected_files = [
+        "-_-_-_-/before_pre_grad_graph_0.txt",
+        "-_-_-_-/after_post_grad_graph_6.txt",
         "provenance_tracking_-_-_-_-.html",
-        "-_-_-_-/inductor_provenance_tracking_node_mappings_11.json",
+        "-_-_-_-/inductor_provenance_tracking_node_mappings_12.json",
     ];
     // Read the test file
     let path = Path::new("tests/inputs/inductor_provenance_aot_cuda_log.txt").to_path_buf();
