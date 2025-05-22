@@ -1,0 +1,1832 @@
+V0318 11:30:14.811000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/__run_lpar_main__.py", 0]}
+V0318 11:30:14.812000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/__par__/meta_only/bootstrap.py", 1]}
+V0318 11:30:14.813000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/__par__/bootstrap.py", 2]}
+V0318 11:30:14.813000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py", 3]}
+V0318 11:30:14.814000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/export/__init__.py", 4]}
+V0318 11:30:14.814000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/export/_trace.py", 5]}
+V0318 11:30:14.814000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/export/exported_program.py", 6]}
+V0318 11:30:14.815000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_export/non_strict_utils.py", 7]}
+V0318 11:30:14.815000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/utils/_pytree.py", 8]}
+V0318 11:30:14.816000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_subclasses/fake_tensor.py", 9]}
+V0318 11:30:14.816000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_subclasses/meta_utils.py", 10]}
+V0318 11:30:14.816000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:248] {"describe_storage": {"id": 0, "describer_id": 0, "size": 320}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 288, "name": "describe_tensor", "filename": 10, "loc": "storage = self.describe_storage(t.untyped_storage(), trace=trace)"}, {"line": 248, "name": "describe_storage", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.818000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:462] {"describe_tensor": {"id": 0, "ndim": 2, "dtype": "torch.float32", "device": "device(type='cpu')", "size": [8, 10], "is_leaf": true, "stride": [10, 1], "storage": 0, "view_func": "_CustomViewFunc(func=<built-in method _view_func_unsafe of Tensor object at 0x7fb1804e8630>)", "describer_id": 0}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 462, "name": "describe_tensor", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.818000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:1869] {"describe_source": {"describer_id": 0, "id": 0, "source": "L['args'][0][0]"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1869, "name": "__call__", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.820000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:248] {"describe_storage": {"id": 1, "describer_id": 0, "size": 800}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 288, "name": "describe_tensor", "filename": 10, "loc": "storage = self.describe_storage(t.untyped_storage(), trace=trace)"}, {"line": 248, "name": "describe_storage", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.821000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:462] {"describe_tensor": {"id": 1, "ndim": 2, "dtype": "torch.float32", "device": "device(type='cpu')", "size": [10, 20], "is_leaf": true, "stride": [20, 1], "storage": 1, "view_func": "_CustomViewFunc(func=<built-in method _view_func_unsafe of Tensor object at 0x7fb1804e8220>)", "describer_id": 0}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 462, "name": "describe_tensor", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.822000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:1869] {"describe_source": {"describer_id": 0, "id": 1, "source": "L['args'][0][1]"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1869, "name": "__call__", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.823000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:248] {"describe_storage": {"id": 2, "describer_id": 0, "size": 2400}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 288, "name": "describe_tensor", "filename": 10, "loc": "storage = self.describe_storage(t.untyped_storage(), trace=trace)"}, {"line": 248, "name": "describe_storage", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.824000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:462] {"describe_tensor": {"id": 2, "ndim": 2, "dtype": "torch.float32", "device": "device(type='cpu')", "size": [20, 30], "is_leaf": true, "stride": [30, 1], "storage": 2, "view_func": "_CustomViewFunc(func=<built-in method _view_func_unsafe of Tensor object at 0x7fb17ff28040>)", "describer_id": 0}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 462, "name": "describe_tensor", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.824000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:1869] {"describe_source": {"describer_id": 0, "id": 2, "source": "L['args'][0][2]"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1869, "name": "__call__", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.825000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:248] {"describe_storage": {"id": 3, "describer_id": 0, "size": 1200}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 288, "name": "describe_tensor", "filename": 10, "loc": "storage = self.describe_storage(t.untyped_storage(), trace=trace)"}, {"line": 248, "name": "describe_storage", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.826000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:462] {"describe_tensor": {"id": 3, "ndim": 2, "dtype": "torch.float32", "device": "device(type='cpu')", "size": [10, 30], "is_leaf": true, "stride": [30, 1], "storage": 3, "view_func": "_CustomViewFunc(func=<built-in method _view_func_unsafe of Tensor object at 0x7fb17ff28680>)", "describer_id": 0}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1865, "name": "__call__", "filename": 10, "loc": "t_desc = self.describer.describe_tensor(t, trace=trace)"}, {"line": 462, "name": "describe_tensor", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:14.827000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_subclasses/meta_utils.py:1869] {"describe_source": {"describer_id": 0, "id": 3, "source": "L['args'][0][3]"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 54, "name": "main", "filename": 3, "loc": "ep = torch.export.export(model, example_inputs)"}, {"line": 360, "name": "export", "filename": 4, "loc": "return _export("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 2112, "name": "_export", "filename": 5, "loc": "ep = _export_for_training("}, {"line": 1065, "name": "wrapper", "filename": 5, "loc": "ep = fn(*args, **kwargs)"}, {"line": 121, "name": "wrapper", "filename": 6, "loc": "return fn(*args, **kwargs)"}, {"line": 1975, "name": "_export_for_training", "filename": 5, "loc": "export_artifact = export_func(  # type: ignore[operator]"}, {"line": 1872, "name": "_non_strict_export", "filename": 5, "loc": ") = make_fake_inputs("}, {"line": 213, "name": "make_fake_inputs", "filename": 7, "loc": "fake_args, fake_kwargs = tree_map_with_path("}, {"line": 1831, "name": "tree_map_with_path", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 983, "name": "unflatten", "filename": 8, "loc": "leaves = list(leaves)"}, {"line": 1831, "name": "<genexpr>", "filename": 8, "loc": "return treespec.unflatten(func(*xs) for xs in zip(*all_keypath_leaves))"}, {"line": 214, "name": "<lambda>", "filename": 7, "loc": "lambda kp, val: fakify(fake_mode, kp, val, t_constraints, sources),"}, {"line": 132, "name": "fakify", "filename": 7, "loc": "fake = mode.from_tensor(t, source=source, symbolic_context=symbolic_context)"}, {"line": 2658, "name": "from_tensor", "filename": 9, "loc": "return self.fake_tensor_converter.from_real_tensor("}, {"line": 392, "name": "from_real_tensor", "filename": 9, "loc": "out = self.meta_converter("}, {"line": 1869, "name": "__call__", "filename": 10, "loc": "trace_structured("}]}
+V0318 11:30:16.766000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "14ae7487699ca5b7cd19d02dfeaa803d"}
+	{
+	"name": "compile_fx_aot",
+	"ts": 1742322616766722.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:16.928000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/__init__.py", 11]}
+V0318 11:30:16.929000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/debug.py", 12]}
+V0318 11:30:16.929000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/compile_fx.py", 13]}
+V0318 11:30:16.931000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:1843] {"inductor_pre_grad_graph": {}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1843, "name": "compile_fx", "filename": 13, "loc": "trace_structured("}], "has_payload": "2b39cf6cca8dc6c9079fbe86d33c3c68"}
+	class GraphModule(torch.nn.Module):
+	    def forward(self, x: "f32[8, 10][10, 1]cpu", a: "f32[10, 20][20, 1]cpu", b: "f32[20, 30][30, 1]cpu", c: "f32[10, 30][30, 1]cpu"):
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cpu" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cpu" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        linear: "f32[8, 16][16, 1]cpu" = torch.ops.aten.linear.default(x, fc1_weight, fc1_bias);  x = fc1_weight = fc1_bias = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(linear);  linear = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(a, 3.14);  a = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(c, mul, b);  c = mul = b = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        gelu: "f32[10, 30][30, 1]cpu" = torch.ops.aten.gelu.default(addmm);  addmm = None
+	        return (sigmoid, gelu)
+	        
+	
+	 # graph id: 140401788875632
+V0318 11:30:16.935000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "9e0426e0c8603fb17b5a1e7f8871a0b7"}
+	{
+	"name": "_recursive_pre_grad_passes",
+	"ts": 1742322616935196.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:16.961000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/fx_passes/pre_grad.py", 14]}
+V0318 11:30:16.962000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/fx_passes/pre_grad.py:261] {"artifact": {"name": "before_recompile_pre_grad", "encoding": "string"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1862, "name": "compile_fx", "filename": 13, "loc": "model_ = _recursive_pre_grad_passes(model_, example_inputs_)"}, {"line": 355, "name": "_recursive_pre_grad_passes", "filename": 13, "loc": "return pre_grad_passes(gm, example_inputs, add_passes, remove_passes)"}, {"line": 261, "name": "pre_grad_passes", "filename": 14, "loc": "trace_structured("}], "has_payload": "cc096ed9ebac7464c580bef316aa5416"}
+	class GraphModule(torch.nn.Module):
+	    def forward(self, x: "f32[8, 10][10, 1]cpu", a: "f32[10, 20][20, 1]cpu", b: "f32[20, 30][30, 1]cpu", c: "f32[10, 30][30, 1]cpu"):
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cpu" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cpu" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        linear: "f32[8, 16][16, 1]cpu" = torch.ops.aten.linear.default(x, fc1_weight, fc1_bias);  x = fc1_weight = fc1_bias = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(linear);  linear = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(a, 3.14);  a = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(c, mul, b);  c = mul = b = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        gelu: "f32[10, 30][30, 1]cpu" = torch.ops.aten.gelu.default(addmm);  addmm = None
+	        return (sigmoid, gelu)
+	        
+V0318 11:30:16.968000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/fx_passes/pre_grad.py:313] {"artifact": {"name": "after_recompile_pre_grad", "encoding": "string"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1862, "name": "compile_fx", "filename": 13, "loc": "model_ = _recursive_pre_grad_passes(model_, example_inputs_)"}, {"line": 355, "name": "_recursive_pre_grad_passes", "filename": 13, "loc": "return pre_grad_passes(gm, example_inputs, add_passes, remove_passes)"}, {"line": 313, "name": "pre_grad_passes", "filename": 14, "loc": "trace_structured("}], "has_payload": "cc096ed9ebac7464c580bef316aa5416"}
+	class GraphModule(torch.nn.Module):
+	    def forward(self, x: "f32[8, 10][10, 1]cpu", a: "f32[10, 20][20, 1]cpu", b: "f32[20, 30][30, 1]cpu", c: "f32[10, 30][30, 1]cpu"):
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cpu" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cpu" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        linear: "f32[8, 16][16, 1]cpu" = torch.ops.aten.linear.default(x, fc1_weight, fc1_bias);  x = fc1_weight = fc1_bias = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(linear);  linear = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(a, 3.14);  a = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(c, mul, b);  c = mul = b = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        gelu: "f32[10, 30][30, 1]cpu" = torch.ops.aten.gelu.default(addmm);  addmm = None
+	        return (sigmoid, gelu)
+	        
+V0318 11:30:16.970000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "f391b8e5cff21aa3a546725eb5441032"}
+	{
+	"name": "_recursive_pre_grad_passes",
+	"ts": 1742322616969953.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:16.978000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "497dd77501c9b82cbba37996c4c04f70"}
+	{
+	"name": "create_aot_dispatcher_function",
+	"ts": 1742322616977950.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:17.048000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_functorch/aot_autograd.py", 15]}
+V0318 11:30:17.048000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", 16]}
+V0318 11:30:17.049000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", 17]}
+V0318 11:30:17.050000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py:214] {"artifact": {"name": "aot_forward_graph_fw_metadata", "encoding": "string"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2059, "name": "compile_fx", "filename": 13, "loc": "gm, graph_signature = aot_export_module("}, {"line": 1347, "name": "aot_export_module", "filename": 15, "loc": "fx_g, metadata, in_spec, out_spec = _aot_export_function("}, {"line": 1586, "name": "_aot_export_function", "filename": 15, "loc": "fx_g, meta = create_aot_dispatcher_function("}, {"line": 570, "name": "create_aot_dispatcher_function", "filename": 15, "loc": "return _create_aot_dispatcher_function("}, {"line": 820, "name": "_create_aot_dispatcher_function", "filename": 15, "loc": "compiled_fn, fw_metadata = compiler_fn("}, {"line": 126, "name": "aot_dispatch_export", "filename": 16, "loc": "graph, _, _ = aot_dispatch_base_graph("}, {"line": 214, "name": "aot_dispatch_base_graph", "filename": 17, "loc": "trace_structured("}], "has_payload": "7c74a144760cefb8a406d8dc8f099cf1"}
+	ViewAndMutationMeta(input_info=[InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=True,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=True,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=False,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=False,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=False,
+	                                              keep_input_mutations=False),
+	                               InputAliasInfo(is_leaf=True,
+	                                              mutates_data=False,
+	                                              mutates_metadata=False,
+	                                              mutations_hidden_from_autograd=True,
+	                                              mutations_under_no_grad_or_inference_mode=False,
+	                                              mutation_inductor_storage_resize=False,
+	                                              mutates_storage_metadata=False,
+	                                              requires_grad=False,
+	                                              keep_input_mutations=False)],
+	                    output_info=[OutputAliasInfo(output_type=<OutputType.non_alias: 1>,
+	                                                raw_type=<class 'torch._subclasses.functional_tensor.FunctionalTensor'>,
+	                                                base_idx=None,
+	                                                dynamic_dims=set(),
+	                                                requires_grad=False,
+	                                                functional_tensor=None),
+	                                OutputAliasInfo(output_type=<OutputType.non_alias: 1>,
+	                                                raw_type=<class 'torch._subclasses.functional_tensor.FunctionalTensor'>,
+	                                                base_idx=None,
+	                                                dynamic_dims=set(),
+	                                                requires_grad=False,
+	                                                functional_tensor=None)],
+	                    num_intermediate_bases=0,
+	                    keep_input_mutations=False,
+	                    traced_tangents=[],
+	                    subclass_inp_meta=[PlainTensorMeta(unwrapped_idx=0,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=1,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=2,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=3,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=4,
+	                                                      memory_format=None),
+	                                      PlainTensorMeta(unwrapped_idx=5,
+	                                                      memory_format=None)],
+	                    subclass_fw_graph_out_meta=[PlainTensorMeta(unwrapped_idx=0,
+	                                                               memory_format=None),
+	                                               PlainTensorMeta(unwrapped_idx=1,
+	                                                               memory_format=None)],
+	                    subclass_tangent_meta=[],
+	                    is_train=False,
+	                    traced_tangent_metas=None,
+	                    num_symints_saved_for_bw=None,
+	                    grad_enabled_mutation=None,
+	                    deterministic=None,
+	                    static_input_indices=[],
+	                    tokens={},
+	                    indices_of_inputs_that_requires_grad_with_mutations_in_bw=[],
+	                    bw_donated_idxs=None,
+	                    num_backward_tokens=0,
+	                    num_graphsafe_rng_states=0,
+	                    graphsafe_rng_state_index=None)
+V0318 11:30:17.053000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py:232] {"aot_inference_graph": {}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2059, "name": "compile_fx", "filename": 13, "loc": "gm, graph_signature = aot_export_module("}, {"line": 1347, "name": "aot_export_module", "filename": 15, "loc": "fx_g, metadata, in_spec, out_spec = _aot_export_function("}, {"line": 1586, "name": "_aot_export_function", "filename": 15, "loc": "fx_g, meta = create_aot_dispatcher_function("}, {"line": 570, "name": "create_aot_dispatcher_function", "filename": 15, "loc": "return _create_aot_dispatcher_function("}, {"line": 820, "name": "_create_aot_dispatcher_function", "filename": 15, "loc": "compiled_fn, fw_metadata = compiler_fn("}, {"line": 126, "name": "aot_dispatch_export", "filename": 16, "loc": "graph, _, _ = aot_dispatch_base_graph("}, {"line": 232, "name": "aot_dispatch_base_graph", "filename": 17, "loc": "trace_structured("}], "has_payload": "dbeecad4f9e006e0c7c5d9903f173dc5"}
+	class <lambda>(torch.nn.Module):
+	    def forward(self, arg0_1: "f32[16, 10][10, 1]cpu", arg1_1: "f32[16][1]cpu", arg2_1: "f32[8, 10][10, 1]cpu", arg3_1: "f32[10, 20][20, 1]cpu", arg4_1: "f32[20, 30][30, 1]cpu", arg5_1: "f32[10, 30][30, 1]cpu"):
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        permute: "f32[10, 16][1, 10]cpu" = torch.ops.aten.permute.default(arg0_1, [1, 0]);  arg0_1 = None
+	        addmm: "f32[8, 16][16, 1]cpu" = torch.ops.aten.addmm.default(arg1_1, arg2_1, permute);  arg1_1 = arg2_1 = permute = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(addmm);  addmm = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(arg3_1, 3.14);  arg3_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(arg5_1, mul, arg4_1);  arg5_1 = mul = arg4_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        mul_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.5)
+	        mul_2: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.7071067811865476);  addmm_1 = None
+	        erf: "f32[10, 30][30, 1]cpu" = torch.ops.aten.erf.default(mul_2);  mul_2 = None
+	        add: "f32[10, 30][30, 1]cpu" = torch.ops.aten.add.Tensor(erf, 1);  erf = None
+	        mul_3: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(mul_1, add);  mul_1 = add = None
+	        return (sigmoid, mul_3)
+	        
+V0318 11:30:17.058000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "ae429e39c2344473aa69581d91c47656"}
+	{
+	"name": "create_aot_dispatcher_function",
+	"ts": 1742322617058209.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:17.061000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "dff8452c9f6a45c83fca2178632c93d9"}
+	{
+	"name": "compile_fx.<locals>.fw_compiler_base",
+	"ts": 1742322617061224.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:17.062000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "def35549fba03556a4425ebc794136e6"}
+	{
+	"name": "_recursive_joint_graph_passes",
+	"ts": 1742322617062422.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.056000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "7868c1e570c6a327ae875da0e394b546"}
+	{
+	"name": "_recursive_joint_graph_passes",
+	"ts": 1742322618056726.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.059000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "5960483d83e4bcd27be4d8823ff3c5b8"}
+	{
+	"name": "inductor_compile",
+	"ts": 1742322618059675.8,
+	"args": {
+	"fn_name": "compile_fx_inner",
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.080000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/usr/local/fbcode/platform010/lib/python3.10/contextlib.py", 18]}
+V0318 11:30:18.080000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_dynamo/repro/after_aot.py", 19]}
+V0318 11:30:18.080000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/fb/utils.py", 20]}
+V0318 11:30:18.087000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:964] {"artifact": {"name": "fx_graph_runnable", "encoding": "string"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 964, "name": "codegen_and_compile", "filename": 13, "loc": "trace_structured("}], "has_payload": "d6dc4a0be9c999ee57b20331b6cb1067"}
+	
+	import os
+	os.environ['TORCH_TRACE'] = '/home/shangdiy/my_trace_log_dir'
+	os.environ['TORCH_COMPILE_DEBUG'] = '1'
+	os.environ['TORCH_LOGS'] = '+inductor'
+	os.environ['PYTORCH_DDP_USE_SIDE_STREAM'] = '0'
+	os.environ['TRITON_CACHE_MANAGER'] = 'triton.runtime.cache:RemoteCacheManager'
+	os.environ['TRITON_REMOTE_CACHE_BACKEND'] = 'triton.fb.fb_memcache:FbMemcacheRemoteKernelCache'
+	os.environ['TORCHINDUCTOR_CACHE_DIR'] = '/tmp/torchinductor_shangdiy'
+	
+	import torch
+	from torch import tensor, device
+	import torch.fx as fx
+	from torch._dynamo.testing import rand_strided
+	from math import inf
+	import torch._inductor.inductor_prims
+	
+	import torch._dynamo.config
+	import torch._inductor.config
+	import torch._functorch.config
+	import torch.fx.experimental._config
+	
+	torch._inductor.config.cpp_wrapper = True
+	torch._inductor.config.triton.cudagraphs = False
+	torch._inductor.config.triton.autotune_cublasLt = False
+	torch._inductor.config.triton.autotune_at_compile_time = True
+	torch._inductor.config.triton.store_cubin = True
+	torch._inductor.config.aot_inductor.output_path = 'cwhkamk7hukdm5d55b4fxkyyok5x57mzbc2hzfy243x4xp2dcbtz'
+	torch._inductor.config.aot_inductor.serialized_in_spec = '[1, {"type": "builtins.tuple", "context": "null", "children_spec": [{"type": "builtins.tuple", "context": "null", "children_spec": [{"type": null, "context": null, "children_spec": []}, {"type": null, "context": null, "children_spec": []}, {"type": null, "context": null, "children_spec": []}, {"type": null, "context": null, "children_spec": []}]}, {"type": "builtins.dict", "context": "[]", "children_spec": []}]}]'
+	torch._inductor.config.aot_inductor.serialized_out_spec = '[1, {"type": "builtins.tuple", "context": "null", "children_spec": [{"type": null, "context": null, "children_spec": []}, {"type": null, "context": null, "children_spec": []}]}]'
+	torch._inductor.config.aot_inductor.package = True
+	torch._functorch.config.functionalize_rng_ops = False
+	torch._functorch.config.unlift_effect_tokens = False
+	
+	
+	
+	isolate_fails_code_str = None
+	
+	torch.ops.load_library("//caffe2/torch/fb/sparsenn:sparsenn_operators_gpu")
+	torch.ops.load_library("//caffe2/torch/fb/sparsenn:sparsenn_operators")
+	torch.ops.load_library("//deeplearning/fbgemm/fbgemm_gpu:sparse_ops_cpu")
+	torch.ops.load_library("//deeplearning/fbgemm/fbgemm_gpu:sparse_ops")
+	
+	"""
+	To run this script in fbcode:
+	- Create a directory (//scripts/{your_unixname}/repro)
+	- Put this file in scripts/{your_unixname}/repro/fx_graph_runnable.py
+	- Add a TARGETS file that looks like the following
+	- `buck2 run //scripts/{your_unixname}/repro:repro`
+	
+	NOTE: you may need additional deps to actually be able to run the script.
+	```
+	# Contents of TARGETS file
+	load("@fbcode_macros//build_defs:python_binary.bzl", "python_binary")
+	
+	python_binary(
+	    name = "repro",
+	    main_src = "fx_graph_runnable.py",
+	    deps = [
+	        "//caffe2:torch",
+	        "//caffe2/torch/fb/sparsenn:sparsenn_operators_gpu",
+	        "//caffe2/torch/fb/sparsenn:sparsenn_operators",
+	        "//deeplearning/fbgemm/fbgemm_gpu:sparse_ops_cpu",
+	        "//deeplearning/fbgemm/fbgemm_gpu:sparse_ops",
+	    ],
+	)
+	```
+	"""
+	
+	# torch version: 2.8.0a0+fb
+	# torch cuda version: 12.4.0
+	# CUDA Info: 
+	# nvcc not found
+	# GPU Hardware Info: 
+	# NVIDIA PG509-210 : 1 
+	
+	
+	from torch.nn import *
+	class Repro(torch.nn.Module):
+	    def __init__(self) -> None:
+	        super().__init__()
+	        self.fc1 = Module()
+	
+	    
+	    
+	    def forward(self):
+	        arg2_1, arg3_1, arg4_1, arg5_1, = fx_pytree.tree_flatten_spec([], self._in_spec)
+	        fc1_weight = self.fc1.weight
+	        fc1_bias = self.fc1.bias
+	        permute = torch.ops.aten.permute.default(fc1_weight, [1, 0]);  fc1_weight = None
+	        addmm = torch.ops.aten.addmm.default(fc1_bias, arg2_1, permute);  fc1_bias = arg2_1 = permute = None
+	        relu = torch.ops.aten.relu.default(addmm);  addmm = None
+	        sigmoid = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        mul = torch.ops.aten.mul.Tensor(arg3_1, 3.14);  arg3_1 = None
+	        addmm_1 = torch.ops.aten.addmm.default(arg5_1, mul, arg4_1);  arg5_1 = mul = arg4_1 = None
+	        mul_1 = torch.ops.aten.mul.Tensor(addmm_1, 0.5)
+	        mul_2 = torch.ops.aten.mul.Tensor(addmm_1, 0.7071067811865476);  addmm_1 = None
+	        erf = torch.ops.aten.erf.default(mul_2);  mul_2 = None
+	        add = torch.ops.aten.add.Tensor(erf, 1);  erf = None
+	        mul_3 = torch.ops.aten.mul.Tensor(mul_1, add);  mul_1 = add = None
+	        return (sigmoid, mul_3)
+	        
+	def load_args(reader):
+	    buf0 = reader.storage(None, 320)
+	    reader.tensor(buf0, (8, 10), is_leaf=True)  # arg2_1
+	    buf1 = reader.storage(None, 800)
+	    reader.tensor(buf1, (10, 20), is_leaf=True)  # arg3_1
+	    buf2 = reader.storage(None, 2400)
+	    reader.tensor(buf2, (20, 30), is_leaf=True)  # arg4_1
+	    buf3 = reader.storage(None, 1200)
+	    reader.tensor(buf3, (10, 30), is_leaf=True)  # arg5_1
+	load_args._version = 0
+	mod = Repro()
+	if __name__ == '__main__':
+	    from torch._dynamo.repro.after_aot import run_repro
+	    with torch.no_grad():
+	        run_repro(mod, load_args, accuracy=False, command='run', save_dir=None, tracing_mode='real', check_str=None)
+	        # To run it separately, do 
+	        # mod, args = run_repro(mod, load_args, accuracy=False, command='get_args', save_dir=None, tracing_mode='real', check_str=None)
+	        # mod(*args)
+V0318 11:30:18.104000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "c381fc2a6c4714ff296755e0f3cf3558"}
+	{
+	"name": "_recursive_post_grad_passes",
+	"ts": 1742322618104557.5,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.133000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/fx_passes/post_grad.py", 21]}
+V0318 11:30:18.134000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/fx_passes/post_grad.py:118] {"artifact": {"name": "before_recompile_post_grad", "encoding": "string"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1015, "name": "codegen_and_compile", "filename": 13, "loc": "_recursive_post_grad_passes(gm, is_inference=is_inference)"}, {"line": 379, "name": "_recursive_post_grad_passes", "filename": 13, "loc": "post_grad_passes(gm, is_inference)"}, {"line": 118, "name": "post_grad_passes", "filename": 21, "loc": "trace_structured("}], "has_payload": "9f438bbe049d4c3593bfa6cfc3f1bb5e"}
+	class <lambda>(torch.nn.Module):
+	    def forward(self):
+	        arg2_1: "f32[8, 10][10, 1]cpu"; arg3_1: "f32[10, 20][20, 1]cpu"; arg4_1: "f32[20, 30][30, 1]cpu"; arg5_1: "f32[10, 30][30, 1]cpu"; 
+	    
+	        arg2_1, arg3_1, arg4_1, arg5_1, = fx_pytree.tree_flatten_spec([], self._in_spec)
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cpu" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cpu" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        permute: "f32[10, 16][1, 10]cpu" = torch.ops.aten.permute.default(fc1_weight, [1, 0]);  fc1_weight = None
+	        addmm: "f32[8, 16][16, 1]cpu" = torch.ops.aten.addmm.default(fc1_bias, arg2_1, permute);  fc1_bias = arg2_1 = permute = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(addmm);  addmm = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(arg3_1, 3.14);  arg3_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(arg5_1, mul, arg4_1);  arg5_1 = mul = arg4_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        mul_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.5)
+	        mul_2: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.7071067811865476);  addmm_1 = None
+	        erf: "f32[10, 30][30, 1]cpu" = torch.ops.aten.erf.default(mul_2);  mul_2 = None
+	        add: "f32[10, 30][30, 1]cpu" = torch.ops.aten.add.Tensor(erf, 1);  erf = None
+	        mul_3: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(mul_1, add);  mul_1 = add = None
+	        return (sigmoid, mul_3)
+	        
+V0318 11:30:18.141000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/fx_passes/post_grad.py:205] {"artifact": {"name": "after_recompile_post_grad", "encoding": "string"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1015, "name": "codegen_and_compile", "filename": 13, "loc": "_recursive_post_grad_passes(gm, is_inference=is_inference)"}, {"line": 379, "name": "_recursive_post_grad_passes", "filename": 13, "loc": "post_grad_passes(gm, is_inference)"}, {"line": 205, "name": "post_grad_passes", "filename": 21, "loc": "trace_structured("}], "has_payload": "9f438bbe049d4c3593bfa6cfc3f1bb5e"}
+	class <lambda>(torch.nn.Module):
+	    def forward(self):
+	        arg2_1: "f32[8, 10][10, 1]cpu"; arg3_1: "f32[10, 20][20, 1]cpu"; arg4_1: "f32[20, 30][30, 1]cpu"; arg5_1: "f32[10, 30][30, 1]cpu"; 
+	    
+	        arg2_1, arg3_1, arg4_1, arg5_1, = fx_pytree.tree_flatten_spec([], self._in_spec)
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cpu" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cpu" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        permute: "f32[10, 16][1, 10]cpu" = torch.ops.aten.permute.default(fc1_weight, [1, 0]);  fc1_weight = None
+	        addmm: "f32[8, 16][16, 1]cpu" = torch.ops.aten.addmm.default(fc1_bias, arg2_1, permute);  fc1_bias = arg2_1 = permute = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(addmm);  addmm = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(arg3_1, 3.14);  arg3_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(arg5_1, mul, arg4_1);  arg5_1 = mul = arg4_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        mul_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.5)
+	        mul_2: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.7071067811865476);  addmm_1 = None
+	        erf: "f32[10, 30][30, 1]cpu" = torch.ops.aten.erf.default(mul_2);  mul_2 = None
+	        add: "f32[10, 30][30, 1]cpu" = torch.ops.aten.add.Tensor(erf, 1);  erf = None
+	        mul_3: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(mul_1, add);  mul_1 = add = None
+	        return (sigmoid, mul_3)
+	        
+V0318 11:30:18.142000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "b380bd0ccdbb49c452d0ef213a46efa1"}
+	{
+	"name": "_recursive_post_grad_passes",
+	"ts": 1742322618142589.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.148000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:1027] {"inductor_post_grad_graph": {}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1027, "name": "codegen_and_compile", "filename": 13, "loc": "trace_structured("}], "has_payload": "9f438bbe049d4c3593bfa6cfc3f1bb5e"}
+	class <lambda>(torch.nn.Module):
+	    def forward(self):
+	        arg2_1: "f32[8, 10][10, 1]cpu"; arg3_1: "f32[10, 20][20, 1]cpu"; arg4_1: "f32[20, 30][30, 1]cpu"; arg5_1: "f32[10, 30][30, 1]cpu"; 
+	    
+	        arg2_1, arg3_1, arg4_1, arg5_1, = fx_pytree.tree_flatten_spec([], self._in_spec)
+	        # No stacktrace found for following nodes
+	        fc1_weight: "f32[16, 10][10, 1]cpu" = self.fc1.weight
+	        fc1_bias: "f32[16][1]cpu" = self.fc1.bias
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/linear.py:125 in forward, code: return F.linear(input, self.weight, self.bias)
+	        permute: "f32[10, 16][1, 10]cpu" = torch.ops.aten.permute.default(fc1_weight, [1, 0]);  fc1_weight = None
+	        addmm: "f32[8, 16][16, 1]cpu" = torch.ops.aten.addmm.default(fc1_bias, arg2_1, permute);  fc1_bias = arg2_1 = permute = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:133 in forward, code: return F.relu(input, inplace=self.inplace)
+	        relu: "f32[8, 16][16, 1]cpu" = torch.ops.aten.relu.default(addmm);  addmm = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/nn/modules/activation.py:327 in forward, code: return torch.sigmoid(input)
+	        sigmoid: "f32[8, 16][16, 1]cpu" = torch.ops.aten.sigmoid.default(relu);  relu = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:32 in forward, code: d = a * 3.14
+	        mul: "f32[10, 20][20, 1]cpu" = torch.ops.aten.mul.Tensor(arg3_1, 3.14);  arg3_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:33 in forward, code: y = torch.addmm(c, d, b)
+	        addmm_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.addmm.default(arg5_1, mul, arg4_1);  arg5_1 = mul = arg4_1 = None
+	        
+	         # File: /data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/scripts/shangdiy/aot.py:34 in forward, code: z = torch.nn.functional.gelu(y)
+	        mul_1: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.5)
+	        mul_2: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(addmm_1, 0.7071067811865476);  addmm_1 = None
+	        erf: "f32[10, 30][30, 1]cpu" = torch.ops.aten.erf.default(mul_2);  mul_2 = None
+	        add: "f32[10, 30][30, 1]cpu" = torch.ops.aten.add.Tensor(erf, 1);  erf = None
+	        mul_3: "f32[10, 30][30, 1]cpu" = torch.ops.aten.mul.Tensor(mul_1, add);  mul_1 = add = None
+	        return (sigmoid, mul_3)
+	        
+V0318 11:30:18.149000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/compile_fx.py:1037] {"artifact": {"name": "inductor_post_to_pre_grad_nodes", "encoding": "json"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1037, "name": "codegen_and_compile", "filename": 13, "loc": "trace_structured("}], "has_payload": "af225182711478927ba06515be9cdf1a"}
+	{"permute": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "addmm": [{"name": "linear", "target": "aten.linear.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "relu": [{"name": "relu", "target": "aten.relu.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "sigmoid": [{"name": "sigmoid", "target": "aten.sigmoid.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "mul": [{"name": "mul", "target": "aten.mul.Tensor", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "addmm_1": [{"name": "addmm", "target": "aten.addmm.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "mul_1": [{"name": "gelu", "target": "aten.gelu.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "mul_2": [{"name": "gelu", "target": "aten.gelu.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "erf": [{"name": "gelu", "target": "aten.gelu.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "add": [{"name": "gelu", "target": "aten.gelu.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}], "mul_3": [{"name": "gelu", "target": "aten.gelu.default", "graph_id": 140401788875632, "pass_name": "Interpreter_PropagateUnbackedSymInts", "action": "create", "from_node": []}]}
+V0318 11:30:18.170000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "76cf5ac0d3840a76514307a464d6117f"}
+	{
+	"name": "GraphLowering.run",
+	"ts": 1742322618170809.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.259000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "90b0ba02a03df3ec9de8c5addac5d51d"}
+	{
+	"name": "GraphLowering.run",
+	"ts": 1742322618259803.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.261000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "c577fe69d11be143455b3f7f85695bd3"}
+	{
+	"name": "GraphLowering.compile_to_fn",
+	"ts": 1742322618261548.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.262000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "2f3a2087450ef5c820b6b0e3bfd8b210"}
+	{
+	"name": "GraphLowering.codegen",
+	"ts": 1742322618262647.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.267000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "2716c538d6722797dfb48f783e884ba8"}
+	{
+	"name": "Scheduler.__init__",
+	"ts": 1742322618267747.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.315000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "8cffccc2e73eea0a7b167e46e542b3f4"}
+	{
+	"name": "Scheduler.fused_nodes",
+	"ts": 1742322618315726.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.318000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "6ab91e01978e430b9cf0120cc0d8177c"}
+	{
+	"name": "Scheduler.fused_nodes",
+	"ts": 1742322618318018.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.335000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "2d7594cb989837393fe7e0a6ca0dd7ab"}
+	{
+	"name": "Scheduler.__init__",
+	"ts": 1742322618335730.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.336000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "dca50d8aae0ce834d353a317184394f2"}
+	{
+	"name": "Scheduler.codegen",
+	"ts": 1742322618336731.5,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.388000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "621cffb0fa4efaf228a142946c130095"}
+	{
+	"name": "Scheduler.codegen",
+	"ts": 1742322618387917.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.392000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/graph.py", 22]}
+V0318 11:30:18.392000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/graph.py:2020] {"artifact": {"name": "inductor_triton_kernel_to_post_grad_nodes", "encoding": "json"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1177, "name": "codegen_and_compile", "filename": 13, "loc": "wrapper_code, kernel_code = graph.codegen_with_cpp_wrapper()"}, {"line": 1983, "name": "codegen_with_cpp_wrapper", "filename": 22, "loc": "return self.codegen()"}, {"line": 2020, "name": "codegen", "filename": 22, "loc": "trace_structured("}], "has_payload": "6de42a77170870d9ab5c63217aae8660"}
+	{"cpp_fused_mul_relu_sigmoid_0": ["mul"], "cpp_fused_gelu_1": ["mul_3", "mul_1", "add", "erf", "mul_2"]}
+V0318 11:30:18.393000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/graph.py:2028] {"artifact": {"name": "inductor_provenance_tracking_node_mappings", "encoding": "json"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1177, "name": "codegen_and_compile", "filename": 13, "loc": "wrapper_code, kernel_code = graph.codegen_with_cpp_wrapper()"}, {"line": 1983, "name": "codegen_with_cpp_wrapper", "filename": 22, "loc": "return self.codegen()"}, {"line": 2028, "name": "codegen", "filename": 22, "loc": "trace_structured("}], "has_payload": "d8da450fe84cc61be6942f024b6530eb"}
+	{"preToPost": {"linear": ["permute", "addmm"], "relu": ["relu"], "sigmoid": ["sigmoid"], "mul": ["mul"], "addmm": ["addmm_1"], "gelu": ["mul_1", "mul_2", "erf", "add", "mul_3"]}, "postToPre": {"permute": ["linear"], "addmm": ["linear"], "relu": ["relu"], "sigmoid": ["sigmoid"], "mul": ["mul"], "addmm_1": ["addmm"], "mul_1": ["gelu"], "mul_2": ["gelu"], "erf": ["gelu"], "add": ["gelu"], "mul_3": ["gelu"]}, "cppCodeToPost": {"cpp_fused_mul_relu_sigmoid_0": ["mul"], "cpp_fused_gelu_1": ["mul_3", "mul_1", "add", "erf", "mul_2"]}, "postToCppCode": {"mul": ["cpp_fused_mul_relu_sigmoid_0"], "mul_3": ["cpp_fused_gelu_1"], "mul_1": ["cpp_fused_gelu_1"], "add": ["cpp_fused_gelu_1"], "erf": ["cpp_fused_gelu_1"], "mul_2": ["cpp_fused_gelu_1"]}}
+V0318 11:30:18.394000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "3f646d4fcdad31ba7b013804ec0d5395"}
+	{
+	"name": "CppWrapperCpu.generate",
+	"ts": 1742322618394678.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.398000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "8640c80a9d7c920a04ff45dcb87139fd"}
+	{
+	"name": "PythonWrapperCodegen.generate",
+	"ts": 1742322618398003.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.401000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "f81e263c79061c965156579d00ddb43b"}
+	{
+	"name": "async_compile.wait",
+	"ts": 1742322618401700.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.403000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "73fd138dfdc9180d68c365fc5e4d32b7"}
+	{
+	"name": "async_compile.wait",
+	"ts": 1742322618403001.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.407000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "09969ba86423d295f6fa08e1a894e2bd"}
+	{
+	"name": "PythonWrapperCodegen.generate",
+	"ts": 1742322618407122.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.408000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "41c0df3bc8d16ced9ceeb3794de1c71c"}
+	{
+	"name": "CppWrapperCpu.generate",
+	"ts": 1742322618408097.5,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.409000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "1bfd1638bad91c80014c7a54b4603b39"}
+	{
+	"name": "GraphLowering.codegen",
+	"ts": 1742322618409746.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.411000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "7cd85c6d31ae32580c3ce897887d42d7"}
+	{
+	"name": "AotCodeCompiler.compile",
+	"ts": 1742322618411477.5,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:18.426000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_inductor/codecache.py", 23]}
+V0318 11:30:18.427000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/codecache.py:1468] {"graph_dump": {"name": "inductor_aot_wrapper_code", "type": "cpp", "filename": "/tmp/torchinductor_shangdiy/cwhkamk7hukdm5d55b4fxkyyok5x57mzbc2hzfy243x4xp2dcbtz/cxmqnk3ttwevbjt7xm6rsozjdczy5ih67o7otzep5pmzx54dtw3o.wrapper.cpp"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1202, "name": "codegen_and_compile", "filename": 13, "loc": "compiled_fn = AotCodeCompiler.compile("}, {"line": 1468, "name": "compile", "filename": 23, "loc": "trace_structured("}], "has_payload": "62b6c63d4f2833faedd543b4ff38fb77"}
+	
+	#include <torch/csrc/inductor/aoti_include/cpu.h>
+	// Definition of AOTI runtime interface functions
+	
+	#include <torch/csrc/inductor/aoti_runtime/interface.h>
+	#include <torch/csrc/inductor/aoti_runtime/model_container.h>
+	
+	#include <iostream>
+	#include <sstream>
+	#include <stdexcept>
+	#include <vector>
+	
+	#define CONVERT_EXCEPTION_TO_ERROR_CODE(...)                 \
+	  try {                                                      \
+	    __VA_ARGS__                                              \
+	  } catch (const std::exception& e) {                        \
+	    std::cerr << "Error: " << e.what() << std::endl;         \
+	    return AOTI_RUNTIME_FAILURE;                             \
+	  } catch (...) {                                            \
+	    std::cerr << "Unknown exception occurred." << std::endl; \
+	    return AOTI_RUNTIME_FAILURE;                             \
+	  }                                                          \
+	  return AOTI_RUNTIME_SUCCESS;
+	
+	#define AOTI_VECTOR_SIZE_CHECK(actual_size, expected_size, name)  \
+	  do {                                                            \
+	    AOTI_RUNTIME_CHECK(                                           \
+	        actual_size == expected_size,                             \
+	        "expected " + std::string(name) + " vector size to be " + \
+	            std::to_string(expected_size) + ", but got " +        \
+	            std::to_string(actual_size));                         \
+	  } while (0)
+	
+	// AOTInductor uses at::addmm_out, which doesn't supports
+	// arguments that requires gradient. For this reason, we
+	// enforce no_grad context for run APIs.
+	//
+	// A RAII, thread local (!) guard that enables or disables grad mode upon
+	// construction, and sets it back to the original value upon destruction.
+	struct AOTINoGradGuard {
+	  AOTINoGradGuard() : prev_mode(aoti_torch_grad_mode_is_enabled()) {
+	    aoti_torch_grad_mode_set_enabled(false);
+	  }
+	  ~AOTINoGradGuard() {
+	    aoti_torch_grad_mode_set_enabled(prev_mode);
+	  }
+	  bool prev_mode;
+	};
+	
+	extern "C" {
+	
+	AOTIRuntimeError AOTInductorModelContainerCreate(
+	    AOTInductorModelContainerHandle* container_handle,
+	    size_t num_models,
+	    bool is_cpu,
+	    const char* cubin_dir) {
+	      return AOTInductorModelContainerCreateWithDevice(
+	        container_handle,
+	        num_models,
+	        is_cpu ? "cpu" : "cuda",
+	        cubin_dir);
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerCreateWithDevice(
+	    AOTInductorModelContainerHandle* container_handle,
+	    size_t num_models,
+	    const char* device_str,
+	    const char* cubin_dir) {
+	  if (num_models == 0) {
+	    std::cerr << "Error: num_models must be positive, but got 0" << std::endl;
+	    return AOTI_RUNTIME_FAILURE;
+	  }
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    std::optional<std::string> cubin_dir_opt;
+	    if (cubin_dir != nullptr) {
+	      cubin_dir_opt.emplace(cubin_dir);
+	    }
+	    auto* container = new torch::aot_inductor::AOTInductorModelContainer(
+	        num_models, std::string(device_str), cubin_dir_opt);
+	    *container_handle =
+	        reinterpret_cast<AOTInductorModelContainerHandle>(container);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerDelete(
+	    AOTInductorModelContainerHandle container_handle) {
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    auto* container =
+	        reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	            container_handle);
+	    delete container;
+	  });
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerRun(
+	    AOTInductorModelContainerHandle container_handle,
+	    AtenTensorHandle* input_handles, // array of input AtenTensorHandle; handles
+	                                     // are stolen; the array itself is borrowed
+	    size_t num_inputs,
+	    AtenTensorHandle*
+	        output_handles, // array for writing output AtenTensorHandle; handles
+	                        // will be stolen by the caller; the array itself is
+	                        // borrowed
+	    size_t num_outputs,
+	    AOTInductorStreamHandle stream_handle,
+	    AOTIProxyExecutorHandle proxy_executor_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  AOTI_VECTOR_SIZE_CHECK(num_inputs, container->num_inputs(), "inputs");
+	  AOTI_VECTOR_SIZE_CHECK(num_outputs, container->num_outputs(), "outputs");
+	
+	  auto stream =
+	      reinterpret_cast<torch::aot_inductor::DeviceStreamType>(stream_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    container->run(
+	        input_handles, output_handles, stream, proxy_executor_handle);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerRunSingleThreaded(
+	    AOTInductorModelContainerHandle container_handle,
+	    AtenTensorHandle* input_handles, // array of input AtenTensorHandle; handles
+	                                     // are stolen; the array itself is borrowed
+	    size_t num_inputs,
+	    AtenTensorHandle*
+	        output_handles, // array for writing output AtenTensorHandle; handles
+	                        // will be stolen by the caller; the array itself is
+	                        // borrowed
+	    size_t num_outputs,
+	    AOTInductorStreamHandle stream_handle,
+	    AOTIProxyExecutorHandle proxy_executor_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  AOTI_VECTOR_SIZE_CHECK(num_inputs, container->num_inputs(), "inputs");
+	  AOTI_VECTOR_SIZE_CHECK(num_outputs, container->num_outputs(), "outputs");
+	
+	  auto stream =
+	      reinterpret_cast<torch::aot_inductor::DeviceStreamType>(stream_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    container->run_single_threaded(
+	        input_handles, output_handles, stream, proxy_executor_handle);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetNumConstants(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t* num_constants) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *num_constants = container->num_constants(); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantName(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    const char** name) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *name = container->constant_name(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantOriginalFQN(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    const char** original_fqn) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *original_fqn = container->constant_original_fqn(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantFromFolded(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    bool* from_folded) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({ *from_folded = container->constant_from_folded(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantType(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    int32_t* type) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({ *type = container->constant_type(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetConstantDtype(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t idx,
+	    int32_t* dtype) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	    { *dtype = container->constant_dtype(idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerUpdateConstantBuffer(
+	    AOTInductorModelContainerHandle container_handle,
+	    AOTInductorConstantMapHandle constant_map_handle,
+	    bool use_inactive,
+	    bool validate_full_update) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  auto input_map = reinterpret_cast<std::unordered_map<std::string, AtenTensorHandle>*>(constant_map_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    container->update_constant_buffer(
+	        *input_map, use_inactive, validate_full_update);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerUpdateInactiveConstantBuffer(
+	    AOTInductorModelContainerHandle container_handle,
+	    AOTInductorConstantMapHandle constant_map_handle) {
+	  return AOTInductorModelContainerUpdateConstantBuffer(container_handle,
+	          constant_map_handle,
+	          /*use_inactive*/ true,
+	          /*validate_full_update*/ true);
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerRunConstantFolding(
+	    AOTInductorModelContainerHandle container_handle,
+	    bool use_inactive,
+	    AOTInductorStreamHandle stream_handle,
+	    AOTIProxyExecutorHandle proxy_executor_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  auto stream =
+	      reinterpret_cast<torch::aot_inductor::DeviceStreamType>(stream_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    container->run_const_fold(use_inactive, stream, proxy_executor_handle);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerSwapConstantBuffer(
+	    AOTInductorModelContainerHandle container_handle) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    container->swap_constant_buffer();
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetNumInputs(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t* ret_num_inputs) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_num_inputs = container->num_inputs(); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetInputName(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t input_idx,
+	    const char** ret_input_names) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_input_names = container->input_name(input_idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetNumOutputs(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t* ret_num_outputs) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_num_outputs = container->num_outputs(); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetOutputName(
+	    AOTInductorModelContainerHandle container_handle,
+	    size_t output_idx,
+	    const char** ret_output_names) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE(
+	      { *ret_output_names = container->output_name(output_idx); })
+	}
+	
+	AOTIRuntimeError AOTInductorModelContainerGetCallSpec(
+	    AOTInductorModelContainerHandle container_handle,
+	    const char** in_spec,
+	    const char** out_spec) {
+	  auto* container =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModelContainer*>(
+	          container_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    *in_spec = container->get_in_spec();
+	    *out_spec = container->get_out_spec();
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelCreate(
+	    AOTInductorModelHandle* model_handle,
+	    AOTInductorConstantMapHandle constant_map_handle){
+	    CONVERT_EXCEPTION_TO_ERROR_CODE({
+	      auto constant_map = std::make_shared<torch::aot_inductor::ConstantMap>();
+	      auto constant_array = std::make_shared<std::vector<torch::aot_inductor::ConstantHandle>>();
+	      auto input_map = reinterpret_cast<std::unordered_map<std::string, AtenTensorHandle>*>(constant_map_handle);
+	
+	      auto model = new torch::aot_inductor::AOTInductorModel(
+	          constant_map,
+	          constant_array,
+	          "cpu", // device_str is hardcoded, as AOTInductorModelCreate is only use for CPU models
+	          ""
+	      );
+	
+	      if (input_map) {
+	        for (auto const& kv : *input_map) {
+	          constant_map->emplace(kv.first, kv.second);
+	        }
+	      } else {
+	        model->load_constants();
+	      }
+	
+	      *model_handle = reinterpret_cast<AOTInductorModelHandle>(model);
+	    })}
+	
+	AOTIRuntimeError AOTInductorModelRun(
+	    AOTInductorModelHandle model_handle,
+	    AtenTensorHandle* input_handles,
+	    AtenTensorHandle* output_handles) {
+	  auto model =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(model_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    AOTINoGradGuard guard;
+	    model->run_impl(
+	        input_handles,
+	        output_handles,
+	        (torch::aot_inductor::DeviceStreamType) nullptr,
+	        nullptr);
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelDelete(AOTInductorModelHandle model_handle){
+	    CONVERT_EXCEPTION_TO_ERROR_CODE({
+	      auto model = reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(
+	          model_handle);
+	      delete model;
+	    })}
+	
+	AOTIRuntimeError AOTInductorModelGetNumOutputs(
+	    AOTInductorModelHandle model_handle,
+	    size_t* ret_num_outputs) {
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	      auto model = reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(model_handle);
+	      *ret_num_outputs = model->num_outputs();
+	  })
+	}
+	
+	AOTIRuntimeError AOTInductorModelUpdateConstantsMap(
+	    AOTInductorModelHandle model_handle,
+	    AOTInductorConstantMapHandle constant_map_handle) {
+	  auto model =
+	      reinterpret_cast<torch::aot_inductor::AOTInductorModel*>(model_handle);
+	  CONVERT_EXCEPTION_TO_ERROR_CODE({
+	    auto constant_map = std::make_shared<torch::aot_inductor::ConstantMap>();
+	    auto input_map =
+	        reinterpret_cast<std::unordered_map<std::string, AtenTensorHandle>*>(
+	            constant_map_handle);
+	
+	    for (auto const& kv : *input_map) {
+	      constant_map->emplace(kv.first, kv.second);
+	    }
+	    model->update_constants_map(std::move(constant_map));
+	  })
+	}
+	
+	} // extern "C"
+	
+	extern "C"  void cpp_fused_mul_relu_sigmoid_0(float* in_out_ptr0,
+	                       const float* in_ptr0,
+	                       float* out_ptr0);
+	extern "C"  void cpp_fused_gelu_1(float* in_out_ptr0);
+	CACHE_TORCH_DTYPE(float32);
+	CACHE_TORCH_DEVICE(cpu);
+	CACHE_TORCH_LAYOUT(strided);
+	namespace torch::aot_inductor {
+	namespace {
+	class AOTInductorModelKernels : public AOTInductorModelKernelsBase {
+	  public:
+	};
+	}  // namespace
+	
+	AOTInductorModel::AOTInductorModel(std::shared_ptr<ConstantMap> constants_map,
+	                                   std::shared_ptr<std::vector<ConstantHandle>> constants_array,
+	                                   const std::string& device_str,
+	                                   std::optional<std::string> cubin_dir,
+	                                   bool include_weights)
+	    : AOTInductorModelBase(4, 2, 2, device_str, cubin_dir, true) {
+	    inputs_info_[0].name = "arg2_1";
+	    inputs_info_[1].name = "arg3_1";
+	    inputs_info_[2].name = "arg4_1";
+	    inputs_info_[3].name = "arg5_1";
+	    constants_info_[0].name = "fc1_weight";
+	    constants_info_[0].dtype = static_cast<int32_t>(cached_torch_dtype_float32);
+	    constants_info_[0].offset = 0;
+	    constants_info_[0].data_size = 640;
+	    constants_info_[0].from_folded = false;
+	    constants_info_[0].type = static_cast<int32_t>(torch::aot_inductor::ConstantType::Parameter);
+	    constants_info_[0].shape = {16, 10};
+	    constants_info_[0].stride = {10, 1};
+	    constants_info_[0].layout = static_cast<int32_t>(cached_torch_layout_strided);
+	    constants_info_[0].original_fqn = "fc1.weight";
+	    constants_info_[1].name = "fc1_bias";
+	    constants_info_[1].dtype = static_cast<int32_t>(cached_torch_dtype_float32);
+	    constants_info_[1].offset = 0;
+	    constants_info_[1].data_size = 64;
+	    constants_info_[1].from_folded = false;
+	    constants_info_[1].type = static_cast<int32_t>(torch::aot_inductor::ConstantType::Parameter);
+	    constants_info_[1].shape = {16};
+	    constants_info_[1].stride = {1};
+	    constants_info_[1].layout = static_cast<int32_t>(cached_torch_layout_strided);
+	    constants_info_[1].original_fqn = "fc1.bias";
+	    update_constants_map(std::move(constants_map));
+	    update_constants_array(std::move(constants_array));
+	    in_spec_ = "[1, {\"type\": \"builtins.tuple\", \"context\": \"null\", \"children_spec\": [{\"type\": \"builtins.tuple\", \"context\": \"null\", \"children_spec\": [{\"type\": null, \"context\": null, \"children_spec\": []}, {\"type\": null, \"context\": null, \"children_spec\": []}, {\"type\": null, \"context\": null, \"children_spec\": []}, {\"type\": null, \"context\": null, \"children_spec\": []}]}, {\"type\": \"builtins.dict\", \"context\": \"[]\", \"children_spec\": []}]}]";
+	    out_spec_ = "[1, {\"type\": \"builtins.tuple\", \"context\": \"null\", \"children_spec\": [{\"type\": null, \"context\": null, \"children_spec\": []}, {\"type\": null, \"context\": null, \"children_spec\": []}]}]";
+	    outputs_info_[0].name = "output0";
+	    outputs_info_[1].name = "output1";
+	    this->kernels_ = std::make_unique<AOTInductorModelKernels>();
+	}
+	
+	std::unordered_map<std::string, AtenTensorHandle> AOTInductorModel::const_run_impl(
+	    DeviceStreamType stream,
+	    AOTIProxyExecutorHandle proxy_executor,
+	    bool initialization
+	) {
+	
+	    if (!initialization) {
+	        std::cerr << "[WARNING] Calling constant_folding in model, but compiled with config: "
+	                  << "aot_inductor.use_runtime_constant_folding=False\n";
+	    }
+	    return {};
+	}
+	} // namespace torch::aot_inductor
+	using namespace torch::aot_inductor;
+	namespace torch::aot_inductor {
+	
+	void AOTInductorModel::_const_run_impl(
+	    std::vector<AtenTensorHandle>& output_handles,
+	    DeviceStreamType stream,
+	    AOTIProxyExecutorHandle proxy_executor
+	) {}
+	
+	bool _check_aoti_runtime_check_inputs_env() {
+	    const static char* env_var_value = getenv("AOTI_RUNTIME_CHECK_INPUTS");
+	    const static bool result = env_var_value != nullptr && env_var_value[0] != '0';
+	    return result;
+	}
+	
+	AOTI_NOINLINE static void __check_inputs_outputs(
+	    AtenTensorHandle* input_handles,
+	    AtenTensorHandle* output_handles) {
+	    if (!_check_aoti_runtime_check_inputs_env()){
+	        return;
+	    }
+	    ConstantHandle arg2_1 = ConstantHandle(input_handles[0]);
+	    int32_t arg2_1_dtype;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_get_dtype(arg2_1, &arg2_1_dtype));
+	
+	    int32_t arg2_1_expected_dtype = aoti_torch_dtype_float32();
+	    if (arg2_1_expected_dtype != arg2_1_dtype) {
+	        std::stringstream ss;
+	        ss << "input_handles[0]: unmatched dtype, "
+	           << "expected: " << arg2_1_expected_dtype << "(at::kFloat), "
+	           << "but got: " << arg2_1_dtype << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg2_1_size = arg2_1.sizes();
+	
+	    if (8 != arg2_1_size[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[0]: unmatched dim value at 0, "
+	           << "expected: 8, " << "but got: " << arg2_1_size[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (10 != arg2_1_size[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[0]: unmatched dim value at 1, "
+	           << "expected: 10, " << "but got: " << arg2_1_size[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg2_1_stride = arg2_1.strides();
+	
+	    if (10 != arg2_1_stride[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[0]: unmatched stride value at 0, "
+	           << "expected: 10, " << "but got: " << arg2_1_stride[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (1 != arg2_1_stride[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[0]: unmatched stride value at 1, "
+	           << "expected: 1, " << "but got: " << arg2_1_stride[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    ConstantHandle arg3_1 = ConstantHandle(input_handles[1]);
+	    int32_t arg3_1_dtype;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_get_dtype(arg3_1, &arg3_1_dtype));
+	
+	    int32_t arg3_1_expected_dtype = aoti_torch_dtype_float32();
+	    if (arg3_1_expected_dtype != arg3_1_dtype) {
+	        std::stringstream ss;
+	        ss << "input_handles[1]: unmatched dtype, "
+	           << "expected: " << arg3_1_expected_dtype << "(at::kFloat), "
+	           << "but got: " << arg3_1_dtype << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg3_1_size = arg3_1.sizes();
+	
+	    if (10 != arg3_1_size[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[1]: unmatched dim value at 0, "
+	           << "expected: 10, " << "but got: " << arg3_1_size[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (20 != arg3_1_size[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[1]: unmatched dim value at 1, "
+	           << "expected: 20, " << "but got: " << arg3_1_size[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg3_1_stride = arg3_1.strides();
+	
+	    if (20 != arg3_1_stride[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[1]: unmatched stride value at 0, "
+	           << "expected: 20, " << "but got: " << arg3_1_stride[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (1 != arg3_1_stride[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[1]: unmatched stride value at 1, "
+	           << "expected: 1, " << "but got: " << arg3_1_stride[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    ConstantHandle arg4_1 = ConstantHandle(input_handles[2]);
+	    int32_t arg4_1_dtype;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_get_dtype(arg4_1, &arg4_1_dtype));
+	
+	    int32_t arg4_1_expected_dtype = aoti_torch_dtype_float32();
+	    if (arg4_1_expected_dtype != arg4_1_dtype) {
+	        std::stringstream ss;
+	        ss << "input_handles[2]: unmatched dtype, "
+	           << "expected: " << arg4_1_expected_dtype << "(at::kFloat), "
+	           << "but got: " << arg4_1_dtype << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg4_1_size = arg4_1.sizes();
+	
+	    if (20 != arg4_1_size[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[2]: unmatched dim value at 0, "
+	           << "expected: 20, " << "but got: " << arg4_1_size[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (30 != arg4_1_size[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[2]: unmatched dim value at 1, "
+	           << "expected: 30, " << "but got: " << arg4_1_size[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg4_1_stride = arg4_1.strides();
+	
+	    if (30 != arg4_1_stride[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[2]: unmatched stride value at 0, "
+	           << "expected: 30, " << "but got: " << arg4_1_stride[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (1 != arg4_1_stride[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[2]: unmatched stride value at 1, "
+	           << "expected: 1, " << "but got: " << arg4_1_stride[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    ConstantHandle arg5_1 = ConstantHandle(input_handles[3]);
+	    int32_t arg5_1_dtype;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_get_dtype(arg5_1, &arg5_1_dtype));
+	
+	    int32_t arg5_1_expected_dtype = aoti_torch_dtype_float32();
+	    if (arg5_1_expected_dtype != arg5_1_dtype) {
+	        std::stringstream ss;
+	        ss << "input_handles[3]: unmatched dtype, "
+	           << "expected: " << arg5_1_expected_dtype << "(at::kFloat), "
+	           << "but got: " << arg5_1_dtype << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg5_1_size = arg5_1.sizes();
+	
+	    if (10 != arg5_1_size[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[3]: unmatched dim value at 0, "
+	           << "expected: 10, " << "but got: " << arg5_1_size[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (30 != arg5_1_size[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[3]: unmatched dim value at 1, "
+	           << "expected: 30, " << "but got: " << arg5_1_size[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	    auto arg5_1_stride = arg5_1.strides();
+	
+	    if (30 != arg5_1_stride[0]) {
+	        std::stringstream ss;
+	        ss << "input_handles[3]: unmatched stride value at 0, "
+	           << "expected: 30, " << "but got: " << arg5_1_stride[0]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	
+	    if (1 != arg5_1_stride[1]) {
+	        std::stringstream ss;
+	        ss << "input_handles[3]: unmatched stride value at 1, "
+	           << "expected: 1, " << "but got: " << arg5_1_stride[1]
+	           << "\n";
+	        throw std::runtime_error(ss.str());
+	    }
+	}
+	
+	void AOTInductorModel::run_impl(
+	    AtenTensorHandle*
+	        input_handles, // array of input AtenTensorHandle; handles
+	                        // are stolen; the array itself is borrowed
+	    AtenTensorHandle*
+	        output_handles, // array for writing output AtenTensorHandle; handles
+	                        // will be stolen by the caller; the array itself is
+	                        // borrowed
+	    DeviceStreamType stream,
+	    AOTIProxyExecutorHandle proxy_executor
+	) {
+	
+	__check_inputs_outputs(input_handles, output_handles);
+	
+	    auto inputs = steal_from_raw_handles_to_raii_handles(input_handles, 4);
+	    auto arg2_1 = std::move(inputs[0]);
+	    auto arg3_1 = std::move(inputs[1]);
+	    auto arg4_1 = std::move(inputs[2]);
+	    auto arg5_1 = std::move(inputs[3]);
+	    [[maybe_unused]] auto fc1_weight = constants_->at(0);
+	    [[maybe_unused]] auto fc1_bias = constants_->at(1);
+	    inputs.clear();
+	    auto& kernels = static_cast<AOTInductorModelKernels&>(*this->kernels_.get());
+	    static constexpr int64_t int_array_2[] = {8L, 16L};
+	    static constexpr int64_t int_array_3[] = {16L, 1L};
+	    AtenTensorHandle buf0_handle;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_empty_strided(2, int_array_2, int_array_3, cached_torch_dtype_float32, cached_torch_device_type_cpu, this->device_idx_, &buf0_handle));
+	    RAIIAtenTensorHandle buf0(buf0_handle);
+	    // Topologically Sorted Source Nodes: [linear], Original ATen: [aten.addmm]
+	    static constexpr int64_t int_array_0[] = {10L, 16L};
+	    static constexpr int64_t int_array_1[] = {1L, 10L};
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_cpu_addmm_out(buf0, fc1_bias, arg2_1, wrap_with_raii_handle_if_needed(reinterpret_tensor_wrapper(fc1_weight, 2, int_array_0, int_array_1, 0L)), 1L, 1L));
+	    arg2_1.reset();
+	    auto buf1 = std::move(buf0);  // reuse
+	    static constexpr int64_t int_array_4[] = {10L, 20L};
+	    static constexpr int64_t int_array_5[] = {20L, 1L};
+	    AtenTensorHandle buf2_handle;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_empty_strided(2, int_array_4, int_array_5, cached_torch_dtype_float32, cached_torch_device_type_cpu, this->device_idx_, &buf2_handle));
+	    RAIIAtenTensorHandle buf2(buf2_handle);
+	    cpp_fused_mul_relu_sigmoid_0((float*)(buf1.data_ptr()), (const float*)(arg3_1.data_ptr()), (float*)(buf2.data_ptr()));
+	    arg3_1.reset();
+	    static constexpr int64_t int_array_6[] = {10L, 30L};
+	    static constexpr int64_t int_array_7[] = {30L, 1L};
+	    AtenTensorHandle buf3_handle;
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_empty_strided(2, int_array_6, int_array_7, cached_torch_dtype_float32, cached_torch_device_type_cpu, this->device_idx_, &buf3_handle));
+	    RAIIAtenTensorHandle buf3(buf3_handle);
+	    // Topologically Sorted Source Nodes: [mul, addmm], Original ATen: [aten.mul, aten.addmm]
+	    AOTI_TORCH_ERROR_CODE_CHECK(aoti_torch_cpu_addmm_out(buf3, arg5_1, buf2, arg4_1, 1L, 1L));
+	    arg4_1.reset();
+	    arg5_1.reset();
+	    buf2.reset();
+	    auto buf4 = std::move(buf3);  // reuse
+	    cpp_fused_gelu_1((float*)(buf4.data_ptr()));
+	    output_handles[0] = buf1.release();
+	    output_handles[1] = buf4.release();
+	} // AOTInductorModel::run_impl
+	} // namespace torch::aot_inductor
+	
+	
+	
+	
+V0318 11:30:18.428000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_inductor/codecache.py:1477] {"graph_dump": {"name": "inductor_aot_kernel_code", "type": "cpp", "filename": "/tmp/torchinductor_shangdiy/cwhkamk7hukdm5d55b4fxkyyok5x57mzbc2hzfy243x4xp2dcbtz/ccnthfhq6scd5ub4pamd4j6tsnjvwvdjjj36mjqo2vsvveqp5ezw.kernel.cpp"}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 735, "name": "_compile_fx_inner", "filename": 13, "loc": "mb_compiled_graph = fx_codegen_and_compile("}, {"line": 1318, "name": "fx_codegen_and_compile", "filename": 13, "loc": "return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)"}, {"line": 1202, "name": "codegen_and_compile", "filename": 13, "loc": "compiled_fn = AotCodeCompiler.compile("}, {"line": 1477, "name": "compile", "filename": 23, "loc": "trace_structured("}], "has_payload": "3a0ab37147358e481f20f342ff827a92"}
+	
+	#include "cpicxudqmdsjh5cm4klbtbrvy2cxwr7whxl3md2zzdjdf3orvfdf.h"
+	extern "C"  void cpp_fused_mul_relu_sigmoid_0(float* in_out_ptr0,
+	                       const float* in_ptr0,
+	                       float* out_ptr0)
+	{
+	    {
+	        for(int64_t x0=static_cast<int64_t>(0L); x0<static_cast<int64_t>(128L); x0+=static_cast<int64_t>(8L))
+	        {
+	            {
+	                if(C10_LIKELY(x0 >= static_cast<int64_t>(0) && x0 < static_cast<int64_t>(128L)))
+	                {
+	                    auto tmp0 = at::vec::Vectorized<float>::loadu(in_out_ptr0 + static_cast<int64_t>(x0), static_cast<int64_t>(8));
+	                    auto tmp1 = at::vec::clamp_min(tmp0, decltype(tmp0)(0));
+	                    auto tmp2 = decltype(tmp1)(1)/(decltype(tmp1)(1) + tmp1.neg().exp());
+	                    tmp2.store(in_out_ptr0 + static_cast<int64_t>(x0));
+	                }
+	            }
+	        }
+	    }
+	    {
+	        for(int64_t x0=static_cast<int64_t>(0L); x0<static_cast<int64_t>(200L); x0+=static_cast<int64_t>(8L))
+	        {
+	            {
+	                if(C10_LIKELY(x0 >= static_cast<int64_t>(0) && x0 < static_cast<int64_t>(200L)))
+	                {
+	                    auto tmp0 = at::vec::Vectorized<float>::loadu(in_ptr0 + static_cast<int64_t>(x0), static_cast<int64_t>(8));
+	                    auto tmp1 = static_cast<float>(3.14);
+	                    auto tmp2 = at::vec::Vectorized<float>(tmp1);
+	                    auto tmp3 = tmp0 * tmp2;
+	                    tmp3.store(out_ptr0 + static_cast<int64_t>(x0));
+	                }
+	            }
+	        }
+	    }
+	}
+	
+	#include "cpicxudqmdsjh5cm4klbtbrvy2cxwr7whxl3md2zzdjdf3orvfdf.h"
+	extern "C"  void cpp_fused_gelu_1(float* in_out_ptr0)
+	{
+	    {
+	        for(int64_t x0=static_cast<int64_t>(0L); x0<static_cast<int64_t>(300L); x0+=static_cast<int64_t>(8L))
+	        {
+	            {
+	                if(C10_LIKELY(x0 >= static_cast<int64_t>(0) && x0 < static_cast<int64_t>(296L)))
+	                {
+	                    auto tmp0 = at::vec::Vectorized<float>::loadu(in_out_ptr0 + static_cast<int64_t>(x0), static_cast<int64_t>(8));
+	                    auto tmp1 = static_cast<float>(0.5);
+	                    auto tmp2 = at::vec::Vectorized<float>(tmp1);
+	                    auto tmp3 = tmp0 * tmp2;
+	                    auto tmp4 = static_cast<float>(0.7071067811865476);
+	                    auto tmp5 = at::vec::Vectorized<float>(tmp4);
+	                    auto tmp6 = tmp0 * tmp5;
+	                    auto tmp7 = tmp6.erf();
+	                    auto tmp8 = static_cast<float>(1.0);
+	                    auto tmp9 = at::vec::Vectorized<float>(tmp8);
+	                    auto tmp10 = tmp7 + tmp9;
+	                    auto tmp11 = tmp3 * tmp10;
+	                    tmp11.store(in_out_ptr0 + static_cast<int64_t>(x0));
+	                }
+	                if(C10_UNLIKELY(x0 >= static_cast<int64_t>(296L) && x0 < static_cast<int64_t>(300L)))
+	                {
+	                    auto tmp0 = at::vec::Vectorized<float>::loadu(in_out_ptr0 + static_cast<int64_t>(x0), static_cast<int64_t>(4L));
+	                    auto tmp1 = static_cast<float>(0.5);
+	                    auto tmp2 = at::vec::Vectorized<float>(tmp1);
+	                    auto tmp3 = tmp0 * tmp2;
+	                    auto tmp4 = static_cast<float>(0.7071067811865476);
+	                    auto tmp5 = at::vec::Vectorized<float>(tmp4);
+	                    auto tmp6 = tmp0 * tmp5;
+	                    auto tmp7 = tmp6.erf();
+	                    auto tmp8 = static_cast<float>(1.0);
+	                    auto tmp9 = at::vec::Vectorized<float>(tmp8);
+	                    auto tmp10 = tmp7 + tmp9;
+	                    auto tmp11 = tmp3 * tmp10;
+	                    tmp11.store(in_out_ptr0 + static_cast<int64_t>(x0), static_cast<int64_t>(4L));
+	                }
+	            }
+	        }
+	    }
+	}
+	
+V0318 11:30:18.435000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "8d2b6161f40bb56155717e875c825bd9"}
+	{
+	"name": "compile_file",
+	"ts": 1742322618435131.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:24.550000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "992de9b030258c7c9cc0ff5b59558c0e"}
+	{
+	"name": "compile_file",
+	"ts": 1742322624549852.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:24.551000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "59224a78cefd52fb2ffacd118cfacc93"}
+	{
+	"name": "compile_file",
+	"ts": 1742322624551754.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:28.520000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "3920dce00c2832a8bf50137098b50e9c"}
+	{
+	"name": "compile_file",
+	"ts": 1742322628520535.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:28.525000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "de363a37a524f63b59a19f69d83bdfb0"}
+	{
+	"name": "compile_file",
+	"ts": 1742322628525327.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:41.944000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "5432b5749c36513650dc66628b0e6d95"}
+	{
+	"name": "compile_file",
+	"ts": 1742322641944486.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:41.949000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "c5a216fb195594e18abf9e5acc7b134f"}
+	{
+	"name": "compile_file",
+	"ts": 1742322641949156.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "B",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:45.424000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "c0d8ef4cb0ec6ac382a3fb1164119fe3"}
+	{
+	"name": "compile_file",
+	"ts": 1742322645424143.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:45.426000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "257c9d4506499f7597bd67409b8ce1e2"}
+	{
+	"name": "AotCodeCompiler.compile",
+	"ts": 1742322645426499.0,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:45.429000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "065254ad1ea336e8a656ca8f75ce3341"}
+	{
+	"name": "GraphLowering.compile_to_fn",
+	"ts": 1742322645429009.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:45.433000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_dynamo/utils.py", 24]}
+V0318 11:30:45.433000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1846] {"chromium_event": {}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1560, "name": "compile_fx_aot", "filename": 13, "loc": "compiled_artifacts = compile_fx("}, {"line": 1754, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 1800, "name": "compile_fx", "filename": 13, "loc": "return compile_fx("}, {"line": 2103, "name": "compile_fx", "filename": 13, "loc": "return inference_compiler(unlifted_gm, example_inputs_)"}, {"line": 479, "name": "__call__", "filename": 15, "loc": "return self.compiler_fn(gm, example_inputs)"}, {"line": 1967, "name": "fw_compiler_base", "filename": 13, "loc": "return inner_compile("}, {"line": 79, "name": "inner", "filename": 18, "loc": "return func(*args, **kwds)"}, {"line": 628, "name": "compile_fx_inner", "filename": 13, "loc": "return wrap_compiler_debug(_compile_fx_inner, compiler_name=\"inductor\")("}, {"line": 124, "name": "debug_wrapper", "filename": 19, "loc": "inner_compiled_fn = compiler_fn(gm, example_inputs)"}, {"line": 167, "name": "newFunction", "filename": 20, "loc": "return old_func(*args, **kwargs)"}, {"line": 800, "name": "_compile_fx_inner", "filename": 13, "loc": "CompileEventLogger.instant("}, {"line": 575, "name": "instant", "filename": 24, "loc": "CompileEventLogger.log_instant_event("}, {"line": 369, "name": "log_instant_event", "filename": 24, "loc": "chromium_log.log_instant_event("}, {"line": 1846, "name": "log_instant_event", "filename": 24, "loc": "torch._logging.trace_structured("}], "has_payload": "0784b5af95f4040d87a89f3ce38b325e"}
+	{
+	"name": "fx_graph_cache_disabled",
+	"ts": 1742322618077739.2,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "i",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0,
+	"s": "p"
+	}
+V0318 11:30:45.438000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "c261f27f8980ae20313f0bd77921aa1b"}
+	{
+	"name": "inductor_compile",
+	"ts": 1742322645438003.8,
+	"args": {
+	"fn_name": "compile_fx_inner",
+	"compile_id": "None",
+	"is_backward": false,
+	"cache_state": "disabled",
+	"cache_event_time": 1742322618077739309,
+	"key": null,
+	"components": null,
+	"cache_bypass_reason": "cache not enabled",
+	"remote_cache_enabled": true,
+	"local_cache_enabled": true
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:45.439000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "d549a7bb84b36c30dcd6a582810149bf"}
+	{
+	"name": "compile_fx.<locals>.fw_compiler_base",
+	"ts": 1742322645439721.8,
+	"args": {
+	"compile_id": "None"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
+V0318 11:30:45.444000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_logging/structured.py:27] {"str": ["/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/torch/_dynamo/metrics_context.py", 25]}
+V0318 11:30:45.444000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1508] {"compilation_metrics": {"compile_id": null, "frame_key": null, "co_name": null, "co_filename": null, "co_firstlineno": null, "cache_size": null, "accumulated_cache_size": null, "guard_count": null, "shape_env_guard_count": null, "graph_op_count": null, "graph_node_count": null, "graph_input_count": null, "start_time": 1742322616.770532, "entire_frame_compile_time_s": null, "backend_compile_time_s": null, "inductor_compile_time_s": 27.378327, "code_gen_time_s": null, "fail_type": null, "fail_reason": null, "fail_user_frame_filename": null, "fail_user_frame_lineno": null, "non_compliant_ops": null, "compliant_custom_ops": null, "restart_reasons": null, "dynamo_time_before_restart_s": null, "has_guarded_code": null, "remote_cache_time_saved_s": null, "structured_logging_overhead_s": null, "config_suppress_errors": null, "config_inline_inbuilt_nn_modules": null, "specialize_float": null, "dynamo_config": "{\"_autograd_backward_strict_mode_conditional_banned_ops\": [\"stride\", \"storage_offset\", \"is_contiguous\"], \"_unsafe_skip_fsdp_module_guards\": false, \"accumulated_recompile_limit\": 256, \"allow_complex_guards_as_runtime_asserts\": false, \"allow_empty_graphs\": false, \"allow_ignore_mark_dynamic\": false, \"allow_rnn\": false, \"allow_unspec_int_on_nn_module\": false, \"allowed_functions_module_string_ignorelist\": [\"torch._decomp\", \"torch._prims\", \"torch._refs\", \"torch.distributions\", \"torch.testing\"], \"assume_static_by_default\": true, \"automatic_dynamic_local_pgo\": true, \"automatic_dynamic_remote_pgo\": null, \"automatic_dynamic_shapes\": true, \"automatic_dynamic_shapes_mark_as\": \"dynamic\", \"capture_autograd_function\": true, \"capture_dynamic_output_shape_ops\": false, \"capture_func_transforms\": true, \"capture_scalar_outputs\": false, \"capture_sparse_compute\": false, \"compiled_autograd\": false, \"compiled_autograd_kwargs_override\": {}, \"cprofile\": false, \"cudagraph_backend_keep_input_mutation\": false, \"cudagraph_backend_support_input_mutation\": false, \"dead_code_elimination\": true, \"disable\": false, \"do_not_emit_runtime_asserts\": false, \"dynamic_shapes\": true, \"enable_compiler_collectives\": false, \"enable_cpp_framelocals_guard_eval\": true, \"enable_cpp_guard_manager\": true, \"enable_cpp_symbolic_shape_guards\": false, \"enable_faithful_generator_behavior\": true, \"enable_trace_contextlib\": true, \"error_on_nested_fx_trace\": true, \"error_on_nested_jit_trace\": true, \"error_on_recompile\": false, \"fail_on_recompile_limit_hit\": false, \"fake_tensor_cache_crosscheck_enabled\": false, \"fake_tensor_cache_enabled\": true, \"force_nn_module_property_static_shapes\": true, \"force_parameter_static_shapes\": true, \"force_unspec_int_unbacked_size_like_on_torchrec_kjt\": false, \"guard_nn_modules\": true, \"guard_nn_modules_using_dict_tags\": true, \"inline_inbuilt_nn_modules\": true, \"issue_3_13_0_warning\": true, \"minimum_call_count\": 1, \"numpy_default_complex\": \"complex128\", \"numpy_default_float\": \"float64\", \"numpy_default_int\": \"int64\", \"only_allow_pt2_compliant_ops\": false, \"optimize_ddp\": true, \"optimize_ddp_lazy_compile\": false, \"prefer_deferred_runtime_asserts_over_guards\": false, \"prepare_freezing\": false, \"raise_on_ctx_manager_usage\": true, \"raise_on_unsafe_aot_autograd\": false, \"recompile_limit\": 8, \"record_compile_time_instruction_count\": false, \"replay_record_enabled\": false, \"report_guard_failures\": true, \"rewrite_assert_with_torch_assert\": true, \"run_gc_after_compile\": true, \"skip_code_recursive_on_recompile_limit_hit\": true, \"skip_fsdp_guards\": true, \"skip_fsdp_hooks\": true, \"skip_nnmodule_hook_guards\": true, \"skip_no_tensor_aliasing_guards_on_parameters\": true, \"skip_tensor_guards_with_matching_dict_tags\": true, \"skip_torchrec\": true, \"skipfiles_inline_module_allowlist\": {}, \"specialize_float\": false, \"specialize_int\": false, \"suppress_errors\": false, \"trace_numpy\": true, \"track_nodes_for_deduplication\": false, \"use_graph_deduplication\": false, \"use_lazy_graph_module\": true, \"use_numpy_random_stream\": false, \"verify_correctness\": false}", "is_forward": null, "num_triton_bundles": null, "remote_fx_graph_cache_get_time_ms": null, "remote_fx_graph_cache_put_time_ms": null, "start_time_us": 1742322616770532, "duration_us": 28670269, "dynamo_cumulative_compile_time_us": null, "aot_autograd_cumulative_compile_time_us": null, "inductor_cumulative_compile_time_us": 27378327, "inductor_code_gen_cumulative_compile_time_us": null, "triton_compile_time_us": 1300, "runtime_cudagraphify_time_us": null, "runtime_triton_autotune_time_us": null, "dynamo_compile_time_before_restart_us": null, "cuda_synchronize_time_us": null, "distributed_ephemeral_timeout_us": null, "structured_logging_overhead_us": null, "remote_fx_graph_cache_get_time_us": null, "remote_fx_graph_cache_put_time_us": null, "backward_cumulative_compile_time_us": null, "end_time_us": 1742322645440801, "pre_grad_pass_time_us": 34757, "post_grad_pass_time_us": 38032, "joint_graph_pass_time_us": 994303, "log_format_version": 3, "inductor_config": "{\"TYPE_CHECKING\": false, \"_cache_config_ignore_prefix\": [\"trace\", \"cuda.cutlass_dir\", \"worker_start_method\", \"compile_threads\", \"post_grad_custom_post_pass\", \"post_grad_custom_pre_pass\", \"always_complex_memory_overlap_TESTING_ONLY\"], \"_collective.auto_select\": false, \"_collective.one_shot_all_reduce_threshold_bytes\": 131072, \"_fuse_ddp_bucket_size\": 25, \"_fuse_ddp_communication\": false, \"_fuse_ddp_communication_passes\": [\"fuse_ddp_with_concat_op\", \"schedule_comm_wait\"], \"_micro_pipeline_tp\": false, \"_pre_fusion_custom_pass\": null, \"_profile_var\": \"\", \"_raise_error_for_testing\": false, \"_save_config_ignore\": [\"trace.upload_tar\", \"joint_custom_pre_pass\", \"joint_custom_post_pass\", \"pre_grad_custom_pass\", \"aot_inductor.repro_level\", \"aot_inductor.dump_aoti_minifier\"], \"add_pre_grad_passes\": null, \"aggressive_fusion\": false, \"allow_buffer_reuse\": true, \"always_complex_memory_overlap_TESTING_ONLY\": false, \"always_keep_tensor_constants\": false, \"annotate_training\": false, \"aot_inductor.allow_stack_allocation\": false, \"aot_inductor.compile_wrapper_opt_level\": \"O1\", \"aot_inductor.debug_compile\": false, \"aot_inductor.debug_intermediate_value_printer\": \"0\", \"aot_inductor.dump_aoti_minifier\": false, \"aot_inductor.filtered_kernel_names\": null, \"aot_inductor.force_mmap_weights\": false, \"aot_inductor.metadata\": {\"AOTI_DEVICE_KEY\": \"cpu\"}, \"aot_inductor.output_path\": \"\", \"aot_inductor.package\": false, \"aot_inductor.package_constants_in_so\": true, \"aot_inductor.package_cpp_only\": false, \"aot_inductor.precompile_headers\": false, \"aot_inductor.presets\": {}, \"aot_inductor.raise_error_on_ignored_optimization\": true, \"aot_inductor.repro_level\": 2, \"aot_inductor.serialized_in_spec\": \"\", \"aot_inductor.serialized_out_spec\": \"\", \"aot_inductor.use_minimal_arrayref_interface\": false, \"aot_inductor.use_runtime_constant_folding\": false, \"assert_indirect_indexing\": true, \"assume_aligned_inputs\": false, \"autoheuristic_collect\": \"\", \"autoheuristic_log_path\": \"DEFAULT\", \"autoheuristic_use\": \"mixed_mm\", \"autotune_fallback_to_aten\": true, \"autotune_in_subproc\": false, \"autotune_local_cache\": true, \"autotune_multi_device\": false, \"autotune_num_choices_displayed\": 10, \"autotune_remote_cache\": null, \"b2b_gemm_pass\": false, \"batch_fusion\": true, \"benchmark_combo_kernel\": false, \"benchmark_epilogue_fusion\": true, \"benchmark_fusion\": false, \"benchmark_harness\": true, \"benchmark_kernel\": false, \"bundle_triton_into_fx_graph_cache\": null, \"bundled_autotune_remote_cache\": null, \"bw_outputs_user_visible\": true, \"can_inplace_pad_graph_input\": false, \"check_stack_no_cycles_TESTING_ONLY\": false, \"combo_kernel_allow_mixed_sizes\": 1, \"combo_kernel_foreach_dynamic_shapes\": false, \"combo_kernels\": false, \"combo_kernels_autotune\": 1, \"comment_origin\": false, \"compile_threads\": 22, \"comprehensive_padding\": true, \"compute_all_bounds\": false, \"constant_and_index_propagation\": true, \"conv_1x1_as_mm\": false, \"coordinate_descent_check_all_directions\": false, \"coordinate_descent_search_radius\": 1, \"coordinate_descent_tuning\": false, \"cpp.cxx\": [null, \"g++\"], \"cpp.descriptive_names\": \"original_aten\", \"cpp.dynamic_threads\": false, \"cpp.enable_concat_linear\": false, \"cpp.enable_floating_point_contract_flag\": \"off\", \"cpp.enable_grouped_gemm_template\": false, \"cpp.enable_kernel_profile\": false, \"cpp.enable_loop_tail_vec\": true, \"cpp.enable_tiling_heuristics\": true, \"cpp.enable_unsafe_math_opt_flag\": false, \"cpp.fallback_scatter_reduce_sum\": true, \"cpp.gemm_cache_blocking\": null, \"cpp.gemm_max_k_slices\": 1, \"cpp.gemm_thread_factors\": null, \"cpp.inject_log1p_bug_TESTING_ONLY\": null, \"cpp.inject_relu_bug_TESTING_ONLY\": null, \"cpp.max_horizontal_fusion_size\": 16, \"cpp.min_chunk_size\": 4096, \"cpp.no_redundant_loops\": true, \"cpp.simdlen\": null, \"cpp.threads\": -1, \"cpp.vec_isa_ok\": null, \"cpp.weight_prepack\": true, \"cpp_cache_precompile_headers\": true, \"cpp_wrapper\": false, \"cpu_backend\": \"cpp\", \"cuda.arch\": null, \"cuda.compile_opt_level\": \"-O1\", \"cuda.cuda_cxx\": null, \"cuda.cutlass_backend_min_gemm_size\": 1, \"cuda.cutlass_dir\": \"/data/users/shangdiy/fbsource/buck-out/v2/gen/fbcode/8cf76b60692ad3ba/scripts/shangdiy/__aot__/aot#link-tree/third_party/cutlass\", \"cuda.cutlass_instantiation_level\": \"0\", \"cuda.cutlass_max_profiling_configs\": null, \"cuda.cutlass_max_profiling_swizzle_options\": [1, 2, 4], \"cuda.cutlass_op_allowlist_regex\": null, \"cuda.cutlass_op_denylist_regex\": null, \"cuda.enable_cuda_lto\": false, \"cuda.enable_debug_info\": false, \"cuda.enable_ptxas_info\": false, \"cuda.generate_test_runner\": false, \"cuda.use_fast_math\": false, \"cuda.version\": null, \"cuda_backend\": \"triton\", \"custom_op_default_layout_constraint\": \"needs_fixed_stride_order\", \"dce\": false, \"debug\": false, \"debug_fusion\": false, \"debug_index_asserts\": false, \"debug_ir_traceback\": false, \"decompose_mem_bound_mm\": false, \"developer_warnings\": true, \"disable_cpp_codegen\": false, \"disable_padding_cpu\": true, \"disable_progress\": true, \"dynamic_scale_rblock\": true, \"efficient_conv_bn_eval_fx_passes\": false, \"emulate_precision_casts\": false, \"enable_auto_functionalized_v2\": true, \"enable_linear_binary_folding\": false, \"enabled_metric_tables\": \"\", \"epilogue_fusion\": true, \"epilogue_fusion_first\": false, \"estimate_op_runtime\": \"default\", \"external_matmul\": [], \"fallback_random\": false, \"force_disable_caches\": false, \"force_fuse_int_mm_with_mul\": false, \"force_layout_optimization\": false, \"force_pointwise_cat\": false, \"force_same_precision\": true, \"force_shape_pad\": false, \"freezing\": false, \"freezing_discard_parameters\": false, \"fx_graph_cache\": true, \"fx_graph_remote_cache\": null, \"fx_passes_numeric_check\": {\"num_iterations\": 1, \"pre_grad\": false, \"precision\": 0.0001, \"requires_optimizer\": true}, \"generate_intermediate_hooks\": false, \"global_cache_dir\": null, \"graph_partition\": false, \"group_fusion\": false, \"halide.asserts\": false, \"halide.cpu_target\": \"host\", \"halide.debug\": false, \"halide.gpu_target\": \"host-cuda\", \"halide.scan_kernels\": false, \"halide.scheduler_cpu\": \"Adams2019\", \"halide.scheduler_cuda\": \"Anderson2021\", \"implicit_fallbacks\": true, \"inplace_buffers\": true, \"inplace_padding\": true, \"inter_node_bw\": 25, \"intra_node_bw\": 300, \"is_nightly_or_source\": false, \"is_predispatch\": false, \"joint_custom_post_pass\": null, \"joint_custom_pre_pass\": null, \"joint_graph_constant_folding\": true, \"keep_output_stride\": true, \"kernel_name_max_ops\": 10, \"layout_opt_default\": \"1\", \"layout_optimization\": true, \"loop_ordering_after_fusion\": false, \"max_autotune\": false, \"max_autotune_conv_backends\": \"ATEN,TRITON\", \"max_autotune_gemm\": false, \"max_autotune_gemm_backends\": \"ATEN,TRITON,CPP\", \"max_autotune_gemm_search_space\": \"DEFAULT\", \"max_autotune_pointwise\": false, \"max_autotune_subproc_graceful_timeout_seconds\": 1.0, \"max_autotune_subproc_result_timeout_seconds\": 60.0, \"max_autotune_subproc_terminate_timeout_seconds\": 2.0, \"max_epilogue_benchmarked_choices\": 1, \"max_fusion_size\": 64, \"max_pointwise_cat_inputs\": 8, \"memory_planning\": false, \"memory_pool\": \"intermediates\", \"mixed_mm_choice\": \"heuristic\", \"nan_asserts\": false, \"online_softmax\": true, \"optimize_scatter_upon_const_tensor\": true, \"pad_channels_last\": false, \"pad_outputs\": false, \"padding_alignment_bytes\": 128, \"padding_stride_threshold\": 1024, \"pattern_matcher\": true, \"permute_fusion\": false, \"pick_loop_orders\": true, \"post_grad_custom_post_pass\": null, \"post_grad_custom_pre_pass\": null, \"post_grad_fusion_options\": {}, \"pre_grad_custom_pass\": null, \"pre_grad_fusion_options\": {}, \"profile_bandwidth\": false, \"profile_bandwidth_output\": null, \"profile_bandwidth_regex\": \"\", \"profile_bandwidth_with_do_bench_using_profiling\": false, \"profiler_mark_wrapper_call\": false, \"prologue_fusion\": true, \"realize_acc_reads_threshold\": 8, \"realize_opcount_threshold\": 30, \"realize_reads_threshold\": 4, \"remove_pre_grad_passes\": null, \"reorder_for_compute_comm_overlap\": false, \"reorder_for_compute_comm_overlap_passes\": [\"reorder_compute_for_overlap\", \"sink_waits\", \"raise_comms\"], \"reorder_for_locality\": true, \"reorder_for_peak_memory\": true, \"rocm.arch\": [], \"rocm.ck_dir\": null, \"rocm.ck_supported_arch\": [\"gfx90a\", \"gfx942\"], \"rocm.compile_opt_level\": \"-O2\", \"rocm.flush_denormals\": true, \"rocm.generate_test_runner\": false, \"rocm.is_debug\": false, \"rocm.kBatch_sweep\": null, \"rocm.n_max_profiling_configs\": null, \"rocm.print_kernel_resource_usage\": false, \"rocm.rocm_home\": null, \"rocm.save_temps\": false, \"rocm.split_k_threshold\": 16, \"rocm.use_fast_math\": true, \"rocm.use_preselected_instances\": false, \"save_args\": false, \"scalar_asserts\": true, \"score_fusion_memory_threshold\": 10, \"search_autotune_cache\": false, \"shape_padding\": true, \"size_asserts\": true, \"sleep_sec_TESTING_ONLY\": null, \"split_cat_fx_passes\": true, \"split_reductions\": true, \"static_weight_shapes\": true, \"test_configs.autotune_choice_desc_regex\": null, \"test_configs.autotune_choice_name_regex\": null, \"test_configs.force_extern_kernel_in_multi_template\": false, \"test_configs.graphsafe_rng_func_ignores_fallback_random\": false, \"test_configs.max_mm_configs\": null, \"test_configs.runtime_triton_dtype_assert\": false, \"trace.compile_profile\": false, \"trace.debug_dir\": null, \"trace.debug_log\": false, \"trace.dot_graph_shape\": null, \"trace.draw_orig_fx_graph\": false, \"trace.enabled\": true, \"trace.fx_graph\": true, \"trace.fx_graph_transformed\": true, \"trace.graph_diagram\": false, \"trace.info_log\": false, \"trace.ir_post_fusion\": true, \"trace.ir_pre_fusion\": true, \"trace.log_autotuning_results\": false, \"trace.log_inductor_triton_kernel_to_post_grad_node_info\": true, \"trace.log_url_for_graph_xform\": null, \"trace.output_code\": true, \"trace.save_real_tensors\": false, \"trace.upload_tar\": null, \"triton.autotune_at_compile_time\": null, \"triton.autotune_cublasLt\": true, \"triton.autotune_pointwise\": true, \"triton.codegen_upcast_to_fp32\": true, \"triton.cooperative_reductions\": false, \"triton.cudagraph_dynamic_shape_warn_limit\": 50, \"triton.cudagraph_skip_dynamic_graphs\": false, \"triton.cudagraph_support_input_mutation\": false, \"triton.cudagraph_trees\": true, \"triton.cudagraph_trees_history_recording\": false, \"triton.cudagraph_unexpected_rerecord_limit\": 128, \"triton.cudagraphs\": false, \"triton.debug_sync_graph\": false, \"triton.debug_sync_kernel\": false, \"triton.dense_indexing\": false, \"triton.descriptive_names\": \"original_aten\", \"triton.disallow_failing_autotune_kernels_TESTING_ONLY\": false, \"triton.divisible_by_16\": true, \"triton.enable_persistent_tma_matmul\": false, \"triton.fast_path_cudagraph_asserts\": false, \"triton.force_cooperative_reductions\": false, \"triton.force_cudagraph_sync\": false, \"triton.force_cudagraphs_warmup\": false, \"triton.inject_relu_bug_TESTING_ONLY\": null, \"triton.max_tiles\": 2, \"triton.min_split_scan_rblock\": 256, \"triton.multi_kernel\": 0, \"triton.persistent_reductions\": true, \"triton.prefer_nd_tiling\": false, \"triton.skip_cudagraph_warmup\": false, \"triton.skip_l1_cache\": false, \"triton.slow_path_cudagraph_asserts\": true, \"triton.spill_threshold\": 16, \"triton.store_cubin\": false, \"triton.tile_reductions\": false, \"triton.tiling_prevents_pointwise_fusion\": true, \"triton.tiling_prevents_reduction_fusion\": true, \"triton.unique_kernel_names\": true, \"triton.unique_user_kernel_names\": false, \"triton.use_block_ptr\": false, \"triton_kernel_default_layout_constraint\": \"needs_fixed_stride_order\", \"unbacked_symint_fallback\": 8192, \"unroll_reductions_threshold\": 8, \"unsafe_ignore_unsupported_triton_autotune_args\": false, \"use_experimental_benchmarker\": false, \"use_fast_math\": false, \"use_mixed_mm\": true, \"verbose_progress\": false, \"warn_mix_layout\": false, \"worker_start_method\": \"subprocess\"}", "remote_cache_version": 14, "inductor_fx_remote_cache_hit_count": null, "inductor_fx_remote_cache_miss_count": null, "inductor_fx_remote_cache_backend_type": "_ManifoldCache", "inductor_fx_remote_cache_hit_keys": null, "inductor_fx_remote_cache_miss_keys": null, "cuda_version": "12.4.0", "triton_version": "3.2.0", "feature_usage": {"fx_cache": false}, "compile_time_autotune_time_us": null, "is_runtime": false, "gc_time_us": null, "tensorify_float_attempt": null, "tensorify_float_success": null, "tensorify_float_failure": null, "guard_latency_us": null, "recompile_reason": null, "num_graph_breaks": 0, "triton_kernel_compile_times_us": null, "ir_count": null, "cudagraph_skip_reason": null}, "stack": [{"line": 38, "name": "<module>", "filename": 0, "loc": "__invoke_main()"}, {"line": 35, "name": "__invoke_main", "filename": 0, "loc": "run_as_main(module, main_function)"}, {"line": 98, "name": "run_as_main", "filename": 1, "loc": "oss_run_as_main("}, {"line": 94, "name": "run_as_main", "filename": 2, "loc": "main()"}, {"line": 55, "name": "main", "filename": 3, "loc": "package_path = torch._inductor.aoti_compile_and_package(ep)"}, {"line": 147, "name": "aoti_compile_and_package", "filename": 11, "loc": "return aot_inductor_minifier_wrapper("}, {"line": 934, "name": "aot_inductor_minifier_wrapper", "filename": 12, "loc": "return func("}, {"line": 190, "name": "_aoti_compile_and_package_inner", "filename": 11, "loc": "aoti_files = aot_compile(gm, args, kwargs, options=inductor_configs)"}, {"line": 287, "name": "aot_compile", "filename": 11, "loc": "return compile_fx_aot("}, {"line": 1550, "name": "compile_fx_aot", "filename": 13, "loc": "with ("}, {"line": 88, "name": "__exit__", "filename": 25, "loc": "self._on_exit("}, {"line": 1508, "name": "record_compilation_metrics", "filename": 24, "loc": "torch._logging.trace_structured("}]}
+V0318 11:30:45.449000 3358118 /data/users/shangdiy/fbsource/fbcode/caffe2/torch/_dynamo/utils.py:1807] {"chromium_event": {}, "has_payload": "c5c068fc392a5b8b5a429c1208731e45"}
+	{
+	"name": "compile_fx_aot",
+	"ts": 1742322645449452.5,
+	"args": {
+	"compile_id": "None",
+	"num_graph_breaks": 0,
+	"frame_key": null,
+	"co_name": null,
+	"co_filename": null,
+	"co_firstlineno": null,
+	"cache_size": null,
+	"accumulated_cache_size": null,
+	"guard_count": null,
+	"shape_env_guard_count": null,
+	"graph_op_count": null,
+	"graph_node_count": null,
+	"graph_input_count": null,
+	"fail_type": null,
+	"fail_reason": null,
+	"fail_user_frame_filename": null,
+	"fail_user_frame_lineno": null,
+	"non_compliant_ops": null,
+	"compliant_custom_ops": null,
+	"restart_reasons": null,
+	"dynamo_time_before_restart_s": null,
+	"has_guarded_code": null,
+	"dynamo_config": "{\"_autograd_backward_strict_mode_conditional_banned_ops\": [\"stride\", \"storage_offset\", \"is_contiguous\"], \"_unsafe_skip_fsdp_module_guards\": false, \"accumulated_recompile_limit\": 256, \"allow_complex_guards_as_runtime_asserts\": false, \"allow_empty_graphs\": false, \"allow_ignore_mark_dynamic\": false, \"allow_rnn\": false, \"allow_unspec_int_on_nn_module\": false, \"allowed_functions_module_string_ignorelist\": [\"torch._decomp\", \"torch._prims\", \"torch._refs\", \"torch.distributions\", \"torch.testing\"], \"assume_static_by_default\": true, \"automatic_dynamic_local_pgo\": true, \"automatic_dynamic_remote_pgo\": null, \"automatic_dynamic_shapes\": true, \"automatic_dynamic_shapes_mark_as\": \"dynamic\", \"capture_autograd_function\": true, \"capture_dynamic_output_shape_ops\": false, \"capture_func_transforms\": true, \"capture_scalar_outputs\": false, \"capture_sparse_compute\": false, \"compiled_autograd\": false, \"compiled_autograd_kwargs_override\": {}, \"cprofile\": false, \"cudagraph_backend_keep_input_mutation\": false, \"cudagraph_backend_support_input_mutation\": false, \"dead_code_elimination\": true, \"disable\": false, \"do_not_emit_runtime_asserts\": false, \"dynamic_shapes\": true, \"enable_compiler_collectives\": false, \"enable_cpp_framelocals_guard_eval\": true, \"enable_cpp_guard_manager\": true, \"enable_cpp_symbolic_shape_guards\": false, \"enable_faithful_generator_behavior\": true, \"enable_trace_contextlib\": true, \"error_on_nested_fx_trace\": true, \"error_on_nested_jit_trace\": true, \"error_on_recompile\": false, \"fail_on_recompile_limit_hit\": false, \"fake_tensor_cache_crosscheck_enabled\": false, \"fake_tensor_cache_enabled\": true, \"force_nn_module_property_static_shapes\": true, \"force_parameter_static_shapes\": true, \"force_unspec_int_unbacked_size_like_on_torchrec_kjt\": false, \"guard_nn_modules\": true, \"guard_nn_modules_using_dict_tags\": true, \"inline_inbuilt_nn_modules\": true, \"issue_3_13_0_warning\": true, \"minimum_call_count\": 1, \"numpy_default_complex\": \"complex128\", \"numpy_default_float\": \"float64\", \"numpy_default_int\": \"int64\", \"only_allow_pt2_compliant_ops\": false, \"optimize_ddp\": true, \"optimize_ddp_lazy_compile\": false, \"prefer_deferred_runtime_asserts_over_guards\": false, \"prepare_freezing\": false, \"raise_on_ctx_manager_usage\": true, \"raise_on_unsafe_aot_autograd\": false, \"recompile_limit\": 8, \"record_compile_time_instruction_count\": false, \"replay_record_enabled\": false, \"report_guard_failures\": true, \"rewrite_assert_with_torch_assert\": true, \"run_gc_after_compile\": true, \"skip_code_recursive_on_recompile_limit_hit\": true, \"skip_fsdp_guards\": true, \"skip_fsdp_hooks\": true, \"skip_nnmodule_hook_guards\": true, \"skip_no_tensor_aliasing_guards_on_parameters\": true, \"skip_tensor_guards_with_matching_dict_tags\": true, \"skip_torchrec\": true, \"skipfiles_inline_module_allowlist\": {}, \"specialize_float\": false, \"specialize_int\": false, \"suppress_errors\": false, \"trace_numpy\": true, \"track_nodes_for_deduplication\": false, \"use_graph_deduplication\": false, \"use_lazy_graph_module\": true, \"use_numpy_random_stream\": false, \"verify_correctness\": false}"
+	},
+	"ph": "E",
+	"cat": "dynamo_timed",
+	"tid": 0,
+	"pid": 0
+	}
