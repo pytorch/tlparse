@@ -13,6 +13,9 @@ use serde_json::Value;
 use syntect::highlighting::ThemeSet;
 use syntect::parsing::SyntaxSet;
 
+// Re-export types from types.rs for external use
+pub use crate::types::{CompileId, EmptyMetadata, Envelope, Metadata};
+
 pub enum ParserOutput {
     File(PathBuf, String),       // File to be saved on disk
     GlobalFile(PathBuf, String), // Like file, but don't give a unique suffix

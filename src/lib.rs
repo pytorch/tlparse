@@ -17,7 +17,7 @@ use crate::parsers::ParserOutput;
 use crate::parsers::StructuredLogParser;
 use crate::templates::*;
 use crate::types::*;
-mod parsers;
+pub mod parsers;
 mod templates;
 mod types;
 
