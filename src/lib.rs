@@ -1,4 +1,5 @@
 use anyhow::{anyhow, bail};
+use chrono::Datelike;
 use fxhash::{FxHashMap, FxHashSet};
 use md5::{Digest, Md5};
 use std::ffi::{OsStr, OsString};
@@ -132,8 +133,8 @@ fn run_parser<'t>(
     compile_directory: &mut Vec<OutputFile>,
     multi: &MultiProgress,
     stats: &mut Stats,
-) -> bool {
-    let mut has_payload_output = false;
+) -> Option<String> {
+    let mut payload_filename = None;
     if let Some(md) = parser.get_metadata(&e) {
         let results = parser.parse(lineno, md, e.rank, &e.compile_id, &payload);
         match results {
@@ -148,8 +149,8 @@ fn run_parser<'t>(
                             add_file_output(filename, out, output, compile_directory, output_count);
                         }
                         ParserOutput::PayloadFile(raw_filename) => {
-                            has_payload_output = true;
                             let filename = add_unique_suffix(raw_filename, *output_count);
+                            payload_filename = Some(filename.to_string_lossy().to_string());
                             add_file_output(
                                 filename,
                                 payload.to_string(),
@@ -159,10 +160,10 @@ fn run_parser<'t>(
                             );
                         }
                         ParserOutput::PayloadReformatFile(raw_filename, formatter) => {
-                            has_payload_output = true;
                             let filename = add_unique_suffix(raw_filename, *output_count);
                             match formatter(payload) {
                                 Ok(formatted_content) => {
+                                    payload_filename = Some(filename.to_string_lossy().to_string());
                                     add_file_output(
                                         filename,
                                         formatted_content,
@@ -207,7 +208,7 @@ fn run_parser<'t>(
             },
         }
     }
-    has_payload_output
+    payload_filename
 }
 
 fn directory_to_json(
@@ -329,6 +330,25 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     let make_number_value = |caps: &regex::Captures, name: &str| -> serde_json::Value {
         let parsed: u64 = caps.name(name).unwrap().as_str().parse().unwrap();
         serde_json::Value::Number(serde_json::Number::from(parsed))
+    };
+
+    // Helper function to format timestamp as ISO-8601
+    let format_timestamp = |caps: &regex::Captures| -> String {
+        let month: u32 = caps.name("month").unwrap().as_str().parse().unwrap();
+        let day: u32 = caps.name("day").unwrap().as_str().parse().unwrap();
+        let hour: u32 = caps.name("hour").unwrap().as_str().parse().unwrap();
+        let minute: u32 = caps.name("minute").unwrap().as_str().parse().unwrap();
+        let second: u32 = caps.name("second").unwrap().as_str().parse().unwrap();
+        let microsecond: u32 = caps.name("millisecond").unwrap().as_str().parse().unwrap();
+
+        // Assume current year since glog doesn't include year
+        let year = chrono::Utc::now().year();
+
+        // Format as ISO-8601 with microsecond precision
+        format!(
+            "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}.{:06}Z",
+            year, month, day, hour, minute, second, microsecond
+        )
     };
 
     let mut stack_trie = StackTrieNode::default();
@@ -469,61 +489,25 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                         // Try to add all log fields, abort on any conflict
                         let success = try_insert(
                             obj,
-                            "log_level",
-                            make_string_value(&caps, "level"),
+                            "timestamp",
+                            serde_json::Value::String(format_timestamp(&caps)),
                             multi,
                             stats,
                         ) && try_insert(
                             obj,
-                            "log_month",
-                            make_number_value(&caps, "month"),
-                            multi,
-                            stats,
-                        ) && try_insert(
-                            obj,
-                            "log_day",
-                            make_number_value(&caps, "day"),
-                            multi,
-                            stats,
-                        ) && try_insert(
-                            obj,
-                            "log_hour",
-                            make_number_value(&caps, "hour"),
-                            multi,
-                            stats,
-                        ) && try_insert(
-                            obj,
-                            "log_minute",
-                            make_number_value(&caps, "minute"),
-                            multi,
-                            stats,
-                        ) && try_insert(
-                            obj,
-                            "log_second",
-                            make_number_value(&caps, "second"),
-                            multi,
-                            stats,
-                        ) && try_insert(
-                            obj,
-                            "log_millisecond",
-                            make_number_value(&caps, "millisecond"),
-                            multi,
-                            stats,
-                        ) && try_insert(
-                            obj,
-                            "log_thread",
+                            "thread",
                             make_number_value(&caps, "thread"),
                             multi,
                             stats,
                         ) && try_insert(
                             obj,
-                            "log_pathname",
+                            "pathname",
                             make_string_value(&caps, "pathname"),
                             multi,
                             stats,
                         ) && try_insert(
                             obj,
-                            "log_line",
+                            "lineno",
                             make_number_value(&caps, "line"),
                             multi,
                             stats,
@@ -606,7 +590,6 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         if let Some((s, i)) = e.str {
             let mut intern_table = INTERN_TABLE.lock().unwrap();
             intern_table.insert(i, s);
-            write_to_shortraw(&mut shortraw_content, None, &multi, &mut stats);
             continue;
         };
 
@@ -671,9 +654,9 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         // TODO: output should be able to generate this without explicitly creating
         let compile_directory = directory.entry(compile_id_entry).or_default();
 
-        let mut has_any_payload_output = false;
+        let mut parser_payload_filename = None;
         for parser in &all_parsers {
-            let has_payload = run_parser(
+            if let Some(filename) = run_parser(
                 lineno,
                 parser,
                 &e,
@@ -683,8 +666,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 compile_directory,
                 &multi,
                 &mut stats,
-            );
-            has_any_payload_output = has_any_payload_output || has_payload;
+            ) {
+                // Take the last Some entry as per the requirement
+                parser_payload_filename = Some(filename);
+            }
         }
 
         if let Some(ref m) = e.compilation_metrics {
@@ -703,7 +688,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     output_files: &copied_directory,
                     compile_id_dir: &compile_id_dir,
                 });
-            let has_payload = run_parser(
+            if let Some(filename) = run_parser(
                 lineno,
                 &parser,
                 &e,
@@ -713,8 +698,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 compile_directory,
                 &multi,
                 &mut stats,
-            );
-            has_any_payload_output = has_any_payload_output || has_payload;
+            ) {
+                // Take the last Some entry as per the requirement
+                parser_payload_filename = Some(filename);
+            }
 
             // compilation metrics is always the last output, since it just ran
             let metrics_filename = format!(
@@ -917,10 +904,13 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             };
         };
 
-        // Handle payload file writing and determine payload filename, but skip chromium events
-        let payload_filename = if let Some(ref expect) = e.has_payload {
+        // Handle payload file writing and determine final payload filename, but skip chromium events
+        let final_payload_filename = if parser_payload_filename.is_some() {
+            // Use filename from parser that generated PayloadFile/PayloadReformatFile output
+            parser_payload_filename
+        } else if let Some(ref expect) = e.has_payload {
             // Only write payload file if no parser generated PayloadFile/PayloadReformatFile output and not a chromium event
-            if !has_any_payload_output && !payload.is_empty() && e.chromium_event.is_none() {
+            if !payload.is_empty() && e.chromium_event.is_none() {
                 let hash_str = expect;
                 let payload_path = PathBuf::from(format!("payloads/{}.txt", hash_str));
                 output.push((payload_path, payload.clone()));
@@ -934,7 +924,12 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
 
         // Write to raw.jsonl with optional payload filename, but skip chromium events
         if e.chromium_event.is_none() {
-            write_to_shortraw(&mut shortraw_content, payload_filename, &multi, &mut stats);
+            write_to_shortraw(
+                &mut shortraw_content,
+                final_payload_filename,
+                &multi,
+                &mut stats,
+            );
         }
     }
 
@@ -1030,7 +1025,30 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     ));
 
     output.push((PathBuf::from("raw.log"), fs::read_to_string(path)?));
-    output.push((PathBuf::from("raw.jsonl"), shortraw_content));
+
+    // Create string table from INTERN_TABLE as an array with nulls for missing indices
+    let intern_table = INTERN_TABLE.lock().unwrap();
+    let max_index = intern_table.keys().max().copied().unwrap_or(0) as usize;
+    let mut string_table: Vec<Option<String>> = vec![None; max_index + 1];
+    for (&index, value) in intern_table.iter() {
+        string_table[index as usize] = Some(value.clone());
+    }
+    drop(intern_table); // Release the lock early
+
+    // Serialize string table as JSON object
+    let string_table_json = serde_json::json!({
+        "string_table": string_table
+    });
+    let string_table_line = serde_json::to_string(&string_table_json)?;
+
+    // Prepend string table to raw.jsonl content
+    let mut final_shortraw_content =
+        String::with_capacity(string_table_line.len() + 1 + shortraw_content.len());
+    final_shortraw_content.push_str(&string_table_line);
+    final_shortraw_content.push('\n');
+    final_shortraw_content.push_str(&shortraw_content);
+
+    output.push((PathBuf::from("raw.jsonl"), final_shortraw_content));
 
     // other_rank is included here because you should only have logs from one rank when
     // configured properly

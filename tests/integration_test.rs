@@ -47,8 +47,18 @@ fn test_parse_simple() {
     let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
     let shortraw_lines = shortraw_content.lines().count();
     assert_eq!(
-        shortraw_lines, 26,
-        "raw.jsonl should have exactly 26 lines (excluding 50 chromium_event entries)"
+        shortraw_lines, 15,
+        "raw.jsonl should have exactly 15 lines (1 string table + 14 log entries, excluding 50 chromium_event entries and 12 str entries)"
+    );
+
+    // Verify that the first line contains the string table
+    let first_line = shortraw_content
+        .lines()
+        .next()
+        .expect("raw.jsonl should have at least one line");
+    assert!(
+        first_line.starts_with("{\"string_table\":"),
+        "First line of raw.jsonl should be the string table object"
     );
 }
 
@@ -92,7 +102,17 @@ fn test_parse_compilation_metrics() {
     );
     let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
     let shortraw_lines = shortraw_content.lines().count();
-    assert_eq!(shortraw_lines, 26, "raw.jsonl should have exactly 26 lines");
+    assert_eq!(shortraw_lines, 13, "raw.jsonl should have exactly 13 lines (1 string table + 12 log entries, excluding 14 str entries)");
+
+    // Verify that the first line contains the string table
+    let first_line = shortraw_content
+        .lines()
+        .next()
+        .expect("raw.jsonl should have at least one line");
+    assert!(
+        first_line.starts_with("{\"string_table\":"),
+        "First line of raw.jsonl should be the string table object"
+    );
 
     // Check that exactly the expected payload files exist (no more, no less)
     // With conditional payload writing, only payloads not handled by parsers are written
@@ -146,32 +166,28 @@ fn test_parse_compilation_metrics() {
             Ok(json_value) => {
                 if let Some(obj) = json_value.as_object() {
                     // Check that log fields are present
-                    if obj.contains_key("log_level")
-                        && obj.contains_key("log_thread")
-                        && obj.contains_key("log_pathname")
+                    if obj.contains_key("timestamp")
+                        && obj.contains_key("thread")
+                        && obj.contains_key("pathname")
                     {
                         jsonl_lines_with_log_fields += 1;
 
                         // Verify log fields have correct types
                         assert!(
-                            obj.get("log_level").unwrap().is_string(),
-                            "log_level should be string"
+                            obj.get("timestamp").unwrap().is_string(),
+                            "timestamp should be string"
                         );
                         assert!(
-                            obj.get("log_month").unwrap().is_number(),
-                            "log_month should be number"
+                            obj.get("thread").unwrap().is_number(),
+                            "thread should be number"
                         );
                         assert!(
-                            obj.get("log_thread").unwrap().is_number(),
-                            "log_thread should be number"
+                            obj.get("pathname").unwrap().is_string(),
+                            "pathname should be string"
                         );
                         assert!(
-                            obj.get("log_pathname").unwrap().is_string(),
-                            "log_pathname should be string"
-                        );
-                        assert!(
-                            obj.get("log_line").unwrap().is_number(),
-                            "log_line should be number"
+                            obj.get("lineno").unwrap().is_number(),
+                            "lineno should be number"
                         );
                     }
 
@@ -179,11 +195,11 @@ fn test_parse_compilation_metrics() {
                     if obj.contains_key("payload_filename") {
                         payload_filename_count += 1;
                         let payload_file = obj.get("payload_filename").unwrap().as_str().unwrap();
-                        // Verify the payload_filename points to one of the expected payload files
-                        let contains_expected_hash = expected_payload_hashes
-                            .iter()
-                            .any(|hash| payload_file.contains(hash));
-                        assert!(contains_expected_hash, "payload_filename in raw.jsonl should point to an expected payload file: {}", payload_file);
+                        // Verify the payload_filename points to an actual file in the output
+                        let file_exists_in_output = map
+                            .keys()
+                            .any(|path| path.to_str().map_or(false, |s| s == payload_file));
+                        assert!(file_exists_in_output, "payload_filename in raw.jsonl should point to an existing output file: {}", payload_file);
                     }
                 }
             }
@@ -199,11 +215,13 @@ fn test_parse_compilation_metrics() {
         "Should have JSONL lines with log fields"
     );
 
-    // We should have exactly the same number of payload_filename entries as payload files written
-    assert_eq!(
+    // We should have at least as many payload_filename entries as payload files written
+    // (since parsers can also generate payload files)
+    assert!(
+        payload_filename_count >= expected_payload_hashes.len(),
+        "Number of payload_filename entries ({}) should be at least the number of expected payload files ({})",
         payload_filename_count,
-        expected_payload_hashes.len(),
-        "Number of payload_filename entries in raw.jsonl should match number of payload files"
+        expected_payload_hashes.len()
     );
 }
 
