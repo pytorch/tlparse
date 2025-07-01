@@ -188,7 +188,58 @@ pub struct Stats {
     pub fail_payload_md5: u64,
     pub fail_dynamo_guards_json: u64,
     pub fail_parser: u64,
+    pub fail_key_conflict: u64,
+    pub fail_json_serialization: u64,
     pub unknown: u64,
+}
+
+impl std::fmt::Display for Stats {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut fields = Vec::new();
+
+        if self.ok > 0 {
+            fields.push(format!("ok: {}", self.ok));
+        }
+        if self.other_rank > 0 {
+            fields.push(format!("other_rank: {}", self.other_rank));
+        }
+        if self.fail_glog > 0 {
+            fields.push(format!("fail_glog: {}", self.fail_glog));
+        }
+        if self.fail_json > 0 {
+            fields.push(format!("fail_json: {}", self.fail_json));
+        }
+        if self.fail_payload_md5 > 0 {
+            fields.push(format!("fail_payload_md5: {}", self.fail_payload_md5));
+        }
+        if self.fail_dynamo_guards_json > 0 {
+            fields.push(format!(
+                "fail_dynamo_guards_json: {}",
+                self.fail_dynamo_guards_json
+            ));
+        }
+        if self.fail_parser > 0 {
+            fields.push(format!("fail_parser: {}", self.fail_parser));
+        }
+        if self.fail_key_conflict > 0 {
+            fields.push(format!("fail_key_conflict: {}", self.fail_key_conflict));
+        }
+        if self.fail_json_serialization > 0 {
+            fields.push(format!(
+                "fail_json_serialization: {}",
+                self.fail_json_serialization
+            ));
+        }
+        if self.unknown > 0 {
+            fields.push(format!("unknown: {}", self.unknown));
+        }
+
+        if fields.is_empty() {
+            write!(f, "Stats {{ }}")
+        } else {
+            write!(f, "Stats {{ {} }}", fields.join(", "))
+        }
+    }
 }
 
 #[derive(Debug, Hash, Eq, PartialEq, Deserialize, Serialize, Clone)]

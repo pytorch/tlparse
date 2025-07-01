@@ -10,6 +10,16 @@ use tinytemplate::TinyTemplate;
 
 use serde_json::Value;
 
+fn format_json_pretty(payload: &str) -> Result<String, anyhow::Error> {
+    match serde_json::from_str::<Value>(payload) {
+        Ok(value) => Ok(serde_json::to_string_pretty(&value)?),
+        Err(_) => {
+            // If failed to parse json string, use the raw payload
+            Ok(payload.to_string())
+        }
+    }
+}
+
 use syntect::highlighting::ThemeSet;
 use syntect::parsing::SyntaxSet;
 
@@ -19,6 +29,8 @@ pub use crate::types::{CompileId, EmptyMetadata, Envelope, Metadata};
 pub enum ParserOutput {
     File(PathBuf, String),       // File to be saved on disk
     GlobalFile(PathBuf, String), // Like file, but don't give a unique suffix
+    PayloadFile(PathBuf),        // File using payload directly from log entry
+    PayloadReformatFile(PathBuf, fn(&str) -> Result<String, anyhow::Error>), // File using reformatted payload from log entry
     Link(String, String), // External href to (name, url) (linked in compile_directory, not returned)
 }
 
@@ -51,6 +63,16 @@ pub trait StructuredLogParser {
     fn name(&self) -> &'static str;
 }
 
+// Helper function to build file path with compile ID directory
+fn build_file_path(filename: &str, lineno: usize, compile_id: &Option<CompileId>) -> PathBuf {
+    let compile_id_dir: PathBuf = compile_id
+        .as_ref()
+        .map_or(format!("unknown_{lineno}"), |cid| cid.as_directory_name())
+        .into();
+    let subdir = PathBuf::from(compile_id_dir);
+    subdir.join(filename)
+}
+
 // Takes a filename and a payload and writes that payload into a the file
 fn simple_file_output(
     filename: &str,
@@ -58,13 +80,29 @@ fn simple_file_output(
     compile_id: &Option<CompileId>,
     payload: &str,
 ) -> anyhow::Result<ParserResults> {
-    let compile_id_dir: PathBuf = compile_id
-        .as_ref()
-        .map_or(format!("unknown_{lineno}"), |cid| cid.as_directory_name())
-        .into();
-    let subdir = PathBuf::from(compile_id_dir);
-    let f = subdir.join(filename);
+    let f = build_file_path(filename, lineno, compile_id);
     Ok(Vec::from([ParserOutput::File(f, String::from(payload))]))
+}
+
+// Takes a filename and returns PayloadFile output that uses payload directly from log entry
+fn payload_file_output(
+    filename: &str,
+    lineno: usize,
+    compile_id: &Option<CompileId>,
+) -> anyhow::Result<ParserResults> {
+    let f = build_file_path(filename, lineno, compile_id);
+    Ok(Vec::from([ParserOutput::PayloadFile(f)]))
+}
+
+// Takes a filename and formatter function, returns PayloadReformatFile output that uses reformatted payload from log entry
+fn payload_reformat_file_output(
+    filename: &str,
+    lineno: usize,
+    compile_id: &Option<CompileId>,
+    formatter: fn(&str) -> Result<String, anyhow::Error>,
+) -> anyhow::Result<ParserResults> {
+    let f = build_file_path(filename, lineno, compile_id);
+    Ok(Vec::from([ParserOutput::PayloadReformatFile(f, formatter)]))
 }
 
 /**
@@ -98,14 +136,9 @@ impl StructuredLogParser for SentinelFileParser {
         _metadata: Metadata<'e>,
         _rank: Option<u32>,
         compile_id: &Option<CompileId>,
-        payload: &str,
+        _payload: &str,
     ) -> anyhow::Result<ParserResults> {
-        simple_file_output(
-            &format!("{}.txt", self.filename),
-            lineno,
-            compile_id,
-            payload,
-        )
+        payload_file_output(&format!("{}.txt", self.filename), lineno, compile_id)
     }
 }
 
@@ -126,7 +159,7 @@ impl StructuredLogParser for GraphDumpParser {
         metadata: Metadata<'e>,
         _rank: Option<u32>,
         compile_id: &Option<CompileId>,
-        payload: &str,
+        _payload: &str,
     ) -> anyhow::Result<ParserResults> {
         if let Metadata::GraphDump(metadata) = metadata {
             let filename: PathBuf = {
@@ -134,7 +167,7 @@ impl StructuredLogParser for GraphDumpParser {
                 r.push(OsStr::new(".txt"));
                 r.into()
             };
-            simple_file_output(&filename.to_string_lossy(), lineno, compile_id, payload)
+            payload_file_output(&filename.to_string_lossy(), lineno, compile_id)
         } else {
             Err(anyhow::anyhow!("Expected GraphDump metadata"))
         }
@@ -158,9 +191,9 @@ impl StructuredLogParser for DynamoOutputGraphParser {
         _metadata: Metadata<'e>, // TODO: log size of graph
         _rank: Option<u32>,
         compile_id: &Option<CompileId>,
-        payload: &str,
+        _payload: &str,
     ) -> anyhow::Result<ParserResults> {
-        simple_file_output("dynamo_output_graph.txt", lineno, compile_id, payload)
+        payload_file_output("dynamo_output_graph.txt", lineno, compile_id)
     }
 }
 
@@ -248,23 +281,23 @@ impl StructuredLogParser for InductorOutputCodeParser {
                         r.into()
                     },
                 );
-            let output_content = if self.plain_text {
-                payload.to_string()
+
+            if self.plain_text {
+                payload_file_output(&filename.to_string_lossy(), lineno, compile_id)
             } else {
-                match generate_html_output(payload) {
+                let output_content = match generate_html_output(payload) {
                     Ok(html) => html,
                     Err(_e) => {
                         return Err(anyhow::anyhow!("Failed to parse inductor code to html"))
                     }
-                }
-            };
-
-            simple_file_output(
-                &filename.to_string_lossy(),
-                lineno,
-                compile_id,
-                &output_content,
-            )
+                };
+                simple_file_output(
+                    &filename.to_string_lossy(),
+                    lineno,
+                    compile_id,
+                    &output_content,
+                )
+            }
         } else {
             Err(anyhow::anyhow!("Expected InductorOutputCode metadata"))
         }
@@ -301,11 +334,11 @@ impl StructuredLogParser for OptimizeDdpSplitChildParser {
         metadata: Metadata<'e>,
         _rank: Option<u32>,
         compile_id: &Option<CompileId>,
-        payload: &str,
+        _payload: &str,
     ) -> anyhow::Result<ParserResults> {
         if let Metadata::OptimizeDdpSplitChild(m) = metadata {
             let filename = format!("optimize_ddp_split_child_{}.txt", m.name);
-            simple_file_output(&filename, lineno, compile_id, payload)
+            payload_file_output(&filename, lineno, compile_id)
         } else {
             Err(anyhow::anyhow!("Expected OptimizeDdpSplitChild metadata"))
         }
@@ -661,24 +694,17 @@ impl StructuredLogParser for ArtifactParser {
         metadata: Metadata<'e>,
         _rank: Option<u32>,
         compile_id: &Option<CompileId>,
-        payload: &str,
+        _payload: &str,
     ) -> anyhow::Result<ParserResults> {
         if let Metadata::Artifact(metadata) = metadata {
             match metadata.encoding.as_str() {
                 "string" => {
                     let filename = format!("{}.txt", metadata.name);
-                    simple_file_output(&filename, lineno, compile_id, &payload)
+                    payload_file_output(&filename, lineno, compile_id)
                 }
                 "json" => {
                     let filename: String = format!("{}.json", metadata.name);
-                    let pretty: String = match serde_json::from_str::<Value>(&payload) {
-                        Ok(value) => serde_json::to_string_pretty(&value).unwrap(),
-                        Err(_) => {
-                            // If failed to parse json string, use the raw payload
-                            payload.to_string()
-                        }
-                    };
-                    simple_file_output(&filename, lineno, compile_id, &pretty)
+                    payload_reformat_file_output(&filename, lineno, compile_id, format_json_pretty)
                 }
                 _ => Err(anyhow::anyhow!(
                     "Unsupported encoding: {}",
