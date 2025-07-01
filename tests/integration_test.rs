@@ -39,14 +39,17 @@ fn test_parse_simple() {
         );
     }
 
-    // Check that raw.jsonl exists and has exactly 76 lines (non-payload lines from original)
+    // Check that raw.jsonl exists and has exactly 26 lines (non-payload lines from original, excluding chromium_event entries)
     assert!(
         map.contains_key(&PathBuf::from("raw.jsonl")),
         "raw.jsonl not found in output"
     );
     let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
     let shortraw_lines = shortraw_content.lines().count();
-    assert_eq!(shortraw_lines, 76, "raw.jsonl should have exactly 76 lines");
+    assert_eq!(
+        shortraw_lines, 26,
+        "raw.jsonl should have exactly 26 lines (excluding 50 chromium_event entries)"
+    );
 }
 
 #[test]

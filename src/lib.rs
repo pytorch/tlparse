@@ -932,8 +932,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             None
         };
 
-        // Write to raw.jsonl with optional payload filename
-        write_to_shortraw(&mut shortraw_content, payload_filename, &multi, &mut stats);
+        // Write to raw.jsonl with optional payload filename, but skip chromium events
+        if e.chromium_event.is_none() {
+            write_to_shortraw(&mut shortraw_content, payload_filename, &multi, &mut stats);
+        }
     }
 
     if config.export {
