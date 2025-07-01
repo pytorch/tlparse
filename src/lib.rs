@@ -79,6 +79,49 @@ fn maybe_remove_convert_frame_suffixes(frames: &mut Vec<FrameSummary>) {
     }
 }
 
+fn add_unique_suffix(raw_filename: PathBuf, output_count: i32) -> PathBuf {
+    if let Some(stem) = raw_filename.file_stem() {
+        let mut r = OsString::new();
+        r.push(stem);
+        r.push(OsStr::new("_"));
+        r.push(output_count.to_string());
+        if let Some(e) = raw_filename.extension() {
+            r.push(OsStr::new("."));
+            r.push(e);
+        };
+        raw_filename.with_file_name(r)
+    } else {
+        raw_filename
+    }
+}
+
+fn add_file_output(
+    filename: PathBuf,
+    content: String,
+    output: &mut Vec<(PathBuf, String)>,
+    compile_directory: &mut Vec<OutputFile>,
+    output_count: &mut i32,
+) {
+    output.push((filename.clone(), content));
+    let filename_str = format!("{}", filename.to_string_lossy());
+    let suffix = if filename_str.contains("cache_miss") {
+        "❌".to_string()
+    } else if filename_str.contains("cache_hit") {
+        "✅".to_string()
+    } else if filename_str.contains("cache_bypass") {
+        "❓".to_string()
+    } else {
+        "".to_string()
+    };
+    compile_directory.push(OutputFile {
+        url: filename_str.clone(),
+        name: filename_str,
+        number: *output_count,
+        suffix: suffix,
+    });
+    *output_count += 1;
+}
+
 fn run_parser<'t>(
     lineno: usize,
     parser: &Box<dyn StructuredLogParser + 't>,
@@ -89,60 +132,56 @@ fn run_parser<'t>(
     compile_directory: &mut Vec<OutputFile>,
     multi: &MultiProgress,
     stats: &mut Stats,
-) {
+) -> bool {
+    let mut has_payload_output = false;
     if let Some(md) = parser.get_metadata(&e) {
         let results = parser.parse(lineno, md, e.rank, &e.compile_id, &payload);
-        fn extract_suffix(filename: &String) -> String {
-            if filename.contains("cache_miss") {
-                "❌".to_string()
-            } else if filename.contains("cache_hit") {
-                "✅".to_string()
-            } else if filename.contains("cache_bypass") {
-                "❓".to_string()
-            } else {
-                "".to_string()
-            }
-        }
         match results {
             Ok(results) => {
                 for parser_result in results {
                     match parser_result {
                         ParserOutput::File(raw_filename, out) => {
-                            let filename = if let Some(stem) = raw_filename.file_stem() {
-                                let mut r = OsString::new();
-                                r.push(stem);
-                                r.push(OsStr::new("_"));
-                                r.push(output_count.to_string());
-                                if let Some(e) = raw_filename.extension() {
-                                    r.push(OsStr::new("."));
-                                    r.push(e);
-                                };
-                                raw_filename.with_file_name(r)
-                            } else {
-                                raw_filename
-                            };
-                            output.push((filename.clone(), out));
-                            let filename_str = format!("{}", filename.to_string_lossy());
-                            let suffix = extract_suffix(&filename_str);
-                            compile_directory.push(OutputFile {
-                                url: filename_str.clone(),
-                                name: filename_str,
-                                number: *output_count,
-                                suffix: suffix,
-                            });
-                            *output_count += 1;
+                            let filename = add_unique_suffix(raw_filename, *output_count);
+                            add_file_output(filename, out, output, compile_directory, output_count);
                         }
                         ParserOutput::GlobalFile(filename, out) => {
-                            output.push((filename.clone(), out));
-                            let filename_str = format!("{}", filename.to_string_lossy());
-                            let suffix = extract_suffix(&filename_str);
-                            compile_directory.push(OutputFile {
-                                url: filename_str.clone(),
-                                name: filename_str,
-                                number: *output_count,
-                                suffix: suffix,
-                            });
-                            *output_count += 1;
+                            add_file_output(filename, out, output, compile_directory, output_count);
+                        }
+                        ParserOutput::PayloadFile(raw_filename) => {
+                            has_payload_output = true;
+                            let filename = add_unique_suffix(raw_filename, *output_count);
+                            add_file_output(
+                                filename,
+                                payload.to_string(),
+                                output,
+                                compile_directory,
+                                output_count,
+                            );
+                        }
+                        ParserOutput::PayloadReformatFile(raw_filename, formatter) => {
+                            has_payload_output = true;
+                            let filename = add_unique_suffix(raw_filename, *output_count);
+                            match formatter(payload) {
+                                Ok(formatted_content) => {
+                                    add_file_output(
+                                        filename,
+                                        formatted_content,
+                                        output,
+                                        compile_directory,
+                                        output_count,
+                                    );
+                                }
+                                Err(err) => {
+                                    multi.suspend(|| {
+                                        eprintln!(
+                                            "Failed to format payload for {}: {}",
+                                            filename.to_string_lossy(),
+                                            err
+                                        )
+                                    });
+                                    stats.fail_parser += 1;
+                                }
+                            }
                         }
                         ParserOutput::Link(name, url) => {
                             compile_directory.push(OutputFile {
@@ -168,6 +207,7 @@ fn run_parser<'t>(
             },
         }
     }
+    has_payload_output
 }
 
 fn directory_to_json(
@@ -219,7 +259,7 @@ fn handle_guard(
             tt,
             sym_expr_info_index: &sym_expr_info_index_borrowed,
         });
-    run_parser(
+    let _ = run_parser(
         lineno,
         &parser,
         e,
@@ -281,6 +321,16 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         r"(?<payload>.)"
     ))?;
 
+    // Helper functions to reduce repetitive serde_json::Value creation
+    let make_string_value = |caps: &regex::Captures, name: &str| -> serde_json::Value {
+        serde_json::Value::String(caps.name(name).unwrap().as_str().to_string())
+    };
+
+    let make_number_value = |caps: &regex::Captures, name: &str| -> serde_json::Value {
+        let parsed: u64 = caps.name(name).unwrap().as_str().parse().unwrap();
+        serde_json::Value::Number(serde_json::Number::from(parsed))
+    };
+
     let mut stack_trie = StackTrieNode::default();
     let mut unknown_stack_trie = StackTrieNode::default();
 
@@ -310,6 +360,9 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
 
     // Store results in an output Vec<PathBuf, String>
     let mut output: Vec<(PathBuf, String)> = Vec::new();
+
+    // Store shortraw.log content (without payloads)
+    let mut shortraw_content = String::new();
 
     let mut tt: TinyTemplate = TinyTemplate::new();
     tt.add_formatter("format_unescaped", tinytemplate::format_unescaped);
@@ -366,7 +419,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     while let Some((lineno, line)) = iter.next() {
         bytes_read += line.len() as u64;
         pb.set_position(bytes_read);
-        spinner.set_message(format!("{:?}", stats));
+        spinner.set_message(format!("{}", stats));
         //spinner.set_message(format!("{:?} {:?}", slowest_time, fastest_time));
         let start = Instant::now();
 
@@ -384,6 +437,150 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             slowest_time = end;
         }
         let payload = &line[caps.name("payload").unwrap().start()..];
+        let original_json_envelope = payload; // Store the original JSON envelope
+
+        // Helper function to safely insert keys and detect conflicts
+        let try_insert = |obj: &mut serde_json::Map<String, serde_json::Value>,
+                          key: &str,
+                          value: serde_json::Value,
+                          multi: &MultiProgress,
+                          stats: &mut Stats|
+         -> bool {
+            if obj.contains_key(key) {
+                multi.suspend(|| {
+                    eprintln!("Key conflict: '{}' already exists in JSON payload, skipping shortraw JSONL conversion", key);
+                });
+                stats.fail_key_conflict += 1;
+                false
+            } else {
+                obj.insert(key.to_string(), value);
+                true
+            }
+        };
+
+        // Create cleanup lambda to handle shortraw writing as JSONL
+        let write_to_shortraw = |shortraw_content: &mut String,
+                                 payload_filename: Option<String>,
+                                 multi: &MultiProgress,
+                                 stats: &mut Stats| {
+            match serde_json::from_str::<serde_json::Value>(original_json_envelope) {
+                Ok(mut json_value) => {
+                    if let Some(obj) = json_value.as_object_mut() {
+                        // Try to add all log fields, abort on any conflict
+                        let success = try_insert(
+                            obj,
+                            "log_level",
+                            make_string_value(&caps, "level"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_month",
+                            make_number_value(&caps, "month"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_day",
+                            make_number_value(&caps, "day"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_hour",
+                            make_number_value(&caps, "hour"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_minute",
+                            make_number_value(&caps, "minute"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_second",
+                            make_number_value(&caps, "second"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_millisecond",
+                            make_number_value(&caps, "millisecond"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_thread",
+                            make_number_value(&caps, "thread"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_pathname",
+                            make_string_value(&caps, "pathname"),
+                            multi,
+                            stats,
+                        ) && try_insert(
+                            obj,
+                            "log_line",
+                            make_number_value(&caps, "line"),
+                            multi,
+                            stats,
+                        );
+
+                        // Try to add payload filename if provided
+                        let success = if let Some(payload_file) = payload_filename {
+                            success
+                                && try_insert(
+                                    obj,
+                                    "payload_filename",
+                                    serde_json::Value::String(payload_file),
+                                    multi,
+                                    stats,
+                                )
+                        } else {
+                            success
+                        };
+
+                        if !success {
+                            // Drop line due to key conflict - don't write anything to maintain JSONL format
+                            return;
+                        }
+
+                        // Output as JSONL
+                        match serde_json::to_string(&json_value) {
+                            Ok(jsonl_line) => {
+                                shortraw_content.push_str(&jsonl_line);
+                                shortraw_content.push('\n');
+                            }
+                            Err(e) => {
+                                multi.suspend(|| {
+                                    eprintln!("Failed to serialize JSON for shortraw.log: {}", e);
+                                });
+                                stats.fail_json_serialization += 1;
+                                // Drop line to maintain JSONL format - don't write anything
+                            }
+                        }
+                    } else {
+                        // Not a JSON object, drop line to maintain JSONL format
+                        multi.suspend(|| {
+                            eprintln!(
+                                "JSON payload is not an object, dropping line from shortraw.log"
+                            );
+                        });
+                        stats.fail_json += 1;
+                    }
+                }
+                Err(e) => {
+                    // JSON parsing failed, drop line to maintain JSONL format
+                    multi.suspend(|| {
+                        eprintln!("Failed to parse JSON envelope for shortraw.log: {}", e);
+                    });
+                    stats.fail_json += 1;
+                }
+            }
+        };
 
         let e = match serde_json::from_str::<Envelope>(payload) {
             Ok(r) => r,
@@ -392,6 +589,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     eprintln!("Failed to parse metadata JSON: {}\n{:?}", payload, err);
                 });
                 stats.fail_json += 1;
+                write_to_shortraw(&mut shortraw_content, None, &multi, &mut stats);
                 continue;
             }
         };
@@ -408,6 +606,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         if let Some((s, i)) = e.str {
             let mut intern_table = INTERN_TABLE.lock().unwrap();
             intern_table.insert(i, s);
+            write_to_shortraw(&mut shortraw_content, None, &multi, &mut stats);
             continue;
         };
 
@@ -442,6 +641,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             Some(rank) => {
                 if rank != e.rank {
                     stats.other_rank += 1;
+                    write_to_shortraw(&mut shortraw_content, None, &multi, &mut stats);
                     continue;
                 }
             }
@@ -471,8 +671,9 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         // TODO: output should be able to generate this without explicitly creating
         let compile_directory = directory.entry(compile_id_entry).or_default();
 
+        let mut has_any_payload_output = false;
         for parser in &all_parsers {
-            run_parser(
+            let has_payload = run_parser(
                 lineno,
                 parser,
                 &e,
@@ -482,7 +683,8 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 compile_directory,
                 &multi,
                 &mut stats,
-            )
+            );
+            has_any_payload_output = has_any_payload_output || has_payload;
         }
 
         if let Some(ref m) = e.compilation_metrics {
@@ -501,7 +703,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     output_files: &copied_directory,
                     compile_id_dir: &compile_id_dir,
                 });
-            run_parser(
+            let has_payload = run_parser(
                 lineno,
                 &parser,
                 &e,
@@ -512,6 +714,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 &multi,
                 &mut stats,
             );
+            has_any_payload_output = has_any_payload_output || has_payload;
 
             // compilation metrics is always the last output, since it just ran
             let metrics_filename = format!(
@@ -567,6 +770,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         if config.export {
             if let Some(ref guard) = e.guard_added {
                 if guard.prefix.as_deref() != Some("eval") {
+                    write_to_shortraw(&mut shortraw_content, None, &multi, &mut stats);
                     continue;
                 }
                 let failure_type = "Guard Evaluated";
@@ -712,6 +916,24 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 stack_trie.insert(stack, e.compile_id.clone());
             };
         };
+
+        // Handle payload file writing and determine payload filename
+        let payload_filename = if let Some(ref expect) = e.has_payload {
+            // Only write payload file if no parser generated PayloadFile/PayloadReformatFile output
+            if !has_any_payload_output && !payload.is_empty() {
+                let hash_str = expect;
+                let payload_path = PathBuf::from(format!("payloads/{}.txt", hash_str));
+                output.push((payload_path, payload.clone()));
+                Some(format!("payloads/{}.txt", hash_str))
+            } else {
+                None
+            }
+        } else {
+            None
+        };
+
+        // Write to shortraw.log with optional payload filename
+        write_to_shortraw(&mut shortraw_content, payload_filename, &multi, &mut stats);
     }
 
     if config.export {
@@ -758,7 +980,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         serde_json::to_string_pretty(&chromium_events).unwrap(),
     ));
 
-    eprintln!("{:?}", stats);
+    eprintln!("{}", stats);
     if unknown_fields.len() > 0 {
         eprintln!(
             "Unknown fields: {:?} (consider updating tlparse to render these)",
@@ -806,6 +1028,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     ));
 
     output.push((PathBuf::from("raw.log"), fs::read_to_string(path)?));
+    output.push((PathBuf::from("raw.jsonl"), shortraw_content));
 
     // other_rank is included here because you should only have logs from one rank when
     // configured properly

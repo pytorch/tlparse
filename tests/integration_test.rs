@@ -38,6 +38,18 @@ fn test_parse_simple() {
             prefix
         );
     }
+
+    // Check that raw.jsonl exists and has exactly 76 lines (non-payload lines from original)
+    assert!(
+        map.contains_key(&PathBuf::from("raw.jsonl")),
+        "raw.jsonl not found in output"
+    );
+    let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
+    let shortraw_lines = shortraw_content.lines().count();
+    assert_eq!(
+        shortraw_lines, 76,
+        "raw.jsonl should have exactly 76 lines"
+    );
 }
 
 #[test]
@@ -72,6 +84,133 @@ fn test_parse_compilation_metrics() {
             prefix
         );
     }
+
+    // Check that raw.jsonl exists and has exactly 26 lines (non-payload lines from original)
+    assert!(
+        map.contains_key(&PathBuf::from("raw.jsonl")),
+        "raw.jsonl not found in output"
+    );
+    let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
+    let shortraw_lines = shortraw_content.lines().count();
+    assert_eq!(
+        shortraw_lines, 26,
+        "raw.jsonl should have exactly 26 lines"
+    );
+
+    // Check that exactly the expected payload files exist (no more, no less)
+    // With conditional payload writing, only payloads not handled by parsers are written
+    let expected_payload_hashes: std::collections::HashSet<&str> = [
+        "11726d08889974e57b12edee2812504e",
+        "29e35548d59d0e446f0c8a3f3010cc72",
+        "e18e1bcb67140c0a67427a6119556f7a",
+    ]
+    .iter()
+    .cloned()
+    .collect();
+
+    // Extract actual payload hashes from the output
+    let actual_payload_hashes: std::collections::HashSet<String> = map
+        .keys()
+        .filter_map(|path| {
+            path.to_str().and_then(|s| {
+                if s.starts_with("payloads/") && s.ends_with(".txt") {
+                    Some(
+                        s.strip_prefix("payloads/")?
+                            .strip_suffix(".txt")?
+                            .to_string(),
+                    )
+                } else {
+                    None
+                }
+            })
+        })
+        .collect();
+
+    // Convert expected hashes to String for comparison
+    let expected_payload_hashes: std::collections::HashSet<String> = expected_payload_hashes
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+
+    assert_eq!(
+        actual_payload_hashes, expected_payload_hashes,
+        "Payload file hashes don't match. Expected: {:?}, Actual: {:?}",
+        expected_payload_hashes, actual_payload_hashes
+    );
+
+    // Verify that raw.jsonl is in JSONL format and contains payload_filename for written payload files
+    let shortraw_lines: Vec<&str> = shortraw_content.lines().collect();
+    let mut payload_filename_count = 0;
+    let mut jsonl_lines_with_log_fields = 0;
+
+    for line in shortraw_lines {
+        // Verify each line is valid JSON
+        match serde_json::from_str::<serde_json::Value>(line) {
+            Ok(json_value) => {
+                if let Some(obj) = json_value.as_object() {
+                    // Check that log fields are present
+                    if obj.contains_key("log_level")
+                        && obj.contains_key("log_thread")
+                        && obj.contains_key("log_pathname")
+                    {
+                        jsonl_lines_with_log_fields += 1;
+
+                        // Verify log fields have correct types
+                        assert!(
+                            obj.get("log_level").unwrap().is_string(),
+                            "log_level should be string"
+                        );
+                        assert!(
+                            obj.get("log_month").unwrap().is_number(),
+                            "log_month should be number"
+                        );
+                        assert!(
+                            obj.get("log_thread").unwrap().is_number(),
+                            "log_thread should be number"
+                        );
+                        assert!(
+                            obj.get("log_pathname").unwrap().is_string(),
+                            "log_pathname should be string"
+                        );
+                        assert!(
+                            obj.get("log_line").unwrap().is_number(),
+                            "log_line should be number"
+                        );
+                    }
+
+                    // Check for payload_filename
+                    if obj.contains_key("payload_filename") {
+                        payload_filename_count += 1;
+                        let payload_file = obj.get("payload_filename").unwrap().as_str().unwrap();
+                        // Verify the payload_filename points to one of the expected payload files
+                        let contains_expected_hash = expected_payload_hashes
+                            .iter()
+                            .any(|hash| payload_file.contains(hash));
+                        assert!(contains_expected_hash, "payload_filename in raw.jsonl should point to an expected payload file: {}", payload_file);
+                    }
+                }
+            }
+            Err(e) => {
+                panic!(
+                    "raw.jsonl line is not valid JSON: {} - Error: {}",
+                    line, e
+                );
+            }
+        }
+    }
+
+    // Verify we have the right number of lines with log fields (should be all non-empty lines)
+    assert!(
+        jsonl_lines_with_log_fields > 0,
+        "Should have JSONL lines with log fields"
+    );
+
+    // We should have exactly the same number of payload_filename entries as payload files written
+    assert_eq!(
+        payload_filename_count,
+        expected_payload_hashes.len(),
+        "Number of payload_filename entries in shortraw.log should match number of payload files"
+    );
 }
 
 #[test]
