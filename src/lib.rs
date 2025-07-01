@@ -22,6 +22,12 @@ pub mod parsers;
 mod templates;
 mod types;
 
+#[derive(Debug)]
+enum ParserResult {
+    NoPayload,
+    PayloadFilename(String),
+}
+
 pub struct ParseConfig {
     pub strict: bool,
     pub strict_compile_id: bool,
@@ -99,12 +105,12 @@ fn add_unique_suffix(raw_filename: PathBuf, output_count: i32) -> PathBuf {
 fn add_file_output(
     filename: PathBuf,
     content: String,
-    output: &mut Vec<(PathBuf, String)>,
+    output: &mut ParseOutput,
     compile_directory: &mut Vec<OutputFile>,
     output_count: &mut i32,
 ) {
     output.push((filename.clone(), content));
-    let filename_str = format!("{}", filename.to_string_lossy());
+    let filename_str = filename.to_string_lossy().to_string();
     let suffix = if filename_str.contains("cache_miss") {
         "❌".to_string()
     } else if filename_str.contains("cache_hit") {
@@ -129,12 +135,12 @@ fn run_parser<'t>(
     e: &Envelope,
     payload: &str,
     output_count: &mut i32,
-    output: &mut Vec<(PathBuf, String)>,
+    output: &mut ParseOutput,
     compile_directory: &mut Vec<OutputFile>,
     multi: &MultiProgress,
     stats: &mut Stats,
-) -> Option<String> {
-    let mut payload_filename = None;
+) -> ParserResult {
+    let mut payload_filename = ParserResult::NoPayload;
     if let Some(md) = parser.get_metadata(&e) {
         let results = parser.parse(lineno, md, e.rank, &e.compile_id, &payload);
         match results {
@@ -150,7 +156,9 @@ fn run_parser<'t>(
                         }
                         ParserOutput::PayloadFile(raw_filename) => {
                             let filename = add_unique_suffix(raw_filename, *output_count);
-                            payload_filename = Some(filename.to_string_lossy().to_string());
+                            payload_filename = ParserResult::PayloadFilename(
+                                filename.to_string_lossy().to_string(),
+                            );
                             add_file_output(
                                 filename,
                                 payload.to_string(),
@@ -163,7 +171,9 @@ fn run_parser<'t>(
                             let filename = add_unique_suffix(raw_filename, *output_count);
                             match formatter(payload) {
                                 Ok(formatted_content) => {
-                                    payload_filename = Some(filename.to_string_lossy().to_string());
+                                    payload_filename = ParserResult::PayloadFilename(
+                                        filename.to_string_lossy().to_string(),
+                                    );
                                     add_file_output(
                                         filename,
                                         formatted_content,
@@ -378,8 +388,8 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     let guard_added_fast_index: RefCell<GuardAddedFastIndex> = RefCell::new(FxHashMap::default());
     let sym_expr_info_index: RefCell<SymExprInfoIndex> = RefCell::new(FxHashMap::default());
 
-    // Store results in an output Vec<PathBuf, String>
-    let mut output: Vec<(PathBuf, String)> = Vec::new();
+    // Store results in an output ParseOutput
+    let mut output: ParseOutput = Vec::new();
 
     // Store raw.jsonl content (without payloads)
     let mut shortraw_content = String::new();
@@ -654,9 +664,9 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         // TODO: output should be able to generate this without explicitly creating
         let compile_directory = directory.entry(compile_id_entry).or_default();
 
-        let mut parser_payload_filename = None;
+        let mut parser_payload_filename = ParserResult::NoPayload;
         for parser in &all_parsers {
-            if let Some(filename) = run_parser(
+            let result = run_parser(
                 lineno,
                 parser,
                 &e,
@@ -666,9 +676,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 compile_directory,
                 &multi,
                 &mut stats,
-            ) {
-                // Take the last Some entry as per the requirement
-                parser_payload_filename = Some(filename);
+            );
+            // Take the last PayloadFilename entry as per the requirement
+            if matches!(result, ParserResult::PayloadFilename(_)) {
+                parser_payload_filename = result;
             }
         }
 
@@ -688,7 +699,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                     output_files: &copied_directory,
                     compile_id_dir: &compile_id_dir,
                 });
-            if let Some(filename) = run_parser(
+            let result = run_parser(
                 lineno,
                 &parser,
                 &e,
@@ -698,9 +709,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 compile_directory,
                 &multi,
                 &mut stats,
-            ) {
-                // Take the last Some entry as per the requirement
-                parser_payload_filename = Some(filename);
+            );
+            // Take the last PayloadFilename entry as per the requirement
+            if matches!(result, ParserResult::PayloadFilename(_)) {
+                parser_payload_filename = result;
             }
 
             // compilation metrics is always the last output, since it just ran
@@ -905,21 +917,23 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
         };
 
         // Handle payload file writing and determine final payload filename, but skip chromium events
-        let final_payload_filename = if parser_payload_filename.is_some() {
-            // Use filename from parser that generated PayloadFile/PayloadReformatFile output
-            parser_payload_filename
-        } else if let Some(ref expect) = e.has_payload {
-            // Only write payload file if no parser generated PayloadFile/PayloadReformatFile output and not a chromium event
-            if !payload.is_empty() && e.chromium_event.is_none() {
-                let hash_str = expect;
-                let payload_path = PathBuf::from(format!("payloads/{}.txt", hash_str));
-                output.push((payload_path, payload.clone()));
-                Some(format!("payloads/{}.txt", hash_str))
-            } else {
-                None
+        let final_payload_filename = match parser_payload_filename {
+            ParserResult::PayloadFilename(filename) => Some(filename),
+            ParserResult::NoPayload => {
+                if let Some(ref expect) = e.has_payload {
+                    // Only write payload file if no parser generated PayloadFile/PayloadReformatFile output and not a chromium event
+                    if !payload.is_empty() && e.chromium_event.is_none() {
+                        let hash_str = expect;
+                        let payload_path = PathBuf::from(format!("payloads/{}.txt", hash_str));
+                        output.push((payload_path, payload.clone()));
+                        Some(format!("payloads/{}.txt", hash_str))
+                    } else {
+                        None
+                    }
+                } else {
+                    None
+                }
             }
-        } else {
-            None
         };
 
         // Write to raw.jsonl with optional payload filename, but skip chromium events
