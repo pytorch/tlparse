@@ -46,10 +46,7 @@ fn test_parse_simple() {
     );
     let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
     let shortraw_lines = shortraw_content.lines().count();
-    assert_eq!(
-        shortraw_lines, 76,
-        "raw.jsonl should have exactly 76 lines"
-    );
+    assert_eq!(shortraw_lines, 76, "raw.jsonl should have exactly 76 lines");
 }
 
 #[test]
@@ -92,10 +89,7 @@ fn test_parse_compilation_metrics() {
     );
     let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
     let shortraw_lines = shortraw_content.lines().count();
-    assert_eq!(
-        shortraw_lines, 26,
-        "raw.jsonl should have exactly 26 lines"
-    );
+    assert_eq!(shortraw_lines, 26, "raw.jsonl should have exactly 26 lines");
 
     // Check that exactly the expected payload files exist (no more, no less)
     // With conditional payload writing, only payloads not handled by parsers are written
@@ -191,10 +185,7 @@ fn test_parse_compilation_metrics() {
                 }
             }
             Err(e) => {
-                panic!(
-                    "raw.jsonl line is not valid JSON: {} - Error: {}",
-                    line, e
-                );
+                panic!("raw.jsonl line is not valid JSON: {} - Error: {}", line, e);
             }
         }
     }
@@ -209,7 +200,7 @@ fn test_parse_compilation_metrics() {
     assert_eq!(
         payload_filename_count,
         expected_payload_hashes.len(),
-        "Number of payload_filename entries in shortraw.log should match number of payload files"
+        "Number of payload_filename entries in raw.jsonl should match number of payload files"
     );
 }
 

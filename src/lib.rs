@@ -361,7 +361,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
     // Store results in an output Vec<PathBuf, String>
     let mut output: Vec<(PathBuf, String)> = Vec::new();
 
-    // Store shortraw.log content (without payloads)
+    // Store raw.jsonl content (without payloads)
     let mut shortraw_content = String::new();
 
     let mut tt: TinyTemplate = TinyTemplate::new();
@@ -448,7 +448,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
          -> bool {
             if obj.contains_key(key) {
                 multi.suspend(|| {
-                    eprintln!("Key conflict: '{}' already exists in JSON payload, skipping shortraw JSONL conversion", key);
+                    eprintln!("Key conflict: '{}' already exists in JSON payload, skipping raw.jsonl JSONL conversion", key);
                 });
                 stats.fail_key_conflict += 1;
                 false
@@ -458,7 +458,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             }
         };
 
-        // Create cleanup lambda to handle shortraw writing as JSONL
+        // Create cleanup lambda to handle raw.jsonl writing as JSONL
         let write_to_shortraw = |shortraw_content: &mut String,
                                  payload_filename: Option<String>,
                                  multi: &MultiProgress,
@@ -556,7 +556,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                             }
                             Err(e) => {
                                 multi.suspend(|| {
-                                    eprintln!("Failed to serialize JSON for shortraw.log: {}", e);
+                                    eprintln!("Failed to serialize JSON for raw.jsonl: {}", e);
                                 });
                                 stats.fail_json_serialization += 1;
                                 // Drop line to maintain JSONL format - don't write anything
@@ -566,7 +566,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                         // Not a JSON object, drop line to maintain JSONL format
                         multi.suspend(|| {
                             eprintln!(
-                                "JSON payload is not an object, dropping line from shortraw.log"
+                                "JSON payload is not an object, dropping line from raw.jsonl"
                             );
                         });
                         stats.fail_json += 1;
@@ -575,7 +575,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
                 Err(e) => {
                     // JSON parsing failed, drop line to maintain JSONL format
                     multi.suspend(|| {
-                        eprintln!("Failed to parse JSON envelope for shortraw.log: {}", e);
+                        eprintln!("Failed to parse JSON envelope for raw.jsonl: {}", e);
                     });
                     stats.fail_json += 1;
                 }
@@ -932,7 +932,7 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             None
         };
 
-        // Write to shortraw.log with optional payload filename
+        // Write to raw.jsonl with optional payload filename
         write_to_shortraw(&mut shortraw_content, payload_filename, &multi, &mut stats);
     }
 
