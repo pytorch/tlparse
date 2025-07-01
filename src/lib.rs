@@ -917,10 +917,10 @@ pub fn parse_path(path: &PathBuf, config: ParseConfig) -> anyhow::Result<ParseOu
             };
         };
 
-        // Handle payload file writing and determine payload filename
+        // Handle payload file writing and determine payload filename, but skip chromium events
         let payload_filename = if let Some(ref expect) = e.has_payload {
-            // Only write payload file if no parser generated PayloadFile/PayloadReformatFile output
-            if !has_any_payload_output && !payload.is_empty() {
+            // Only write payload file if no parser generated PayloadFile/PayloadReformatFile output and not a chromium event
+            if !has_any_payload_output && !payload.is_empty() && e.chromium_event.is_none() {
                 let hash_str = expect;
                 let payload_path = PathBuf::from(format!("payloads/{}.txt", hash_str));
                 output.push((payload_path, payload.clone()));
