@@ -37,6 +37,7 @@ pub struct ParseConfig {
     pub plain_text: bool,
     pub export: bool,
     pub inductor_provenance: bool,
+    pub all_ranks: bool,
 }
 
 impl Default for ParseConfig {
@@ -50,6 +51,7 @@ impl Default for ParseConfig {
             plain_text: false,
             export: false,
             inductor_provenance: false,
+            all_ranks: false,
         }
     }
 }
