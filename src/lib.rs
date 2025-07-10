@@ -22,6 +22,8 @@ pub mod parsers;
 mod templates;
 mod types;
 
+pub use crate::templates::{CSS, JAVASCRIPT, TEMPLATE_MULTI_RANK_INDEX};
+
 #[derive(Debug)]
 enum ParserResult {
     NoPayload,
@@ -37,6 +39,22 @@ pub struct ParseConfig {
     pub plain_text: bool,
     pub export: bool,
     pub inductor_provenance: bool,
+    pub all_ranks: bool,
+}
+
+#[derive(serde::Serialize)]
+pub struct RankInfo {
+    pub number: String,
+    pub link: String,
+}
+
+#[derive(serde::Serialize)]
+pub struct MultiRankContext {
+    pub css: &'static str,
+    pub javascript: &'static str,
+    pub custom_header_html: String,
+    pub rank_count: usize,
+    pub ranks: Vec<RankInfo>,
 }
 
 impl Default for ParseConfig {
@@ -50,6 +68,7 @@ impl Default for ParseConfig {
             plain_text: false,
             export: false,
             inductor_provenance: false,
+            all_ranks: false,
         }
     }
 }
