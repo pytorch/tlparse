@@ -6,6 +6,9 @@ use std::path::PathBuf;
 
 use tlparse::{parse_path, ParseConfig};
 
+// Main output filename used by both single rank and multi-rank processing
+const MAIN_OUTPUT_FILENAME: &str = "index.html";
+
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 #[command(propagate_version = true)]
@@ -51,6 +54,7 @@ pub struct Cli {
 
 fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
+
     let path = if cli.latest {
         let input_path = cli.path;
         // Path should be a directory
@@ -76,7 +80,6 @@ fn main() -> anyhow::Result<()> {
     };
 
     let out_path = cli.out;
-
     if out_path.exists() {
         if !cli.overwrite {
             bail!(
@@ -98,19 +101,37 @@ fn main() -> anyhow::Result<()> {
         export: cli.export,
         inductor_provenance: cli.inductor_provenance,
     };
+    let per_rank_config = config;
+    parse_and_write_output(per_rank_config, &path, &out_path)?;
 
-    let output = parse_path(&path, config)?;
+    if !cli.no_browser {
+        opener::open(out_path.join(MAIN_OUTPUT_FILENAME))?;
+    }
+    Ok(())
+}
 
-    for (filename, path) in output {
-        let out_file = out_path.join(filename);
+// Helper function to parse a log file and write output to a directory
+// Returns the relative path to the main output file within the output directory
+fn parse_and_write_output(
+    config: ParseConfig,
+    log_path: &PathBuf,
+    output_dir: &PathBuf,
+) -> anyhow::Result<PathBuf> {
+    let output = parse_path(log_path, config)?;
+    let mut main_output_path = None;
+
+    // Write output files to output directory
+    for (filename, content) in output {
+        let out_file = output_dir.join(&filename);
         if let Some(dir) = out_file.parent() {
             fs::create_dir_all(dir)?;
         }
-        fs::write(out_file, path)?;
+        fs::write(out_file, content)?;
+
+        if filename.file_name().and_then(|name| name.to_str()) == Some(MAIN_OUTPUT_FILENAME) {
+            main_output_path = Some(filename);
+        }
     }
 
-    if !cli.no_browser {
-        opener::open(out_path.join("index.html"))?;
-    }
-    Ok(())
+    Ok(main_output_path.unwrap_or_else(|| PathBuf::from(MAIN_OUTPUT_FILENAME)))
 }
