@@ -1,6 +1,9 @@
 use std::collections::HashMap;
+use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
+use std::process::Command;
+use tempfile::tempdir;
 use tlparse;
 
 fn prefix_exists(map: &HashMap<PathBuf, String>, prefix: &str) -> bool {
@@ -418,4 +421,176 @@ fn test_provenance_tracking() {
             prefix
         );
     }
+}
+
+#[test]
+fn test_all_ranks_basic() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_logs");
+    let temp_dir = tempdir().unwrap();
+    let out_dir = temp_dir.path().join("out");
+
+    let output = Command::new(env!("CARGO_BIN_EXE_tlparse"))
+        .arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .output()?;
+
+    assert!(
+        output.status.success(),
+        "tlparse command failed. stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+
+    let rank0_index = out_dir.join("rank_0/index.html");
+    let rank1_index = out_dir.join("rank_1/index.html");
+    let landing_page = out_dir.join("index.html");
+
+    assert!(rank0_index.exists(), "rank 0 index.html should exist");
+    assert!(rank1_index.exists(), "rank 1 index.html should exist");
+    assert!(landing_page.exists(), "toplevel index.html should exist");
+
+    let landing_content = fs::read_to_string(landing_page).unwrap();
+    assert!(
+        landing_content.contains(r#"<a href="rank_0/index.html">"#),
+        "Landing page should contain a link to rank 0"
+    );
+    assert!(
+        landing_content.contains(r#"<a href="rank_1/index.html">"#),
+        "Landing page should contain a link to rank 1"
+    );
+    Ok(())
+}
+
+#[test]
+fn test_all_ranks_messy_input() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_messy_input");
+    let temp_dir = tempdir().unwrap();
+    let out_dir = temp_dir.path().join("out");
+
+    let output = Command::new(env!("CARGO_BIN_EXE_tlparse"))
+        .arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .output()?;
+
+    assert!(
+        output.status.success(),
+        "tlparse command failed on messy input. stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+
+    let rank0_index = out_dir.join("rank_0/index.html");
+    let rank1_index = out_dir.join("rank_1/index.html");
+    let landing_page = out_dir.join("index.html");
+
+    assert!(
+        rank0_index.exists(),
+        "rank 0 index.html should exist in messy input test"
+    );
+    assert!(
+        rank1_index.exists(),
+        "rank 1 index.html should exist in messy input test"
+    );
+    assert!(
+        landing_page.exists(),
+        "toplevel index.html should exist in messy input test"
+    );
+
+    let landing_content = fs::read_to_string(landing_page).unwrap();
+    assert!(
+        landing_content.contains(r#"<a href="rank_0/index.html">"#),
+        "Landing page should contain a link to rank 0 in messy input test"
+    );
+    assert!(
+        landing_content.contains(r#"<a href="rank_1/index.html">"#),
+        "Landing page should contain a link to rank 1 in messy input test"
+    );
+    Ok(())
+}
+
+#[test]
+fn test_all_ranks_no_browser() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_logs");
+    let temp_dir = tempdir().unwrap();
+    let out_dir = temp_dir.path().join("out");
+
+    let output = Command::new(env!("CARGO_BIN_EXE_tlparse"))
+        .arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .output()?;
+
+    assert!(
+        output.status.success(),
+        "tlparse command failed. stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+
+    let rank0_index = out_dir.join("rank_0/index.html");
+    let rank1_index = out_dir.join("rank_1/index.html");
+    let landing_page = out_dir.join("index.html");
+
+    assert!(rank0_index.exists(), "rank 0 index.html should exist");
+    assert!(rank1_index.exists(), "rank 1 index.html should exist");
+    assert!(landing_page.exists(), "toplevel index.html should exist");
+    Ok(())
+}
+
+#[test]
+fn test_all_ranks_with_latest_fails() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_logs");
+    let temp_root = tempdir()?; // only used for output cleanup
+    let out_dir = temp_root.path().join("out");
+
+    let output = Command::new(env!("CARGO_BIN_EXE_tlparse"))
+        .arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--latest")
+        .arg("-o")
+        .arg(&out_dir)
+        .output()?;
+
+    assert!(
+        !output.status.success(),
+        "tlparse should fail when --all-ranks-html and --latest are used together"
+    );
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("--latest cannot be used with --all-ranks-html"),
+        "stderr should complain about using --latest with --all-ranks-html"
+    );
+    Ok(())
+}
+
+#[test]
+fn test_all_ranks_no_logs() -> Result<(), Box<dyn std::error::Error>> {
+    let temp_root = tempdir()?;
+    let input_dir = temp_root.path().to_path_buf();
+    let out_dir = temp_root.path().join("out");
+
+    let output = Command::new(env!("CARGO_BIN_EXE_tlparse"))
+        .arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .output()?;
+
+    assert!(!output.status.success(), "tlparse should fail on empty dir");
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(
+        stderr.contains("No rank log files found"),
+        "stderr should complain about missing log files"
+    );
+    Ok(())
 }

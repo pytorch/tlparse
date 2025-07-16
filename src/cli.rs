@@ -4,6 +4,7 @@ use anyhow::{bail, Context};
 use std::fs;
 use std::path::PathBuf;
 
+use tlparse::generate_multi_rank_html;
 use tlparse::{parse_path, ParseConfig};
 
 #[derive(Parser)]
@@ -54,6 +55,12 @@ pub struct Cli {
 
 fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
+
+    // Early validation of incompatible flags
+    if cli.all_ranks_html && cli.latest {
+        bail!("--latest cannot be used with --all-ranks-html");
+    }
+
     let path = if cli.latest {
         let input_path = cli.path;
         // Path should be a directory
@@ -78,15 +85,6 @@ fn main() -> anyhow::Result<()> {
         cli.path
     };
 
-    if cli.all_ranks_html {
-        if cli.latest {
-            bail!("--latest cannot be used with --all-ranks-html");
-        }
-        if cli.no_browser {
-            bail!("--no-browser not yet implemented with --all-ranks-html");
-        }
-    }
-
     let config = ParseConfig {
         strict: cli.strict,
         strict_compile_id: cli.strict_compile_id,
@@ -99,7 +97,7 @@ fn main() -> anyhow::Result<()> {
     };
 
     if cli.all_ranks_html {
-        handle_all_ranks(&config, path, cli.out, cli.overwrite)?;
+        handle_all_ranks(&config, path, cli.out, cli.overwrite, !cli.no_browser)?;
     } else {
         handle_one_rank(
             &config,
@@ -186,6 +184,7 @@ fn handle_all_ranks(
     path: PathBuf,
     out_path: PathBuf,
     overwrite: bool,
+    open_browser: bool,
 ) -> anyhow::Result<()> {
     let input_dir = path;
     if !input_dir.is_dir() {
@@ -224,6 +223,14 @@ fn handle_all_ranks(
         );
     }
 
+    let mut sorted_ranks: Vec<String> =
+        rank_logs.iter().map(|(_, rank)| rank.to_string()).collect();
+    sorted_ranks.sort_by(|a, b| {
+        a.parse::<u32>()
+            .unwrap_or(0)
+            .cmp(&b.parse::<u32>().unwrap_or(0))
+    });
+
     for (log_path, rank_num) in rank_logs {
         let subdir = out_path.join(format!("rank_{rank_num}"));
         println!("Processing rank {rank_num} → {}", subdir.display());
@@ -235,6 +242,12 @@ fn handle_all_ranks(
         "Multi-rank report generated under {}\nIndividual pages: rank_*/index.html",
         out_path.display()
     );
-    // TODO: generate and open a landing page
+
+    let (landing_page_path, landing_html) = generate_multi_rank_html(&out_path, sorted_ranks, cfg)?;
+    fs::write(&landing_page_path, landing_html)?;
+    if open_browser {
+        opener::open(&landing_page_path)?;
+    }
+
     Ok(())
 }
