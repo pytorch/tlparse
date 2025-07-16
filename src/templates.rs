@@ -157,7 +157,7 @@ and avoid inlining the function in the first place.
 </p>
 <p>
 When compiled autograd is enabled, the compile id will include a prefix signifier <code>[!a/x/y]</code>,
-where a is the <strong>compiled autograd id</strong>. For instance, <code>[!0/-/-]</code> refers
+where a is the <strong>compiled autograd id</strong>. For instance, <code>[!0/-/-]</code> refers 
 to the first graph captured by compiled autograd. It is then traced by torch.compile as <code>[!0/x/y_z]</code>.
 </p>
 <p>
@@ -486,7 +486,7 @@ you may address them.
 <table>
 <tr> <th> Failure Type </th> <th> Reason </th> <th> Additional Info </th> </tr>
 {{ for failure in failures }}
-<tr>
+<tr> 
     <td>{failure.failure_type | format_unescaped}</td>
     <td>{failure.reason | format_unescaped}</td>
     <td>{failure.additional_info | format_unescaped}</td>
