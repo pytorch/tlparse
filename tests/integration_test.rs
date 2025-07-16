@@ -1,6 +1,6 @@
-use assert_cmd::prelude::*;
-use assert_cmd::Command as AssertCommand;
-use predicates::prelude::*;
+use assert_cmd::Command;
+use predicates::boolean::PredicateBooleanExt;
+use predicates::str;
 use std::collections::HashMap;
 use std::fs;
 use std::path::Path;
@@ -431,7 +431,7 @@ fn test_all_ranks_basic() -> Result<(), Box<dyn std::error::Error>> {
     let temp_dir = tempdir().unwrap();
     let out_dir = temp_dir.path().join("out");
 
-    let mut cmd = AssertCommand::cargo_bin("tlparse")?;
+    let mut cmd = Command::cargo_bin("tlparse")?;
     cmd.arg(&input_dir)
         .arg("--all-ranks-html")
         .arg("--overwrite")
@@ -444,19 +444,13 @@ fn test_all_ranks_basic() -> Result<(), Box<dyn std::error::Error>> {
     let rank1_index = out_dir.join("rank_1/index.html");
     let landing_page = out_dir.join("index.html");
 
-    assert!(rank0_index.exists(), "rank 0 index.html should exist");
-    assert!(rank1_index.exists(), "rank 1 index.html should exist");
-    assert!(landing_page.exists(), "toplevel index.html should exist");
+    assert!(rank0_index.exists());
+    assert!(rank1_index.exists());
+    assert!(landing_page.exists());
 
     let landing_content = fs::read_to_string(landing_page).unwrap();
-    assert!(
-        landing_content.contains(r#"<a href="rank_0/index.html">"#),
-        "Landing page should contain a link to rank 0"
-    );
-    assert!(
-        landing_content.contains(r#"<a href="rank_1/index.html">"#),
-        "Landing page should contain a link to rank 1"
-    );
+    assert!(landing_content.contains(r#"<a href="rank_0/index.html">"#));
+    assert!(landing_content.contains(r#"<a href="rank_1/index.html">"#));
     Ok(())
 }
 
@@ -466,7 +460,7 @@ fn test_all_ranks_messy_input() -> Result<(), Box<dyn std::error::Error>> {
     let temp_dir = tempdir().unwrap();
     let out_dir = temp_dir.path().join("out");
 
-    let mut cmd = AssertCommand::cargo_bin("tlparse")?;
+    let mut cmd = Command::cargo_bin("tlparse")?;
     cmd.arg(&input_dir)
         .arg("--all-ranks-html")
         .arg("--overwrite")
@@ -495,14 +489,8 @@ fn test_all_ranks_messy_input() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     let landing_content = fs::read_to_string(landing_page).unwrap();
-    assert!(
-        landing_content.contains(r#"<a href="rank_0/index.html">"#),
-        "Landing page should contain a link to rank 0 in messy input test"
-    );
-    assert!(
-        landing_content.contains(r#"<a href="rank_1/index.html">"#),
-        "Landing page should contain a link to rank 1 in messy input test"
-    );
+    assert!(landing_content.contains(r#"<a href="rank_0/index.html">"#));
+    assert!(landing_content.contains(r#"<a href="rank_1/index.html">"#));
     Ok(())
 }
 
@@ -512,7 +500,7 @@ fn test_all_ranks_no_browser() -> Result<(), Box<dyn std::error::Error>> {
     let temp_dir = tempdir().unwrap();
     let out_dir = temp_dir.path().join("out");
 
-    let mut cmd = AssertCommand::cargo_bin("tlparse")?;
+    let mut cmd = Command::cargo_bin("tlparse")?;
     cmd.arg(&input_dir)
         .arg("--all-ranks-html")
         .arg("--overwrite")
@@ -521,8 +509,7 @@ fn test_all_ranks_no_browser() -> Result<(), Box<dyn std::error::Error>> {
         .arg("--no-browser");
 
     cmd.assert().success().stdout(
-        predicate::str::contains("Multi-rank report generated")
-            .and(predicate::str::contains(out_dir.to_str().unwrap())),
+        str::contains("Multi-rank report generated").and(str::contains(out_dir.to_str().unwrap())),
     );
 
     // Check that files were created but don't try to open them
@@ -530,9 +517,9 @@ fn test_all_ranks_no_browser() -> Result<(), Box<dyn std::error::Error>> {
     let rank1_index = out_dir.join("rank_1/index.html");
     let landing_page = out_dir.join("index.html");
 
-    assert!(rank0_index.exists(), "rank 0 index.html should exist");
-    assert!(rank1_index.exists(), "rank 1 index.html should exist");
-    assert!(landing_page.exists(), "toplevel index.html should exist");
+    assert!(rank0_index.exists());
+    assert!(rank1_index.exists());
+    assert!(landing_page.exists());
     Ok(())
 }
 
@@ -542,14 +529,15 @@ fn test_all_ranks_with_latest_fails() -> Result<(), Box<dyn std::error::Error>> 
     let temp_dir = tempdir().unwrap();
     let out_dir = temp_dir.path().join("out");
 
-    let mut cmd = AssertCommand::cargo_bin("tlparse")?;
+    let mut cmd = Command::cargo_bin("tlparse")?;
     cmd.arg(&input_dir)
         .arg("--all-ranks-html")
         .arg("--latest")
         .arg("-o")
-        .arg(&out_dir);
+        .arg(&out_dir)
+        .arg("--no-browser");
 
-    cmd.assert().failure().stderr(predicate::str::contains(
+    cmd.assert().failure().stderr(str::contains(
         "--latest cannot be used with --all-ranks-html",
     ));
 
@@ -561,14 +549,15 @@ fn test_all_ranks_no_logs() -> Result<(), Box<dyn std::error::Error>> {
     let temp_dir = tempdir()?;
     let empty_dir = temp_dir.path();
 
-    let mut cmd = AssertCommand::cargo_bin("tlparse")?;
+    let mut cmd = Command::cargo_bin("tlparse")?;
     cmd.arg(empty_dir)
         .arg("--all-ranks-html")
-        .arg("--overwrite");
+        .arg("--overwrite")
+        .arg("--no-browser");
 
     cmd.assert()
         .failure()
-        .stderr(predicate::str::contains("No rank log files found"));
+        .stderr(str::contains("No rank log files found"));
 
     Ok(())
 }
