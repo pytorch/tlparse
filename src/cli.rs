@@ -5,7 +5,7 @@ use std::fs;
 use std::path::PathBuf;
 
 use tlparse::generate_multi_rank_html;
-use tlparse::{parse_path, ParseConfig};
+use tlparse::{generate_multi_rank_html, parse_path, ParseConfig};
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
