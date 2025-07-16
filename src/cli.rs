@@ -4,8 +4,7 @@ use anyhow::{bail, Context};
 use std::fs;
 use std::path::PathBuf;
 
-use tlparse::generate_multi_rank_html;
-use tlparse::{parse_path, ParseConfig};
+use tlparse::{generate_multi_rank_html, parse_path, ParseConfig};
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -223,13 +222,10 @@ fn handle_all_ranks(
         );
     }
 
-    let mut sorted_ranks: Vec<String> =
-        rank_logs.iter().map(|(_, rank)| rank.to_string()).collect();
-    sorted_ranks.sort_by(|a, b| {
-        a.parse::<u32>()
-            .unwrap_or(0)
-            .cmp(&b.parse::<u32>().unwrap_or(0))
-    });
+    // Extract rank numbers, sort numerically, then convert to strings for HTML generation
+    let mut rank_nums: Vec<u32> = rank_logs.iter().map(|(_, rank)| *rank).collect();
+    rank_nums.sort_unstable();
+    let sorted_ranks: Vec<String> = rank_nums.iter().map(|r| r.to_string()).collect();
 
     for (log_path, rank_num) in rank_logs {
         let subdir = out_path.join(format!("rank_{rank_num}"));
