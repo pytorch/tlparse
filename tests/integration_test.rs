@@ -3,6 +3,24 @@ use std::path::Path;
 use std::path::PathBuf;
 use tlparse;
 
+use assert_cmd::assert::Assert;
+use assert_cmd::CommandCargoExt;
+use std::process::Command;
+
+#[test]
+fn test_e2e_simple() {
+    let temp = assert_fs::TempDir::new().unwrap();
+    let mut cmd = Command::cargo_bin("tlparse").unwrap();
+    cmd.arg("tests/inputs/simple.log");
+    cmd.arg("--no-browser");
+    cmd.arg("-o");
+    cmd.arg(temp.path());
+    cmd.arg("--overwrite");
+    cmd.assert().success();
+    let output_path = temp.path().join("index.html");
+    assert!(output_path.is_file());
+}
+
 fn prefix_exists(map: &HashMap<PathBuf, String>, prefix: &str) -> bool {
     map.keys()
         .any(|key| key.to_str().map_or(false, |s| s.starts_with(prefix)))
