@@ -1,5 +1,5 @@
 use core::hash::BuildHasherDefault;
-use fxhash::{FxHashMap, FxHasher};
+use fxhash::{FxHashMap, FxHashSet, FxHasher};
 use html_escape::encode_text;
 use indexmap::IndexMap;
 use regex::Regex;
@@ -22,6 +22,13 @@ pub type GuardAddedFastIndex = FxHashMap<Option<CompileId>, Vec<GuardAddedFastMe
 pub type SymExprInfoIndex = FxHashMap<u64, SymExprInfoMetadata>;
 
 pub type FxIndexMap<K, V> = IndexMap<K, V, BuildHasherDefault<FxHasher>>;
+
+/// Per-rank metadata collected during multi-rank aggregation.
+#[derive(Debug)]
+pub struct RankMetaData {
+    pub rank: u32,
+    pub compile_ids: FxHashSet<String>,
+}
 
 pub fn extract_eval_with_key_id(filename: &str) -> Option<u64> {
     let re = Regex::new(r"<eval_with_key>\.([0-9]+)").unwrap();

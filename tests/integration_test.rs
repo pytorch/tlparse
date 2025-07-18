@@ -704,3 +704,74 @@ fn test_all_ranks_chromium_events_sparse() -> Result<(), Box<dyn std::error::Err
 
     Ok(())
 }
+
+// Detect diverging compile-ID sets: should raise warning.
+#[test]
+fn test_diverging_compile_ids_warning() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_logs");
+    let temp_dir = tempdir().unwrap();
+    let out_dir = temp_dir.path();
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(out_dir)
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    let landing_page = out_dir.join("index.html");
+    assert!(
+        landing_page.exists(),
+        "Expected {} to exist",
+        landing_page.display()
+    );
+    let landing_content = fs::read_to_string(&landing_page)?;
+    assert!(
+        landing_content.contains("Diverging Compilation IDs detected"),
+        "Expected divergence warning to be present"
+    );
+
+    Ok(())
+}
+
+// Two ranks with identical logs ⇒ no divergence warning.
+#[test]
+fn test_no_compile_id_divergence() -> Result<(), Box<dyn std::error::Error>> {
+    // Create temp input dir with identical logs for rank 0 and 1
+    let temp_in = tempdir()?;
+    let src_log = PathBuf::from("tests/inputs/simple.log");
+
+    for rank in 0..=1 {
+        let dest = temp_in
+            .path()
+            .join(format!("dedicated_log_torch_trace_rank_{}.log", rank));
+        fs::copy(&src_log, dest)?;
+    }
+
+    let temp_out = tempdir()?;
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(temp_in.path())
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(temp_out.path())
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    let landing_page = temp_out.path().join("index.html");
+    assert!(
+        landing_page.exists(),
+        "Expected {} to exist",
+        landing_page.display()
+    );
+    let landing_content = fs::read_to_string(&landing_page)?;
+    assert!(
+        !landing_content.contains("Diverging Compilation IDs detected"),
+        "Did not expect divergence warning for identical logs"
+    );
+
+    Ok(())
+}

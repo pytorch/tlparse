@@ -549,7 +549,7 @@ pub static TEMPLATE_MULTI_RANK_INDEX: &str = r#"
 {custom_header_html | format_unescaped}
 {{ if show_desync_warning }}
 <div class="warning-box">
-    <p><strong>Warning:</strong> Placeholder desync warning message.</p>
+    <p><strong>Warning:</strong> Diverging Compilation IDs detected across ranks. This may lead to hangs or timeouts during distributed execution.</p>
 </div>
 {{ endif }}
 <h2>Multi-Rank TLParse Report</h2>
