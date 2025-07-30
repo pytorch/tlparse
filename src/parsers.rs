@@ -741,11 +741,12 @@ fn parse_schedule_from_dir(
     let content = fs::read_to_string(&schedule_path)
         .with_context(|| format!("Reading collective schedule for rank {rank}"))?;
 
-    // Fix trailing commas in JSON before parsing
-    let fixed_content = content.replace(",\n]", "\n]").replace(",]", "]");
-    let ops: Vec<String> =
-        serde_json::from_str(&fixed_content).context("Failed to parse collective schedule JSON")?;
-
+    let ops: Vec<String> = serde_json::from_str(&content).with_context(|| {
+        format!(
+            "Failed to parse collective schedule JSON from {}",
+            schedule_path.display()
+        )
+    })?;
     if ops.is_empty() {
         return Ok(None);
     }
