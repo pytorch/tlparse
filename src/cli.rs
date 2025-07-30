@@ -325,6 +325,17 @@ fn handle_all_ranks(
         fs::write(combined_chromium_path, combined_events_json)?;
     }
 
+    // Process collective schedules from all ranks
+    let collective_schedules = tlparse::parsers::read_collective_schedules(&out_path, &rank_nums)?;
+    if !collective_schedules.is_empty() {
+        let schedules_path = out_path.join("collective_schedules.json");
+        fs::write(
+            &schedules_path,
+            serde_json::to_string_pretty(&collective_schedules)?,
+        )?;
+        println!("Collective schedules: {}", schedules_path.display());
+    }
+
     println!(
         "Multi-rank report generated under {}\nIndividual pages: rank_*/index.html",
         out_path.display()

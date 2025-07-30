@@ -680,6 +680,88 @@ pub fn anchor_source(text: &str) -> String {
     html
 }
 
+/// Reads collective schedule artifacts from processed rank directories
+/// Handles multiple graphs per rank
+pub fn read_collective_schedules(
+    out_path: &PathBuf,
+    rank_nums: &[u32],
+) -> anyhow::Result<Vec<CollectiveSchedule>> {
+    use anyhow::Context;
+    use std::fs;
+
+    let mut schedules = Vec::new();
+
+    for &rank in rank_nums {
+        let rank_dir = out_path.join(format!("rank_{rank}"));
+
+        // Skip missing rank directories (some ranks may not have collective schedules)
+        if !rank_dir.exists() {
+            continue;
+        }
+
+        let entries =
+            fs::read_dir(&rank_dir).with_context(|| format!("Reading rank_{rank} directory"))?;
+
+        // Each subdirectory represents a different graph (compile ID like "-_0_0_0", "-_1_0_0", etc.)
+        for entry in entries.flatten().filter(|e| e.path().is_dir()) {
+            if let Some(schedule) = parse_schedule_from_dir(&entry.path(), rank)? {
+                schedules.push(schedule);
+            }
+        }
+    }
+
+    Ok(schedules)
+}
+
+fn parse_schedule_from_dir(
+    compile_dir: &PathBuf,
+    rank: u32,
+) -> anyhow::Result<Option<CollectiveSchedule>> {
+    use anyhow::Context;
+    use std::fs;
+
+    // Look for files matching pattern: inductor_collective_schedule*.json
+    let entries = fs::read_dir(compile_dir)?;
+    let schedule_file = entries.flatten().find(|entry| {
+        let path = entry.path();
+        path.extension() == Some(OsStr::new("json"))
+            && path
+                .file_stem()
+                .and_then(|stem| stem.to_str())
+                .map_or(false, |stem_str| {
+                    stem_str.starts_with("inductor_collective_schedule")
+                })
+    });
+
+    let schedule_path = match schedule_file {
+        Some(file) => file.path(),
+        None => return Ok(None),
+    };
+
+    let content = fs::read_to_string(&schedule_path)
+        .with_context(|| format!("Reading collective schedule for rank {rank}"))?;
+
+    // Fix trailing commas in JSON before parsing
+    let fixed_content = content.replace(",\n]", "\n]").replace(",]", "]");
+    let ops: Vec<String> =
+        serde_json::from_str(&fixed_content).context("Failed to parse collective schedule JSON")?;
+
+    if ops.is_empty() {
+        return Ok(None);
+    }
+
+    let graph_id = compile_dir
+        .file_name()
+        .and_then(|n| n.to_str())
+        .unwrap_or("unknown");
+
+    Ok(Some(CollectiveSchedule {
+        rank,
+        graph: graph_id.to_string(),
+        ops,
+    }))
+}
+
 pub struct ArtifactParser;
 impl StructuredLogParser for ArtifactParser {
     fn name(&self) -> &'static str {

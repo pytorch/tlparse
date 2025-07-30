@@ -38,6 +38,13 @@ pub struct CacheDivergenceGroup {
     pub ranks: String,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CollectiveSchedule {
+    pub rank: u32,
+    pub graph: String,
+    pub ops: Vec<String>,
+}
+
 pub fn extract_eval_with_key_id(filename: &str) -> Option<u64> {
     let re = Regex::new(r"<eval_with_key>\.([0-9]+)").unwrap();
     re.captures(filename)

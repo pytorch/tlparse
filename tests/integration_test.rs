@@ -864,3 +864,64 @@ fn test_diverging_cache_events_multiple_groups() -> Result<(), Box<dyn std::erro
 
     Ok(())
 }
+
+#[test]
+fn test_collective_schedule_parsing() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_schedule");
+    let temp_dir = tempdir().unwrap();
+    let out_dir = temp_dir.path().join("out");
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(&out_dir)
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    // Check that collective schedule files are created for each rank
+    for rank in 0..=2 {
+        let rank_dir = out_dir.join(format!("rank_{}", rank));
+        assert!(rank_dir.exists(), "rank_{} directory should exist", rank);
+
+        let index_file = rank_dir.join("index.html");
+        assert!(index_file.exists(), "rank_{} index.html should exist", rank);
+    }
+
+    // Check that landing page exists
+    let landing_page = out_dir.join("index.html");
+    assert!(landing_page.exists(), "Landing page should exist");
+
+    // Check collective_schedules.json exists and has correct structure
+    let collective_schedules_file = out_dir.join("collective_schedules.json");
+    assert!(collective_schedules_file.exists());
+
+    let schedules: Vec<serde_json::Value> =
+        serde_json::from_str(&fs::read_to_string(&collective_schedules_file)?)?;
+    assert!(!schedules.is_empty());
+
+    // Verify ranks 0 and 2 have same ops, rank 1 is different
+    let rank0_ops = schedules
+        .iter()
+        .find(|s| s["rank"] == 0 && s["graph"] == "-_0_0_0")
+        .map(|s| &s["ops"])
+        .unwrap();
+    let rank1_ops = schedules
+        .iter()
+        .find(|s| s["rank"] == 1 && s["graph"] == "-_0_0_0")
+        .map(|s| &s["ops"])
+        .unwrap();
+    let rank2_ops = schedules
+        .iter()
+        .find(|s| s["rank"] == 2 && s["graph"] == "-_0_0_0")
+        .map(|s| &s["ops"])
+        .unwrap();
+
+    assert_eq!(rank0_ops, rank2_ops);
+    assert_ne!(rank0_ops, rank1_ops);
+    assert_eq!(rank0_ops.as_array().unwrap().len(), 6);
+    assert_eq!(rank1_ops.as_array().unwrap().len(), 4);
+
+    Ok(())
+}
