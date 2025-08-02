@@ -6,7 +6,7 @@ use std::path::PathBuf;
 
 use fxhash::{FxHashMap, FxHashSet};
 use tlparse::{
-    generate_multi_rank_html, parse_path, read_chromium_events_with_pid, CacheDivergenceGroup,
+    generate_multi_rank_html, parse_path, read_chromium_events_with_pid, DivergenceGroup,
     ParseConfig, RankMetaData,
 };
 
@@ -284,7 +284,7 @@ fn handle_all_ranks(
     }
 
     // Determine if there is any divergence in compile IDs across ranks
-    let show_desync_warning = if let Some(first) = rank_metadata.first() {
+    let compile_id_divergence = if let Some(first) = rank_metadata.first() {
         rank_metadata
             .iter()
             .any(|md| md.compile_ids != first.compile_ids)
@@ -293,7 +293,7 @@ fn handle_all_ranks(
     };
 
     // Group ranks by their cache hit/miss sequence
-    let seq_groups: FxHashMap<String, Vec<u32>> =
+    let cache_seq_groups: FxHashMap<String, Vec<u32>> =
         rank_metadata
             .into_iter()
             .fold(FxHashMap::default(), |mut acc, md| {
@@ -302,21 +302,25 @@ fn handle_all_ranks(
             });
 
     // Build groups describing cache hit/miss patterns per rank
-    let divergence_groups: Vec<CacheDivergenceGroup> = seq_groups
-        .iter()
-        .map(|(seq, ranks_vec)| {
-            let mut sorted_ranks = ranks_vec.clone();
-            sorted_ranks.sort_unstable();
-            CacheDivergenceGroup {
-                sequence: seq.clone(),
-                ranks: sorted_ranks
-                    .iter()
-                    .map(|r| r.to_string())
-                    .collect::<Vec<_>>()
-                    .join(", "),
-            }
-        })
-        .collect();
+    let cache_divergence_groups: Vec<DivergenceGroup> = if cache_seq_groups.len() > 1 {
+        cache_seq_groups
+            .iter()
+            .map(|(seq, ranks_vec)| {
+                let mut sorted_ranks = ranks_vec.clone();
+                sorted_ranks.sort_unstable();
+                DivergenceGroup {
+                    sequence: seq.clone(),
+                    ranks: sorted_ranks
+                        .iter()
+                        .map(|r| r.to_string())
+                        .collect::<Vec<_>>()
+                        .join(", "),
+                }
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
 
     // combine chromium events from all ranks
     if !all_chromium_events.is_empty() {
@@ -336,6 +340,43 @@ fn handle_all_ranks(
         println!("Collective schedules: {}", schedules_path.display());
     }
 
+    // Group ranks by their collective op sequence
+    let mut collective_seq_groups: FxHashMap<String, Vec<u32>> = FxHashMap::default();
+    if !collective_schedules.is_empty() {
+        for &rank in &rank_nums {
+            let ops_concat: String = collective_schedules
+                .iter()
+                .filter(|s| s.rank == rank)
+                .flat_map(|s| s.ops.clone())
+                .collect::<Vec<_>>()
+                .join(",");
+            collective_seq_groups
+                .entry(ops_concat)
+                .or_default()
+                .push(rank);
+        }
+    }
+
+    let collective_divergence_groups: Vec<DivergenceGroup> = if collective_seq_groups.len() > 1 {
+        collective_seq_groups
+            .iter()
+            .map(|(seq, ranks_vec)| {
+                let mut sorted_ranks = ranks_vec.clone();
+                sorted_ranks.sort_unstable();
+                DivergenceGroup {
+                    sequence: seq.clone(),
+                    ranks: sorted_ranks
+                        .iter()
+                        .map(|r| r.to_string())
+                        .collect::<Vec<_>>()
+                        .join(", "),
+                }
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
+
     println!(
         "Multi-rank report generated under {}\nIndividual pages: rank_*/index.html",
         out_path.display()
@@ -346,8 +387,12 @@ fn handle_all_ranks(
         sorted_ranks,
         cfg,
         !all_chromium_events.is_empty(),
-        show_desync_warning,
-        divergence_groups,
+        compile_id_divergence || cache_seq_groups.len() > 1 || collective_seq_groups.len() > 1,
+        cache_divergence_groups,
+        collective_divergence_groups,
+        compile_id_divergence,
+        cache_seq_groups.len() > 1,
+        collective_seq_groups.len() > 1,
     )?;
     fs::write(&landing_page_path, landing_html)?;
     if open_browser {

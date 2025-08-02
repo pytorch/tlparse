@@ -31,9 +31,9 @@ pub struct RankMetaData {
     pub cache_sequence: String,
 }
 
-/// Grouping of ranks that share the same cache hit/miss sequence.
+/// Grouping of ranks that share the same sequence pattern (cache, collective ops, etc.).
 #[derive(Debug, Serialize)]
-pub struct CacheDivergenceGroup {
+pub struct DivergenceGroup {
     pub sequence: String,
     pub ranks: String,
 }
@@ -864,5 +864,9 @@ pub struct MultiRankContext<'a> {
     pub qps: &'a str,
     pub has_chromium_events: bool,
     pub show_desync_warning: bool,
-    pub divergence_groups: Vec<CacheDivergenceGroup>,
+    pub cache_divergence_groups: Vec<DivergenceGroup>,
+    pub collective_divergence_groups: Vec<DivergenceGroup>,
+    pub compile_id_divergence: bool,
+    pub has_cache_divergence: bool,
+    pub has_collective_divergence: bool,
 }

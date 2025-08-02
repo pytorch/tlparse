@@ -925,3 +925,71 @@ fn test_collective_schedule_parsing() -> Result<(), Box<dyn std::error::Error>> 
 
     Ok(())
 }
+
+#[test]
+fn test_collective_schedule_no_divergence() -> Result<(), Box<dyn std::error::Error>> {
+    let temp_dir = tempdir().unwrap();
+    let input_dir = temp_dir.path();
+
+    // Copy identical logs (rank 0 and 2 have same collective schedule)
+    fs::copy(
+        "tests/inputs/multi_rank_schedule/dedicated_log_torch_trace_rank_0_6u3fubwl.log",
+        input_dir.join("dedicated_log_torch_trace_rank_0.log"),
+    )?;
+    fs::copy(
+        "tests/inputs/multi_rank_schedule/dedicated_log_torch_trace_rank_2.log",
+        input_dir.join("dedicated_log_torch_trace_rank_2.log"),
+    )?;
+
+    let temp_out_dir = tempdir().unwrap();
+    let out_dir = temp_out_dir.path();
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(out_dir)
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    let landing_page = out_dir.join("index.html");
+    assert!(landing_page.exists(), "Landing page should exist");
+    let html_content = fs::read_to_string(&landing_page)?;
+
+    // Should NOT have desync warning since ranks 0 and 2 have identical collective schedules
+    assert!(!html_content.contains("Warning:</strong> Diverging collective operation sequences"));
+
+    Ok(())
+}
+
+#[test]
+fn test_collective_schedule_with_divergence() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_schedule");
+    let temp_dir = tempdir().unwrap();
+    let out_dir = temp_dir.path();
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(out_dir)
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    let landing_page = out_dir.join("index.html");
+    assert!(landing_page.exists(), "Landing page should exist");
+    let html_content = fs::read_to_string(&landing_page)?;
+
+    // Should have desync warning since rank 1 has different collective schedule
+    assert!(html_content.contains("Warning:</strong> Diverging collective operation sequences"));
+
+    // Check that ranks 0 and 2 are grouped (same sequence)
+    assert!(html_content.contains("Ranks: 0, 2"));
+
+    // Check that rank 1 separate (different sequence)
+    assert!(html_content.contains("Ranks: 1"));
+
+    Ok(())
+}

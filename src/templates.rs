@@ -549,11 +549,22 @@ pub static TEMPLATE_MULTI_RANK_INDEX: &str = r#"
 {custom_header_html | format_unescaped}
 {{ if show_desync_warning }}
 <div class="warning-box">
+    {{ if compile_id_divergence }}
     <p><strong>Warning:</strong> Diverging Compilation IDs detected across ranks. This may lead to hangs or timeouts during distributed execution.</p>
-    {{ if divergence_groups }}
-    <p><strong>Warning</strong>: Diverging Cache hit/miss patterns detected across ranks. Cache hit/miss pattern groups:</p>
+    {{ endif }}
+    {{ if has_cache_divergence }}
+    <p><strong>Warning:</strong> Diverging Cache hit/miss patterns detected across ranks. Cache hit/miss pattern groups:</p>
     <ul>
-        {{ for group in divergence_groups }}
+        {{ for group in cache_divergence_groups }}
+            <li>Ranks: {group.ranks}</li>
+        {{ endfor }}
+    </ul>
+    {{ endif }}
+    {{ if has_collective_divergence }}
+    <p><strong>Warning:</strong> Diverging collective operation sequences detected across ranks. This can lead to hangs or timeouts during distributed execution.</p>
+    <p>Collective operation sequence groups:</p>
+    <ul>
+        {{ for group in collective_divergence_groups }}
             <li>Ranks: {group.ranks}</li>
         {{ endfor }}
     </ul>
