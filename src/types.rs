@@ -45,6 +45,21 @@ pub struct CollectiveSchedule {
     pub ops: Vec<String>,
 }
 
+/// Estimated runtime entry for a single op within a graph.
+#[derive(Debug, Serialize, Deserialize)]
+pub struct OpRuntime {
+    pub name: String,
+    pub estimated_runtime_ns: f64,
+}
+
+/// Aggregated runtime estimations for 1 graph on a given rank
+#[derive(Debug, Serialize, Deserialize)]
+pub struct GraphRuntime {
+    pub rank: u32,
+    pub graph: String,
+    pub ops: Vec<OpRuntime>,
+}
+
 pub fn extract_eval_with_key_id(filename: &str) -> Option<u64> {
     let re = Regex::new(r"<eval_with_key>\.([0-9]+)").unwrap();
     re.captures(filename)

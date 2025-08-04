@@ -329,6 +329,17 @@ fn handle_all_ranks(
         fs::write(combined_chromium_path, combined_events_json)?;
     }
 
+    // Process runtime estimations from all ranks
+    let runtime_estimations = tlparse::parsers::read_runtime_estimations(&out_path, &rank_nums)?;
+    if !runtime_estimations.is_empty() {
+        let runtime_path = out_path.join("runtime_estimations.json");
+        fs::write(
+            &runtime_path,
+            serde_json::to_string_pretty(&runtime_estimations)?,
+        )?;
+        println!("Runtime estimations: {}", runtime_path.display());
+    }
+
     // Process collective schedules from all ranks
     let collective_schedules = tlparse::parsers::read_collective_schedules(&out_path, &rank_nums)?;
     if !collective_schedules.is_empty() {

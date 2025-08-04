@@ -24,7 +24,7 @@ use syntect::highlighting::ThemeSet;
 use syntect::parsing::SyntaxSet;
 
 // Re-export types from types.rs for external use
-pub use crate::types::{CompileId, EmptyMetadata, Envelope, Metadata};
+pub use crate::types::{CompileId, EmptyMetadata, Envelope, GraphRuntime, Metadata, OpRuntime};
 
 pub enum ParserOutput {
     File(PathBuf, String),       // File to be saved on disk
@@ -680,16 +680,57 @@ pub fn anchor_source(text: &str) -> String {
     html
 }
 
+pub fn read_runtime_estimations(
+    out_path: &PathBuf,
+    rank_nums: &[u32],
+) -> anyhow::Result<Vec<GraphRuntime>> {
+    read_artifacts(
+        out_path,
+        rank_nums,
+        "inductor_tlparse_runtime",
+        |content, rank, graph| {
+            #[derive(serde::Deserialize)]
+            struct RuntimeJson {
+                ops: Vec<OpRuntime>,
+            }
+
+            let json: RuntimeJson = serde_json::from_str(content)?;
+            Ok((!json.ops.is_empty()).then(|| GraphRuntime {
+                rank,
+                graph,
+                ops: json.ops,
+            }))
+        },
+    )
+}
+
 /// Reads collective schedule artifacts from processed rank directories
 /// Handles multiple graphs per rank
 pub fn read_collective_schedules(
     out_path: &PathBuf,
     rank_nums: &[u32],
 ) -> anyhow::Result<Vec<CollectiveSchedule>> {
+    read_artifacts(
+        out_path,
+        rank_nums,
+        "inductor_collective_schedule",
+        |content, rank, graph| {
+            let ops: Vec<String> = serde_json::from_str(content)?;
+            Ok((!ops.is_empty()).then(|| CollectiveSchedule { rank, graph, ops }))
+        },
+    )
+}
+
+fn read_artifacts<T>(
+    out_path: &PathBuf,
+    rank_nums: &[u32],
+    file_prefix: &str,
+    parse_fn: impl Fn(&str, u32, String) -> anyhow::Result<Option<T>>,
+) -> anyhow::Result<Vec<T>> {
     use anyhow::Context;
     use std::fs;
 
-    let mut schedules = Vec::new();
+    let mut results = Vec::new();
 
     for &rank in rank_nums {
         let rank_dir = out_path.join(format!("rank_{rank}"));
@@ -699,68 +740,39 @@ pub fn read_collective_schedules(
             continue;
         }
 
-        let entries =
-            fs::read_dir(&rank_dir).with_context(|| format!("Reading rank_{rank} directory"))?;
+        for entry in fs::read_dir(&rank_dir)?
+            .flatten()
+            .filter(|e| e.path().is_dir())
+        {
+            let compile_dir = entry.path();
 
-        // Each subdirectory represents a different graph (compile ID like "-_0_0_0", "-_1_0_0", etc.)
-        for entry in entries.flatten().filter(|e| e.path().is_dir()) {
-            if let Some(schedule) = parse_schedule_from_dir(&entry.path(), rank)? {
-                schedules.push(schedule);
+            let file = fs::read_dir(&compile_dir)?.flatten().find(|e| {
+                let path = e.path();
+                path.extension() == Some(OsStr::new("json"))
+                    && path
+                        .file_stem()
+                        .and_then(|s| s.to_str())
+                        .map_or(false, |s| s.starts_with(file_prefix))
+            });
+
+            if let Some(file) = file {
+                let content = fs::read_to_string(file.path())
+                    .with_context(|| format!("Reading {file_prefix} for rank {rank}"))?;
+
+                let graph = compile_dir
+                    .file_name()
+                    .and_then(|n| n.to_str())
+                    .unwrap_or("unknown")
+                    .to_string();
+
+                if let Some(result) = parse_fn(&content, rank, graph)? {
+                    results.push(result);
+                }
             }
         }
     }
 
-    Ok(schedules)
-}
-
-fn parse_schedule_from_dir(
-    compile_dir: &PathBuf,
-    rank: u32,
-) -> anyhow::Result<Option<CollectiveSchedule>> {
-    use anyhow::Context;
-    use std::fs;
-
-    // Look for files matching pattern: inductor_collective_schedule*.json
-    let entries = fs::read_dir(compile_dir)?;
-    let schedule_file = entries.flatten().find(|entry| {
-        let path = entry.path();
-        path.extension() == Some(OsStr::new("json"))
-            && path
-                .file_stem()
-                .and_then(|stem| stem.to_str())
-                .map_or(false, |stem_str| {
-                    stem_str.starts_with("inductor_collective_schedule")
-                })
-    });
-
-    let schedule_path = match schedule_file {
-        Some(file) => file.path(),
-        None => return Ok(None),
-    };
-
-    let content = fs::read_to_string(&schedule_path)
-        .with_context(|| format!("Reading collective schedule for rank {rank}"))?;
-
-    let ops: Vec<String> = serde_json::from_str(&content).with_context(|| {
-        format!(
-            "Failed to parse collective schedule JSON from {}",
-            schedule_path.display()
-        )
-    })?;
-    if ops.is_empty() {
-        return Ok(None);
-    }
-
-    let graph_id = compile_dir
-        .file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("unknown");
-
-    Ok(Some(CollectiveSchedule {
-        rank,
-        graph: graph_id.to_string(),
-        ops,
-    }))
+    Ok(results)
 }
 
 pub struct ArtifactParser;

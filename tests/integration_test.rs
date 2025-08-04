@@ -993,3 +993,35 @@ fn test_collective_schedule_with_divergence() -> Result<(), Box<dyn std::error::
 
     Ok(())
 }
+
+#[test]
+fn test_runtime_estimation_parsing() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_runtime");
+    let out_dir = input_dir.join("out");
+
+    Command::cargo_bin("tlparse")?
+        .arg(&input_dir)
+        .args(&["--all-ranks-html", "--overwrite", "-o"])
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .assert()
+        .success();
+
+    let estimations: Vec<serde_json::Value> = serde_json::from_str(&fs::read_to_string(
+        out_dir.join("runtime_estimations.json"),
+    )?)?;
+
+    assert!(!estimations.is_empty());
+    assert!(estimations.iter().any(|e| e["rank"] == 0));
+    assert!(estimations.iter().any(|e| e["rank"] == 1));
+
+    // Verify structure
+    for estimation in &estimations {
+        for op in estimation["ops"].as_array().unwrap() {
+            assert!(op["name"].is_string() && op["estimated_runtime_ns"].is_number());
+            assert!(!op.as_object().unwrap().contains_key("type"));
+        }
+    }
+
+    Ok(())
+}
