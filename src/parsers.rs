@@ -721,6 +721,9 @@ pub fn read_collective_schedules(
     )
 }
 
+/// Parses a prefixed JSON file from each multi-rank output directory.
+/// It finds the first matching file, calls `parse_fn` on its contents,
+/// and collects the `Some(T)` results into a vector.
 fn read_artifacts<T>(
     out_path: &PathBuf,
     rank_nums: &[u32],
