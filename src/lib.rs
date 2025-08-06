@@ -1295,13 +1295,11 @@ fn compare_graph_runtimes(
                     RuntimeRankDetail {
                         rank: fastest_rank,
                         graph_id: graph_id.clone(),
-                        runtime_ns: min_runtime.round(),
                         runtime_ms: (min_runtime / 1e6 * 1000.0).round() / 1000.0,
                     },
                     RuntimeRankDetail {
                         rank: slowest_rank,
                         graph_id,
-                        runtime_ns: max_runtime.round(),
                         runtime_ms: (max_runtime / 1e6 * 1000.0).round() / 1000.0,
                     },
                 ],

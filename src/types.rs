@@ -65,7 +65,6 @@ pub struct GraphRuntime {
 pub struct RuntimeRankDetail {
     pub rank: u32,
     pub graph_id: String,
-    pub runtime_ns: f64,
     pub runtime_ms: f64,
 }
 
