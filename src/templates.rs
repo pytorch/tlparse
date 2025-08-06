@@ -592,6 +592,24 @@ Individual rank reports:
     <li><a href="rank_{rank}/index.html">Rank {rank}</a></li>
 {{ endfor }}
 </ul>
+{{ if runtime_analysis }}
+{{ if runtime_analysis.has_mismatched_graph_counts }}
+<h3>Graph Runtime Analysis</h3>
+<p>
+<strong>Runtime analysis not available:</strong> Ranks have different numbers of compiled graphs, preventing cross-rank comparison. This mismatch may indicate compilation divergence between ranks.
+</p>
+{{ else }}
+<h3>Graph Runtime Analysis</h3>
+<p>
+Runtime variance analysis across all <strong>{num_ranks}</strong> rank(s) for each compiled graph based on inductor runtime estimates. Shows the delta between the fastest and slowest ranks,
+helping identify performance imbalances that could impact distributed training efficiency. Large deltas indicate potential
+desync issues on specific ranks.
+</p>
+{{ for graph in runtime_analysis.graphs }}
+<p><strong>Graph {graph.rank_details.0.graph_id}:</strong> {graph.delta_ms} ms delta (Fastest: Rank {graph.rank_details.0.rank} - {graph.rank_details.0.runtime_ms} ms, Slowest: Rank {graph.rank_details.1.rank} - {graph.rank_details.1.runtime_ms} ms)</p>
+{{ endfor }}
+{{ endif }}
+{{ endif }}
 </div>
 {qps | format_unescaped}
 </body>

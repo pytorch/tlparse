@@ -60,6 +60,31 @@ pub struct GraphRuntime {
     pub ops: Vec<OpRuntime>,
 }
 
+/// Details for a specific rank at a graph index
+#[derive(Debug, Serialize)]
+pub struct RuntimeRankDetail {
+    pub rank: u32,
+    pub graph_id: String,
+    pub runtime_ns: f64,
+    pub runtime_ms: f64,
+}
+
+/// Analysis results for a single graph index across all ranks
+#[derive(Debug, Serialize)]
+pub struct GraphAnalysis {
+    pub graph_index: usize,
+    pub delta_ns: f64,
+    pub delta_ms: f64,
+    pub rank_details: Vec<RuntimeRankDetail>,
+}
+
+/// Runtime analysis results across ranks for all graphs
+#[derive(Debug, Serialize)]
+pub struct RuntimeAnalysis {
+    pub graphs: Vec<GraphAnalysis>,
+    pub has_mismatched_graph_counts: bool,
+}
+
 pub fn extract_eval_with_key_id(filename: &str) -> Option<u64> {
     let re = Regex::new(r"<eval_with_key>\.([0-9]+)").unwrap();
     re.captures(filename)
@@ -884,4 +909,5 @@ pub struct MultiRankContext<'a> {
     pub compile_id_divergence: bool,
     pub has_cache_divergence: bool,
     pub has_collective_divergence: bool,
+    pub runtime_analysis: Option<RuntimeAnalysis>,
 }

@@ -22,7 +22,9 @@ pub mod parsers;
 mod templates;
 mod types;
 
-pub use types::{DivergenceGroup, RankMetaData};
+pub use types::{
+    DivergenceGroup, GraphAnalysis, GraphRuntime, RankMetaData, RuntimeAnalysis, RuntimeRankDetail,
+};
 
 #[derive(Debug)]
 enum ParserResult {
@@ -1184,6 +1186,7 @@ pub fn generate_multi_rank_html(
     compile_id_divergence: bool,
     has_cache_divergence: bool,
     has_collective_divergence: bool,
+    runtime_analysis: Option<RuntimeAnalysis>,
 ) -> anyhow::Result<(PathBuf, String)> {
     // Create the TinyTemplate instance for rendering the landing page.
     let mut tt = TinyTemplate::new();
@@ -1203,9 +1206,126 @@ pub fn generate_multi_rank_html(
         compile_id_divergence,
         has_cache_divergence,
         has_collective_divergence,
+        runtime_analysis,
     };
     let html = tt.render("multi_rank_index.html", &ctx)?;
     let landing_page_path = out_path.join("index.html");
 
     Ok((landing_page_path, html))
+}
+
+fn prepare_and_validate_graphs(
+    runtime_estimations: &[GraphRuntime],
+) -> Option<(
+    std::collections::HashMap<u32, Vec<(&str, f64)>>,
+    Vec<u32>,
+    usize,
+)> {
+    use std::collections::HashMap;
+
+    let rank_graphs: HashMap<u32, Vec<(&str, f64)>> = runtime_estimations
+        .iter()
+        .map(|gr| {
+            (
+                gr.rank,
+                &gr.graph,
+                gr.ops.iter().map(|op| op.estimated_runtime_ns).sum::<f64>(),
+            )
+        })
+        .fold(HashMap::new(), |mut acc, (rank, graph, runtime)| {
+            acc.entry(rank).or_default().push((graph, runtime));
+            acc
+        });
+
+    let max_graphs = rank_graphs.values().map(|graphs| graphs.len()).max()?;
+    let min_graphs = rank_graphs.values().map(|graphs| graphs.len()).min()?;
+
+    if max_graphs != min_graphs {
+        return None; // Different number of graphs across ranks
+    }
+
+    let mut ranks: Vec<_> = rank_graphs.keys().copied().collect();
+    ranks.sort_unstable();
+
+    Some((rank_graphs, ranks, max_graphs))
+}
+
+fn compare_graph_runtimes(
+    rank_graphs: std::collections::HashMap<u32, Vec<(&str, f64)>>,
+    ranks: Vec<u32>,
+    max_graphs: usize,
+) -> Vec<GraphAnalysis> {
+    (0..max_graphs)
+        .filter_map(|index| {
+            let runtimes: Vec<_> = ranks
+                .iter()
+                .map(|&rank| {
+                    rank_graphs
+                        .get(&rank)
+                        .and_then(|g| g.get(index))
+                        .map(|(graph_id, runtime)| (rank, *graph_id, *runtime))
+                })
+                .collect::<Option<Vec<_>>>()?;
+
+            let (min_runtime, max_runtime, fastest_rank, slowest_rank) = runtimes.iter().fold(
+                (f64::INFINITY, f64::NEG_INFINITY, 0_u32, 0_u32),
+                |(min_rt, max_rt, fast_rank, slow_rank), &(rank, _, rt)| {
+                    let (new_min_rt, new_fast) = if rt <= min_rt {
+                        (rt, rank)
+                    } else {
+                        (min_rt, fast_rank)
+                    };
+                    let (new_max_rt, new_slow) = if rt >= max_rt {
+                        (rt, rank)
+                    } else {
+                        (max_rt, slow_rank)
+                    };
+                    (new_min_rt, new_max_rt, new_fast, new_slow)
+                },
+            );
+
+            let delta_ns = max_runtime - min_runtime;
+            let graph_id = runtimes[0].1.to_string();
+
+            Some(GraphAnalysis {
+                graph_index: index,
+                delta_ns: delta_ns.round(),
+                delta_ms: (delta_ns / 1e6 * 1000.0).round() / 1000.0,
+                rank_details: vec![
+                    RuntimeRankDetail {
+                        rank: fastest_rank,
+                        graph_id: graph_id.clone(),
+                        runtime_ns: min_runtime.round(),
+                        runtime_ms: (min_runtime / 1e6 * 1000.0).round() / 1000.0,
+                    },
+                    RuntimeRankDetail {
+                        rank: slowest_rank,
+                        graph_id,
+                        runtime_ns: max_runtime.round(),
+                        runtime_ms: (max_runtime / 1e6 * 1000.0).round() / 1000.0,
+                    },
+                ],
+            })
+        })
+        .collect()
+}
+
+pub fn analyze_graph_runtime_deltas(
+    runtime_estimations: &[GraphRuntime],
+) -> Option<RuntimeAnalysis> {
+    let Some((rank_graphs, ranks, max_graphs)) = prepare_and_validate_graphs(runtime_estimations)
+    else {
+        return Some(RuntimeAnalysis {
+            graphs: vec![],
+            has_mismatched_graph_counts: true,
+        });
+    };
+
+    let mut graphs = compare_graph_runtimes(rank_graphs, ranks, max_graphs);
+    graphs.sort_by(|a, b| a.rank_details[0].graph_id.cmp(&b.rank_details[0].graph_id));
+
+    Some(RuntimeAnalysis {
+        graphs,
+        has_mismatched_graph_counts: false,
+    })
 }

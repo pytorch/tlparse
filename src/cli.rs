@@ -6,8 +6,8 @@ use std::path::PathBuf;
 
 use fxhash::{FxHashMap, FxHashSet};
 use tlparse::{
-    generate_multi_rank_html, parse_path, read_chromium_events_with_pid, DivergenceGroup,
-    ParseConfig, RankMetaData,
+    analyze_graph_runtime_deltas, generate_multi_rank_html, parse_path,
+    read_chromium_events_with_pid, DivergenceGroup, ParseConfig, RankMetaData,
 };
 
 #[derive(Parser)]
@@ -340,6 +340,13 @@ fn handle_all_ranks(
         println!("Runtime estimations: {}", runtime_path.display());
     }
 
+    // Analyze graph runtime deltas across ranks
+    let runtime_analysis = if !runtime_estimations.is_empty() {
+        analyze_graph_runtime_deltas(&runtime_estimations)
+    } else {
+        None
+    };
+
     // Process collective schedules from all ranks
     let collective_schedules = tlparse::parsers::read_collective_schedules(&out_path, &rank_nums)?;
     if !collective_schedules.is_empty() {
@@ -404,6 +411,7 @@ fn handle_all_ranks(
         compile_id_divergence,
         cache_seq_groups.len() > 1,
         collective_seq_groups.len() > 1,
+        runtime_analysis,
     )?;
     fs::write(&landing_page_path, landing_html)?;
     if open_browser {

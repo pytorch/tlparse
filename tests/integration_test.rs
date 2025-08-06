@@ -1025,3 +1025,74 @@ fn test_runtime_estimation_parsing() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+
+fn setup_runtime_test_with_ranks(
+    ranks: &[u32],
+) -> Result<(tempfile::TempDir, tempfile::TempDir), Box<dyn std::error::Error>> {
+    let temp_in = tempdir()?;
+    let temp_out = tempdir()?;
+    let src_dir = PathBuf::from("tests/inputs/multi_rank_runtime");
+
+    for &rank in ranks {
+        let src_file = src_dir.join(format!("dedicated_log_torch_trace_rank_{}.log", rank));
+        let dest_file = temp_in
+            .path()
+            .join(format!("dedicated_log_torch_trace_rank_{}.log", rank));
+        fs::copy(&src_file, &dest_file)?;
+    }
+
+    Ok((temp_in, temp_out))
+}
+
+#[test]
+fn test_runtime_analysis_working() -> Result<(), Box<dyn std::error::Error>> {
+    let (input_dir, output_dir) = setup_runtime_test_with_ranks(&[0, 1, 2, 3])?;
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(input_dir.path())
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(output_dir.path())
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    let landing_page = output_dir.path().join("index.html");
+    assert!(landing_page.exists(), "Landing page should exist");
+
+    let html_content = fs::read_to_string(&landing_page)?;
+
+    assert!(html_content.contains("Graph Runtime Analysis"));
+    assert!(!html_content.contains("Runtime analysis not available"));
+    assert!(html_content.contains("ms delta"));
+
+    Ok(())
+}
+
+#[test]
+fn test_runtime_analysis_mismatched_graphs() -> Result<(), Box<dyn std::error::Error>> {
+    // Use entire directory - rank 4 is missing a graph compared to ranks 0,1,2,3
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_runtime");
+    let temp_out = tempdir()?;
+    let output_dir = temp_out.path();
+
+    let mut cmd = Command::cargo_bin("tlparse")?;
+    cmd.arg(&input_dir)
+        .arg("--all-ranks-html")
+        .arg("--overwrite")
+        .arg("-o")
+        .arg(&output_dir)
+        .arg("--no-browser");
+    cmd.assert().success();
+
+    let landing_page = output_dir.join("index.html");
+    assert!(landing_page.exists(), "Landing page should exist");
+
+    let html_content = fs::read_to_string(&landing_page)?;
+
+    assert!(html_content.contains("Graph Runtime Analysis"));
+    assert!(html_content.contains("Runtime analysis not available"));
+    assert!(!html_content.contains("ms delta"));
+
+    Ok(())
+}
