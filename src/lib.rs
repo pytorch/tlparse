@@ -1289,7 +1289,6 @@ fn compare_graph_runtimes(
 
             Some(GraphAnalysis {
                 graph_index: index,
-                delta_ns: delta_ns.round(),
                 delta_ms: (delta_ns / 1e6 * 1000.0).round() / 1000.0,
                 rank_details: vec![
                     RuntimeRankDetail {

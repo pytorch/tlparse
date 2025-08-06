@@ -72,7 +72,6 @@ pub struct RuntimeRankDetail {
 #[derive(Debug, Serialize)]
 pub struct GraphAnalysis {
     pub graph_index: usize,
-    pub delta_ns: f64,
     pub delta_ms: f64,
     pub rank_details: Vec<RuntimeRankDetail>,
 }
