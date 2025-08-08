@@ -64,7 +64,6 @@ pub struct GraphRuntime {
 #[derive(Debug, Serialize)]
 pub struct RuntimeRankDetail {
     pub rank: u32,
-    pub graph_id: String,
     pub runtime_ms: f64,
 }
 
@@ -72,6 +71,7 @@ pub struct RuntimeRankDetail {
 #[derive(Debug, Serialize)]
 pub struct GraphAnalysis {
     pub graph_index: usize,
+    pub graph_id: String,
     pub delta_ms: f64,
     pub rank_details: Vec<RuntimeRankDetail>,
 }

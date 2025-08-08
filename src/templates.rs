@@ -606,7 +606,7 @@ helping identify performance imbalances that could impact distributed training e
 desync issues on specific ranks.
 </p>
 {{ for graph in runtime_analysis.graphs }}
-<p><strong>Graph {graph.rank_details.0.graph_id}:</strong> {graph.delta_ms} ms delta (Fastest: Rank {graph.rank_details.0.rank} - {graph.rank_details.0.runtime_ms} ms, Slowest: Rank {graph.rank_details.1.rank} - {graph.rank_details.1.runtime_ms} ms)</p>
+<p><strong>Graph {graph.graph_id}:</strong> {graph.delta_ms} ms delta (Fastest: Rank {graph.rank_details.0.rank} - {graph.rank_details.0.runtime_ms} ms, Slowest: Rank {graph.rank_details.1.rank} - {graph.rank_details.1.runtime_ms} ms)</p>
 {{ endfor }}
 {{ endif }}
 {{ endif }}

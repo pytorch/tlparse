@@ -1289,16 +1289,15 @@ fn compare_graph_runtimes(
 
             Some(GraphAnalysis {
                 graph_index: index,
+                graph_id: graph_id,
                 delta_ms: (delta_ns / 1e6 * 1000.0).round() / 1000.0,
                 rank_details: vec![
                     RuntimeRankDetail {
                         rank: fastest_rank,
-                        graph_id: graph_id.clone(),
                         runtime_ms: (min_runtime / 1e6 * 1000.0).round() / 1000.0,
                     },
                     RuntimeRankDetail {
                         rank: slowest_rank,
-                        graph_id,
                         runtime_ms: (max_runtime / 1e6 * 1000.0).round() / 1000.0,
                     },
                 ],
@@ -1319,7 +1318,7 @@ pub fn analyze_graph_runtime_deltas(
     };
 
     let mut graphs = compare_graph_runtimes(rank_graphs, ranks, max_graphs);
-    graphs.sort_by(|a, b| a.rank_details[0].graph_id.cmp(&b.rank_details[0].graph_id));
+    graphs.sort_by(|a, b| a.graph_id.cmp(&b.graph_id));
 
     Some(RuntimeAnalysis {
         graphs,
