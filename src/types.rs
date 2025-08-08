@@ -908,4 +908,5 @@ pub struct MultiRankContext<'a> {
     pub has_cache_divergence: bool,
     pub has_collective_divergence: bool,
     pub runtime_analysis: Option<RuntimeAnalysis>,
+    pub has_runtime_trace: bool,
 }

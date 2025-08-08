@@ -338,6 +338,75 @@ fn handle_all_ranks(
             serde_json::to_string_pretty(&runtime_estimations)?,
         )?;
         println!("Runtime estimations: {}", runtime_path.display());
+
+        // Generate runtime trace events in a single pass
+        let mut runtime_events: Vec<serde_json::Value> = Vec::new();
+        let mut pid_set: FxHashSet<u32> = FxHashSet::default();
+        let mut thread_names: FxHashMap<(u32, u32), String> = FxHashMap::default();
+
+        // Concise, deterministic 32-bit TID from (rank, graph)
+        let calc_tid = |rank: u32, graph: &str| -> u32 {
+            use std::hash::{Hash, Hasher};
+            let mut h = fxhash::FxHasher::default();
+            (rank, graph).hash(&mut h);
+            (h.finish() & 0xFFFF_FFFF) as u32
+        };
+
+        for gr in &runtime_estimations {
+            pid_set.insert(gr.rank);
+            let tid = calc_tid(gr.rank, &gr.graph);
+            thread_names
+                .entry((gr.rank, tid))
+                .or_insert_with(|| gr.graph.clone());
+
+            let mut time_offset_us: u64 = 0;
+            for op in &gr.ops {
+                let dur_us = (op.estimated_runtime_ns / 1000.0).ceil().max(1.0) as u64;
+                runtime_events.push(serde_json::json!({
+                    "name": op.name,
+                    "ph": "X",
+                    "ts": time_offset_us,
+                    "dur": dur_us,
+                    "pid": gr.rank,
+                    "tid": tid,
+                    "cat": "runtime",
+                    "args": {
+                        "graph": gr.graph,
+                        "rank": gr.rank,
+                        "runtime_ns": op.estimated_runtime_ns as u64
+                    }
+                }));
+                time_offset_us += dur_us;
+            }
+        }
+
+        // Place metadata after runtime events to keep the first event as an execution event
+        let mut all_events = runtime_events;
+
+        // Process metadata succinctly and without duplicates
+        for pid in pid_set.into_iter() {
+            all_events.push(serde_json::json!({
+                "name": "process_name",
+                "ph": "M",
+                "pid": pid,
+                "args": {"name": "Rank"}
+            }));
+        }
+
+        for ((pid, tid), graph_name) in thread_names.into_iter() {
+            all_events.push(serde_json::json!({
+                "name": "thread_name",
+                "ph": "M",
+                "pid": pid,
+                "tid": tid,
+                "args": {"name": format!("graph {}", graph_name)}
+            }));
+        }
+
+        fs::write(
+            out_path.join("chromium_trace_with_runtime.json"),
+            serde_json::to_string_pretty(&all_events)?,
+        )?;
     }
 
     // Analyze graph runtime deltas across ranks
@@ -412,6 +481,7 @@ fn handle_all_ranks(
         cache_seq_groups.len() > 1,
         collective_seq_groups.len() > 1,
         runtime_analysis,
+        !runtime_estimations.is_empty(),
     )?;
     fs::write(&landing_page_path, landing_html)?;
     if open_browser {

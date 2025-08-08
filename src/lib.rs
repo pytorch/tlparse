@@ -1187,6 +1187,7 @@ pub fn generate_multi_rank_html(
     has_cache_divergence: bool,
     has_collective_divergence: bool,
     runtime_analysis: Option<RuntimeAnalysis>,
+    has_runtime_trace: bool,
 ) -> anyhow::Result<(PathBuf, String)> {
     // Create the TinyTemplate instance for rendering the landing page.
     let mut tt = TinyTemplate::new();
@@ -1207,6 +1208,7 @@ pub fn generate_multi_rank_html(
         has_cache_divergence,
         has_collective_divergence,
         runtime_analysis,
+        has_runtime_trace,
     };
     let html = tt.render("multi_rank_index.html", &ctx)?;
     let landing_page_path = out_path.join("index.html");
@@ -1285,11 +1287,10 @@ fn compare_graph_runtimes(
             );
 
             let delta_ns = max_runtime - min_runtime;
-            let graph_id = runtimes[0].1.to_string();
 
             Some(GraphAnalysis {
                 graph_index: index,
-                graph_id: graph_id,
+                graph_id: runtimes[0].1.to_string(),
                 delta_ms: (delta_ns / 1e6 * 1000.0).round() / 1000.0,
                 rank_details: vec![
                     RuntimeRankDetail {

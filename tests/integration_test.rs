@@ -1096,3 +1096,39 @@ fn test_runtime_analysis_mismatched_graphs() -> Result<(), Box<dyn std::error::E
 
     Ok(())
 }
+
+#[test]
+fn test_chromium_trace_with_runtime() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_runtime");
+    let temp_out = tempdir()?;
+    let out_dir = temp_out.path();
+
+    Command::cargo_bin("tlparse")?
+        .arg(&input_dir)
+        .args(&["--all-ranks-html", "--overwrite", "-o"])
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .assert()
+        .success();
+
+    let runtime_trace_path = out_dir.join("chromium_trace_with_runtime.json");
+    assert!(runtime_trace_path.exists());
+
+    let trace_events: Vec<serde_json::Value> =
+        serde_json::from_str(&fs::read_to_string(&runtime_trace_path)?)?;
+    assert!(!trace_events.is_empty());
+    assert_eq!(trace_events[0]["ph"], "X");
+    assert_eq!(trace_events[0]["cat"], "runtime");
+    assert!(trace_events[0]["name"].is_string());
+    assert!(trace_events[0]["dur"].as_u64().unwrap() > 0);
+    assert!(trace_events[0]["args"]["runtime_ns"].is_number());
+
+    // Verify events from multiple ranks
+    let pids: std::collections::HashSet<u64> = trace_events
+        .iter()
+        .filter_map(|event| event["pid"].as_u64())
+        .collect();
+    assert!(pids.len() > 1);
+
+    Ok(())
+}

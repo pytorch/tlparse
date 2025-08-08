@@ -584,6 +584,14 @@ You can download and view them in a tool like <a href='https://ui.perfetto.dev/'
 This is a combined trace from all ranks.
 </p>
 {{ endif }}
+{{ if has_runtime_trace }}
+<h3> Runtime Trace Visualization </h3>
+<p>
+<a href='chromium_trace_with_runtime.json'>Runtime Estimation Chromium Trace</a> shows estimated runtime per operation across all ranks and graphs.
+Each rank appears as a separate process (PID) in the trace; within each process, each compiled graph is visualized as its own thread (TID). Operations are laid out sequentially by estimated duration on that thread.
+You can download and view this trace in <a href='https://ui.perfetto.dev/'>Perfetto</a> to visualize performance differences across ranks.
+</p>
+{{ endif }}
 <p>
 Individual rank reports:
 </p>
