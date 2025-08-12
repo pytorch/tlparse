@@ -1117,18 +1117,42 @@ fn test_chromium_trace_with_runtime() -> Result<(), Box<dyn std::error::Error>> 
     let trace_events: Vec<serde_json::Value> =
         serde_json::from_str(&fs::read_to_string(&runtime_trace_path)?)?;
     assert!(!trace_events.is_empty());
-    assert_eq!(trace_events[0]["ph"], "X");
-    assert_eq!(trace_events[0]["cat"], "runtime");
-    assert!(trace_events[0]["name"].is_string());
-    assert!(trace_events[0]["dur"].as_u64().unwrap() > 0);
-    assert!(trace_events[0]["args"]["runtime_ns"].is_number());
 
-    // Verify events from multiple ranks
-    let pids: std::collections::HashSet<u64> = trace_events
+    let runtime_events: Vec<&serde_json::Value> = trace_events
         .iter()
-        .filter_map(|event| event["pid"].as_u64())
+        .filter(|e| e["ph"] == "X" && e["cat"] == "runtime")
         .collect();
-    assert!(pids.len() > 1);
+    assert!(!runtime_events.is_empty());
+
+    for e in &runtime_events {
+        assert!(e["name"].is_string());
+        let dur = e["dur"].as_u64().expect("dur should be u64");
+        assert!(dur > 0);
+        assert!(e["pid"].as_u64().is_some());
+        assert!(e["tid"].as_u64().is_some());
+        assert!(e["args"]["runtime_ns"].is_number());
+        assert!(e["args"]["graph"].is_string());
+        if let (Some(pid), Some(rank)) = (e["pid"].as_u64(), e["args"]["rank"].as_u64()) {
+            assert_eq!(pid, rank);
+        }
+    }
+
+    // Verify exact rank set matches input logs
+    let expected_ranks: std::collections::HashSet<u64> = std::fs::read_dir(&input_dir)?
+        .filter_map(|e| e.ok())
+        .filter_map(|e| e.file_name().into_string().ok())
+        .filter_map(|name| {
+            name.strip_prefix("dedicated_log_torch_trace_rank_")
+                .and_then(|s| s.strip_suffix(".log"))
+                .and_then(|n| n.parse::<u64>().ok())
+        })
+        .collect();
+
+    let pids: std::collections::HashSet<u64> = runtime_events
+        .iter()
+        .filter_map(|e| e["pid"].as_u64())
+        .collect();
+    assert_eq!(pids, expected_ranks, "pid set != expected rank set");
 
     Ok(())
 }
