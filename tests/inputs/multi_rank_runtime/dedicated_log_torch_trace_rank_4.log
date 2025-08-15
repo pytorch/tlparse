@@ -5403,17 +5403,55 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "extern_kernels.mm",
 	"type": "compute",
-	"estimated_runtime_ns": 8263010.24428684
+	"estimated_runtime_ns": 8263010.24428684,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "op1_op2_op4",
 	"type": "compute",
-	"estimated_runtime_ns": 2603.174603174603
+	"estimated_runtime_ns": 2603.174603174603,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.all_reduce_.default",
 	"type": "collective",
-	"estimated_runtime_ns": 36084.62941847206
+	"estimated_runtime_ns": 36084.62941847206,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.wait_tensor.default",
@@ -5423,22 +5461,72 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "extern_kernels.mm",
 	"type": "compute",
-	"estimated_runtime_ns": 8263010.24428684
+	"estimated_runtime_ns": 8263010.24428684,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "op8",
 	"type": "compute",
-	"estimated_runtime_ns": 2600.63492063492
+	"estimated_runtime_ns": 2600.63492063492,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.all_gather_into_tensor.default",
 	"type": "collective",
-	"estimated_runtime_ns": 22002.31470923603
+	"estimated_runtime_ns": 22002.31470923603,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.reduce_scatter_tensor.default",
 	"type": "collective",
-	"estimated_runtime_ns": 35364.62941847206
+	"estimated_runtime_ns": 35364.62941847206,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.wait_tensor.default",
@@ -5453,7 +5541,20 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "op13",
 	"type": "compute",
-	"estimated_runtime_ns": 6501.5873015873
+	"estimated_runtime_ns": 6501.5873015873,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	}
 	]
 	}
@@ -9226,17 +9327,55 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "extern_kernels.mm",
 	"type": "compute",
-	"estimated_runtime_ns": 8263010.24428684
+	"estimated_runtime_ns": 8263010.24428684,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "op1_op2_op4",
 	"type": "compute",
-	"estimated_runtime_ns": 2603.174603174603
+	"estimated_runtime_ns": 2603.174603174603,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.all_reduce_.default",
 	"type": "collective",
-	"estimated_runtime_ns": 36084.62941847206
+	"estimated_runtime_ns": 36084.62941847206,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.wait_tensor.default",
@@ -9246,22 +9385,72 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "extern_kernels.mm",
 	"type": "compute",
-	"estimated_runtime_ns": 8263010.24428684
+	"estimated_runtime_ns": 8263010.24428684,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "op8",
 	"type": "compute",
-	"estimated_runtime_ns": 2600.63492063492
+	"estimated_runtime_ns": 2600.63492063492,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.all_gather_into_tensor.default",
 	"type": "collective",
-	"estimated_runtime_ns": 22002.31470923603
+	"estimated_runtime_ns": 22002.31470923603,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.reduce_scatter_tensor.default",
 	"type": "collective",
-	"estimated_runtime_ns": 35364.62941847206
+	"estimated_runtime_ns": 35364.62941847206,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.wait_tensor.default",
@@ -9276,7 +9465,20 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "op13",
 	"type": "compute",
-	"estimated_runtime_ns": 6501.5873015873
+	"estimated_runtime_ns": 6501.5873015873,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	}
 	]
 	}
@@ -13049,17 +13251,55 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "extern_kernels.mm",
 	"type": "compute",
-	"estimated_runtime_ns": 8263010.24428684
+	"estimated_runtime_ns": 8263010.24428684,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "op1_op2_op4",
 	"type": "compute",
-	"estimated_runtime_ns": 2603.174603174603
+	"estimated_runtime_ns": 2603.174603174603,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.all_reduce_.default",
 	"type": "collective",
-	"estimated_runtime_ns": 36084.62941847206
+	"estimated_runtime_ns": 36084.62941847206,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.wait_tensor.default",
@@ -13069,22 +13309,72 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "extern_kernels.mm",
 	"type": "compute",
-	"estimated_runtime_ns": 8263010.24428684
+	"estimated_runtime_ns": 8263010.24428684,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "op8",
 	"type": "compute",
-	"estimated_runtime_ns": 2600.63492063492
+	"estimated_runtime_ns": 2600.63492063492,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.all_gather_into_tensor.default",
 	"type": "collective",
-	"estimated_runtime_ns": 22002.31470923603
+	"estimated_runtime_ns": 22002.31470923603,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.reduce_scatter_tensor.default",
 	"type": "collective",
-	"estimated_runtime_ns": 35364.62941847206
+	"estimated_runtime_ns": 35364.62941847206,
+	"outputs": [
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	},
+	{
+	"shape": [],
+	"stride": [],
+	"dtype": null
+	}
+	]
 	},
 	{
 	"name": "torch.ops._c10d_functional.wait_tensor.default",
@@ -13099,7 +13389,20 @@ V0804 12:34:17.536000 1142858 torch/_inductor/debug.py:734] {"artifact": {"name"
 	{
 	"name": "op13",
 	"type": "compute",
-	"estimated_runtime_ns": 6501.5873015873
+	"estimated_runtime_ns": 6501.5873015873,
+	"outputs": [
+	{
+	"shape": [
+	1024,
+	1024
+	],
+	"stride": [
+	1024,
+	1
+	],
+	"dtype": "float16"
+	}
+	]
 	}
 	]
 	}

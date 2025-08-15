@@ -1156,3 +1156,32 @@ fn test_chromium_trace_with_runtime() -> Result<(), Box<dyn std::error::Error>> 
 
     Ok(())
 }
+
+#[test]
+fn test_tensor_meta_divergence_groups() -> Result<(), Box<dyn std::error::Error>> {
+    let input_dir = PathBuf::from("tests/inputs/multi_rank_runtime");
+    let temp_out = tempdir()?;
+    let out_dir = temp_out.path();
+
+    Command::cargo_bin("tlparse")?
+        .arg(&input_dir)
+        .args(&["--all-ranks-html", "--overwrite", "-o"])
+        .arg(&out_dir)
+        .arg("--no-browser")
+        .assert()
+        .success();
+
+    let landing_page = out_dir.join("index.html");
+    let html_content = fs::read_to_string(&landing_page)?;
+
+    // Should always show tensor meta analysis section
+    assert!(html_content.contains("Tensor Metadata Analysis"));
+
+    // Should show divergence since ranks have different tensor meta
+    assert!(html_content.contains("Ranks exhibit divergent inductor tensor meta"));
+
+    // Ranks 5 and 6 should be grouped together (same tensor meta)
+    assert!(html_content.contains("Ranks: 5, 6"));
+
+    Ok(())
+}

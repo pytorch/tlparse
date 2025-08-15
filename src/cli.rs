@@ -459,6 +459,52 @@ fn handle_all_ranks(
         println!("Collective schedules: {}", schedules_path.display());
     }
 
+    // Process tensor meta fingerprints from all ranks
+    let tensor_meta = tlparse::parsers::read_tensor_meta_fingerprints(&out_path, &rank_nums)?;
+    let mut tensor_meta_groups: FxHashMap<String, Vec<u32>> = FxHashMap::default();
+    if !tensor_meta.is_empty() {
+        use std::collections::HashMap;
+        // rank -> sorted list of (graph_id, fingerprint)
+        let mut by_rank: HashMap<u32, Vec<(String, String)>> = HashMap::new();
+        for tm in &tensor_meta {
+            by_rank
+                .entry(tm.rank)
+                .or_default()
+                .push((tm.graph.clone(), tm.fingerprint.clone()));
+        }
+        for (&rank, entries) in &mut by_rank {
+            // sort by graph id to make cross-rank concatenation consistent
+            let mut entries_sorted = entries.clone();
+            entries_sorted.sort_by(|a, b| a.0.cmp(&b.0));
+            let signature = entries_sorted
+                .into_iter()
+                .map(|(_, fp)| fp)
+                .collect::<Vec<_>>()
+                .join(",");
+            tensor_meta_groups.entry(signature).or_default().push(rank);
+        }
+    }
+
+    let tensor_meta_divergence_groups: Vec<DivergenceGroup> = if tensor_meta_groups.len() > 1 {
+        tensor_meta_groups
+            .iter()
+            .map(|(seq, ranks_vec)| {
+                let mut sorted_ranks = ranks_vec.clone();
+                sorted_ranks.sort_unstable();
+                DivergenceGroup {
+                    sequence: seq.clone(),
+                    ranks: sorted_ranks
+                        .iter()
+                        .map(|r| r.to_string())
+                        .collect::<Vec<_>>()
+                        .join(", "),
+                }
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
+
     // Group ranks by their collective op sequence
     let mut collective_seq_groups: FxHashMap<String, Vec<u32>> = FxHashMap::default();
     if !collective_schedules.is_empty() {
@@ -505,11 +551,15 @@ fn handle_all_ranks(
         divergence: DivergenceFlags {
             cache: cache_seq_groups.len() > 1,
             collective: collective_seq_groups.len() > 1,
+            tensor_meta: tensor_meta_groups.len() > 1,
         },
         artifacts: ArtifactFlags {
             runtime_trace: !runtime_estimations.is_empty(),
         },
         analysis: runtime_analysis,
+        cache_groups: cache_divergence_groups.clone(),
+        collective_groups: collective_divergence_groups.clone(),
+        tensor_meta_groups: tensor_meta_divergence_groups.clone(),
     };
 
     let (landing_page_path, landing_html) = generate_multi_rank_html(
@@ -517,9 +567,10 @@ fn handle_all_ranks(
         sorted_ranks,
         cfg,
         !all_chromium_events.is_empty(),
-        compile_id_divergence || cache_seq_groups.len() > 1 || collective_seq_groups.len() > 1,
-        cache_divergence_groups,
-        collective_divergence_groups,
+        compile_id_divergence
+            || diagnostics.divergence.cache
+            || diagnostics.divergence.collective
+            || diagnostics.divergence.tensor_meta,
         compile_id_divergence,
         diagnostics,
     )?;

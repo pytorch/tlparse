@@ -1182,8 +1182,6 @@ pub fn generate_multi_rank_html(
     cfg: &ParseConfig,
     has_chromium_events: bool,
     show_desync_warning: bool,
-    cache_divergence_groups: Vec<DivergenceGroup>,
-    collective_divergence_groups: Vec<DivergenceGroup>,
     compile_id_divergence: bool,
     diagnostics: Diagnostics,
 ) -> anyhow::Result<(PathBuf, String)> {
@@ -1200,8 +1198,6 @@ pub fn generate_multi_rank_html(
         qps: TEMPLATE_QUERY_PARAM_SCRIPT,
         has_chromium_events,
         show_desync_warning,
-        cache_divergence_groups,
-        collective_divergence_groups,
         compile_id_divergence,
         diagnostics,
     };

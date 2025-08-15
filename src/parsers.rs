@@ -704,6 +704,29 @@ pub fn read_runtime_estimations(
     )
 }
 
+/// Reads inductor_tlparse_tensor_meta*.json from each rank/graph, canonicalizes the JSON,
+/// computes a fingerprint per graph, and returns entries for each graph
+pub fn read_tensor_meta_fingerprints(
+    out_path: &PathBuf,
+    rank_nums: &[u32],
+) -> anyhow::Result<Vec<TensorMetaFingerprint>> {
+    read_artifacts(
+        out_path,
+        rank_nums,
+        "inductor_runtime_and_tensor_meta",
+        |content, rank, graph| {
+            // Canonicalize JSON: parse Value and serialize compact to ensure stable formatting
+            let json_value: serde_json::Value = serde_json::from_str(content)?;
+            let canonical_json = serde_json::to_string(&json_value)?;
+            Ok(Some(TensorMetaFingerprint {
+                rank,
+                graph,
+                fingerprint: canonical_json,
+            }))
+        },
+    )
+}
+
 /// Reads collective schedule artifacts from processed rank directories
 /// Handles multiple graphs per rank
 pub fn read_collective_schedules(
