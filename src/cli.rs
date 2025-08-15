@@ -467,10 +467,7 @@ fn handle_all_ranks(
         // rank -> sorted list of (graph_id, fingerprint)
         let mut by_rank: HashMap<u32, Vec<(String, String)>> = HashMap::new();
         for tm in &tensor_meta {
-            by_rank
-                .entry(tm.rank)
-                .or_default()
-                .push((tm.graph.clone(), tm.fingerprint.clone()));
+            by_rank.entry(tm.rank).or_default().push((tm.graph.clone(), tm.fingerprint.clone()));
         }
         for (&rank, entries) in &mut by_rank {
             // sort by graph id to make cross-rank concatenation consistent

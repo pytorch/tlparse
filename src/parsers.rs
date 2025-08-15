@@ -745,6 +745,141 @@ pub fn read_collective_schedules(
     )
 }
 
+pub fn check_collectives_parity(out_path: &PathBuf, rank_nums: &[u32]) -> anyhow::Result<()> {
+    use regex::Regex;
+    use std::collections::HashMap;
+    use std::fs;
+
+    const OPS: [&str; 6] = [
+        "all_reduce",
+        "reduce_scatter",
+        "all_gather",
+        "broadcast",
+        "reduce",
+        "all_to_all",
+    ];
+
+    let code_re = Regex::new("(all_reduce|reduce_scatter|all_gather|broadcast|reduce|all_to_all)")?;
+    let comment_re = Regex::new(r"(?m)#.*$|//.*$|(?s)/\*.*?\*/")?;
+
+    for &rank in rank_nums {
+        let rank_dir = out_path.join(format!("rank_{rank}"));
+        if !rank_dir.exists() {
+            continue;
+        }
+
+        // Map compile directory names to compile IDs via compile_directory.json
+        let mut dir_to_compile_id: HashMap<String, String> = HashMap::new();
+        if let Ok(cd_content) = fs::read_to_string(rank_dir.join("compile_directory.json")) {
+            if let Ok(val) = serde_json::from_str::<serde_json::Value>(&cd_content) {
+                if let Some(obj) = val.as_object() {
+                    for (cid_str, entry) in obj {
+                        if let Some(arts) = entry.get("artifacts").and_then(|v| v.as_array()) {
+                            for a in arts {
+                                if let Some(url) = a.get("url").and_then(|v| v.as_str()) {
+                                    if let Some((prefix, _)) = url.split_once('/') {
+                                        dir_to_compile_id
+                                            .entry(prefix.to_string())
+                                            .or_insert_with(|| cid_str.to_string());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        let mut report = crate::types::CollectivesParityReport { graphs: Vec::new() };
+
+        for entry in fs::read_dir(&rank_dir)? {
+            let entry = entry?;
+            let compile_dir = entry.path();
+            if !compile_dir.is_dir() {
+                continue;
+            }
+
+            let mut schedule_path = None;
+            let mut code_path = None;
+            for file in fs::read_dir(&compile_dir)? {
+                let file = file?;
+                let p = file.path();
+                if p.extension() == Some(OsStr::new("json")) {
+                    if p.file_stem()
+                        .and_then(|s| s.to_str())
+                        .map_or(false, |s| s.starts_with("inductor_collective_schedule"))
+                    {
+                        schedule_path = Some(p.clone());
+                    }
+                } else if p.extension() == Some(OsStr::new("txt")) {
+                    if p.file_stem()
+                        .and_then(|s| s.to_str())
+                        .map_or(false, |s| s.starts_with("inductor_output_code"))
+                    {
+                        code_path = Some(p.clone());
+                    }
+                }
+            }
+
+            if let (Some(schedule), Some(code)) = (schedule_path, code_path) {
+                let schedule_content = fs::read_to_string(schedule)?;
+                let code_content = fs::read_to_string(code)?;
+
+                let raw_ops: Vec<String> =
+                    serde_json::from_str(&schedule_content).unwrap_or_default();
+                let schedule_ops: Vec<String> = raw_ops
+                    .into_iter()
+                    .filter_map(|op| {
+                        OPS.iter()
+                            .find(|name| op.contains(**name))
+                            .map(|s| s.to_string())
+                    })
+                    .collect();
+
+                let code_clean = comment_re.replace_all(&code_content, "");
+                let code_ops: Vec<String> = code_re
+                    .captures_iter(&code_clean)
+                    .map(|c| c[1].to_string())
+                    .collect();
+
+                let mismatch_positions = schedule_ops
+                    .iter()
+                    .zip(&code_ops)
+                    .filter(|(a, b)| a != b)
+                    .count();
+                let missing_from_schedule = schedule_ops.len().saturating_sub(code_ops.len());
+                let extra_in_code = code_ops.len().saturating_sub(schedule_ops.len());
+                let missing_count = mismatch_positions + missing_from_schedule;
+
+                if missing_count > 0 || extra_in_code > 0 {
+                    let graph_name = compile_dir
+                        .file_name()
+                        .and_then(|n| n.to_str())
+                        .unwrap_or("unknown")
+                        .to_string();
+                    let compile_id = dir_to_compile_id
+                        .get(&graph_name)
+                        .cloned()
+                        .unwrap_or_else(|| "unknown".to_string());
+                    report.graphs.push(crate::types::GraphCollectivesParity {
+                        graph: graph_name,
+                        compile_id,
+                        missing_count,
+                        extra_count: extra_in_code,
+                    });
+                }
+            }
+        }
+
+        fs::write(
+            rank_dir.join("collectives_parity.json"),
+            serde_json::to_string_pretty(&report)?,
+        )?;
+    }
+
+    Ok(())
+}
+
 /// Parses a prefixed JSON file from each multi-rank output directory.
 /// It finds the first matching file, calls `parse_fn` on its contents,
 /// and collects the `Some(T)` results into a vector.

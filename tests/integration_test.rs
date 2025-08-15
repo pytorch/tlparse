@@ -489,6 +489,14 @@ fn test_all_ranks_basic() -> Result<(), Box<dyn std::error::Error>> {
     let landing_content = fs::read_to_string(landing_page).unwrap();
     assert!(landing_content.contains(r#"<a href="rank_0/index.html">"#));
     assert!(landing_content.contains(r#"<a href="rank_1/index.html">"#));
+    assert!(
+        !landing_content.contains("collectives_parity.json"),
+        "multi-rank landing page should not link collectives parity"
+    );
+
+    let rank0_content = fs::read_to_string(rank0_index).unwrap();
+    assert!(rank0_content.contains("collectives_parity.json"));
+    assert!(rank0_content.contains("NCCL collectives parity report"));
     Ok(())
 }
 

@@ -53,6 +53,18 @@ pub struct TensorMetaFingerprint {
     pub fingerprint: String,
 }
 
+#[derive(Debug, Serialize)]
+pub struct GraphCollectivesParity {
+    pub graph: String,
+    pub compile_id: String,
+    pub missing_count: usize,
+    pub extra_count: usize,
+}
+
+#[derive(Debug, Serialize)]
+pub struct CollectivesParityReport {
+    pub graphs: Vec<GraphCollectivesParity>,
+}
 /// Estimated runtime entry for a single op within a graph.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct OpRuntime {
