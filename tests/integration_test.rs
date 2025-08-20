@@ -426,6 +426,42 @@ fn test_provenance_tracking() {
 }
 
 #[test]
+fn test_provenance_stack_trace_readable() {
+    let path = Path::new("tests/inputs/inductor_provenance_aot_cuda_log.txt").to_path_buf();
+    let config = tlparse::ParseConfig {
+        inductor_provenance: true,
+        ..Default::default()
+    };
+    let map: HashMap<PathBuf, String> =
+        tlparse::parse_path(&path, &config).unwrap().into_iter().collect();
+
+    assert!(map.keys().any(|k| {
+        let s = k.to_str().unwrap_or("");
+        s.contains("inductor_provenance_tracking_kernel_stack_traces") && s.ends_with(".json")
+    }));
+    assert!(map.keys().any(|k| {
+        let s = k.to_str().unwrap_or("");
+        s.contains("inductor_provenance_tracking_kernel_stack_traces")
+            && s.ends_with("_readable.html")
+    }));
+
+    let html = map
+        .iter()
+        .find(|(k, _)| {
+            let s = k.to_str().unwrap_or("");
+            s.contains("inductor_provenance_tracking_kernel_stack_traces")
+                && s.ends_with("_readable.html")
+        })
+        .unwrap()
+        .1;
+    assert!(html.contains("line 1\n  foo()"));
+    assert!(!html.contains("\\n"));
+
+    let index_html = map.get(Path::new("index.html")).unwrap();
+    assert!(index_html.contains("_readable.html\">readable_html</a>"));
+}
+
+#[test]
 fn test_all_ranks_basic() -> Result<(), Box<dyn std::error::Error>> {
     let input_dir = PathBuf::from("tests/inputs/multi_rank_logs");
     let temp_dir = tempdir().unwrap();

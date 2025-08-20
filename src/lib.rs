@@ -4,8 +4,10 @@ use fxhash::{FxHashMap, FxHashSet};
 use md5::{Digest, Md5};
 use std::ffi::{OsStr, OsString};
 
+use html_escape::encode_text;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use regex::Regex;
+use serde_json::Value;
 use std::cell::RefCell;
 use std::fs::{self, File};
 use std::io::{self, BufRead};
@@ -114,6 +116,12 @@ fn add_file_output(
     compile_directory: &mut Vec<OutputFile>,
     output_count: &mut i32,
 ) {
+    let is_stack_traces = is_stack_traces_file(&filename);
+    let maybe_content = if is_stack_traces {
+        Some(content.clone())
+    } else {
+        None
+    };
     output.push((filename.clone(), content));
     let filename_str = filename.to_string_lossy().to_string();
     let suffix = if filename_str.contains("cache_miss") {
@@ -130,8 +138,65 @@ fn add_file_output(
         name: filename_str,
         number: *output_count,
         suffix: suffix,
+        readable_url: None,
     });
     *output_count += 1;
+    if let Some(c) = maybe_content {
+        let html_path = add_stack_traces_html(&filename, &c, output, output_count);
+        if let Some(last) = compile_directory.last_mut() {
+            last.readable_url = Some(html_path);
+        }
+    }
+}
+
+fn is_stack_traces_file(path: &PathBuf) -> bool {
+    if let Some(name) = path.file_name().and_then(|s| s.to_str()) {
+        name.starts_with("inductor_provenance_tracking_kernel_stack_traces")
+            && name.ends_with(".json")
+    } else {
+        false
+    }
+}
+
+fn add_stack_traces_html(
+    json_path: &PathBuf,
+    json_content: &str,
+    output: &mut ParseOutput,
+    output_count: &mut i32,
+) -> String {
+    let parsed: Value = match serde_json::from_str(json_content) {
+        Ok(v) => v,
+        Err(_) => return String::new(),
+    };
+    let mut html = String::from("<html><body>\n");
+    if let Some(map) = parsed.as_object() {
+        for (kernel, traces) in map {
+            html.push_str(&format!("<h3>{}</h3>\n", encode_text(kernel)));
+            if let Some(arr) = traces.as_array() {
+                for t in arr {
+                    if let Some(s) = t.as_str() {
+                        // The JSON strings encode newlines as "\\n" sequences, so translate
+                        // those into real line breaks for the HTML view.
+                        let decoded = s.replace("\\n", "\n");
+                        html.push_str("<pre>");
+                        html.push_str(&encode_text(decoded.trim_end_matches('\n')));
+                        html.push_str("</pre>\n");
+                    }
+                }
+            }
+        }
+    }
+    html.push_str("</body></html>\n");
+    let mut html_path = json_path.clone();
+    if let Some(stem) = json_path.file_stem().and_then(|s| s.to_str()) {
+        html_path.set_file_name(format!("{stem}_readable.html"));
+    } else {
+        html_path.set_extension("html");
+    }
+    let html_path_str = html_path.to_string_lossy().to_string();
+    output.push((html_path.clone(), html));
+    *output_count += 1;
+    html_path_str
 }
 
 fn run_parser<'t>(
@@ -205,6 +270,7 @@ fn run_parser<'t>(
                                 name: name,
                                 number: *output_count,
                                 suffix: "".to_string(),
+                                readable_url: None,
                             });
                             *output_count += 1;
                         }
@@ -244,7 +310,8 @@ fn directory_to_json(
                     // Strip away any leading directory names, that will just be in the url path anyway
                     "name": file.name.split('/').last().unwrap_or(&file.name),
                     "number": file.number,
-                    "suffix": file.suffix
+                    "suffix": file.suffix,
+                    "readable_url": file.readable_url,
                 })
             })
             .collect();

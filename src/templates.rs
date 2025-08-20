@@ -192,7 +192,7 @@ Build products below:
     <li><a id="{compile_directory.0}">{compile_directory.0}</a>
     <ul>
         {{ for path_idx in compile_directory.1 }}
-            <li><a href="{path_idx.url}">{path_idx.name}</a> {path_idx.suffix} ({path_idx.number})</li>
+            <li><a href="{path_idx.url}">{path_idx.name}</a>{{ if path_idx.readable_url }} (<a href="{path_idx.readable_url}">readable_html</a>){{ endif }} {path_idx.suffix} ({path_idx.number})</li>
         {{ endfor }}
     </ul>
     </li>

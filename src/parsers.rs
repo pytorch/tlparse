@@ -495,6 +495,7 @@ impl StructuredLogParser for CompilationMetricsParser<'_> {
                     name: remove_prefix(&o.name),
                     number: o.number.clone(),
                     suffix: o.suffix.clone(),
+                    readable_url: o.readable_url.as_ref().map(|u| remove_prefix(u)),
                 })
                 .collect();
             let context = CompilationMetricsContext {

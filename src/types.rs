@@ -578,6 +578,7 @@ pub struct OutputFile {
     pub name: String,
     pub number: i32,
     pub suffix: String,
+    pub readable_url: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
