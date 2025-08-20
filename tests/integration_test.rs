@@ -432,8 +432,10 @@ fn test_provenance_stack_trace_readable() {
         inductor_provenance: true,
         ..Default::default()
     };
-    let map: HashMap<PathBuf, String> =
-        tlparse::parse_path(&path, &config).unwrap().into_iter().collect();
+    let map: HashMap<PathBuf, String> = tlparse::parse_path(&path, &config)
+        .unwrap()
+        .into_iter()
+        .collect();
 
     assert!(map.keys().any(|k| {
         let s = k.to_str().unwrap_or("");
