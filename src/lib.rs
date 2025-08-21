@@ -133,7 +133,6 @@ fn add_file_output(
     } else {
         "".to_string()
     };
-    let current_number = *output_count;
     let readable_url = if let Some(c) = maybe_content {
         Some(add_stack_traces_html(&filename, &c, output, output_count))
     } else {
@@ -142,7 +141,7 @@ fn add_file_output(
     compile_directory.push(OutputFile {
         url: filename_str.clone(),
         name: filename_str,
-        number: current_number,
+        number: *output_count,
         suffix: suffix,
         readable_url,
     });
