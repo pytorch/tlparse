@@ -251,9 +251,15 @@ fn run_parser<'t>(
                                         output_count,
                                     );
                                 }
-                                Err(e) => {
-                                    multi.suspend(|| eprintln!("Formatter failed: {e}"));
-                                    stats.fail_json_serialization += 1;
+                                Err(err) => {
+                                    multi.suspend(|| {
+                                        eprintln!(
+                                            "Failed to format payload for {}: {}",
+                                            filename.to_string_lossy(),
+                                            err
+                                        )
+                                    });
+                                    stats.fail_parser += 1;
                                 }
                             }
                         }
@@ -270,11 +276,16 @@ fn run_parser<'t>(
                     }
                 }
             }
-            Err(err) => {
-                let name = parser.name();
-                multi.suspend(|| eprintln!("Parser {name} failed: {err}"));
-                stats.fail_parser += 1;
-            }
+            Err(err) => match parser.name() {
+                "dynamo_guards" => {
+                    multi.suspend(|| eprintln!("Failed to parse guards json: {}", err));
+                    stats.fail_dynamo_guards_json += 1;
+                }
+                name => {
+                    multi.suspend(|| eprintln!("Parser {name} failed: {err}"));
+                    stats.fail_parser += 1;
+                }
+            },
         }
     }
     payload_filename

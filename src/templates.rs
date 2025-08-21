@@ -184,10 +184,6 @@ phase generates:
 PT2 generates <a href='chromium_events.json'>Chromium Trace Events</a> in JSON on specific events during compilation.
 You can download and view them in a tool like <a href='https://ui.perfetto.dev/'>Perfetto</a>.
 {{ endif  }}
-<h3>Collectives Parity</h3>
-<p>
-<a href='collectives_parity.json'>NCCL collectives parity report</a> comparing scheduler and generated code operations.
-</p>
 <p>
 Build products below:
 </p>
@@ -622,16 +618,23 @@ desync issues on specific ranks.
 {{ endfor }}
 {{ endif }}
 {{ endif }}
-{{ if has_tensor_meta_divergence }}
-<h3>Tensor Meta Divergence</h3>
+<h3>Tensor Metadata Analysis</h3>
 <p>
-Ranks exhibit divergent inductor tensor meta across graphs. Groups with identical signatures:
+Compares inductor tensor metadata (shapes, dtypes, strides) across ranks to detect compilation divergence.
+</p>
+{{ if diagnostics.divergence.tensor_meta }}
+<p>
+Ranks exhibit divergent inductor tensor metadata across graphs. Groups with identical signatures:
 </p>
 <ul>
-    {{ for group in tensor_meta_divergence_groups }}
+    {{ for group in diagnostics.tensor_meta_groups }}
         <li>Ranks: {group.ranks}</li>
     {{ endfor }}
     </ul>
+{{ else }}
+<p>
+All ranks have matching tensor meta signatures across graphs.
+</p>
 {{ endif }}
 </div>
 {qps | format_unescaped}
