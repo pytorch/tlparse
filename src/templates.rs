@@ -185,6 +185,9 @@ PT2 generates <a href='chromium_events.json'>Chromium Trace Events</a> in JSON o
 You can download and view them in a tool like <a href='https://ui.perfetto.dev/'>Perfetto</a>.
 {{ endif  }}
 <p>
+<a href="collectives_parity.json">NCCL collectives parity report</a> comparing scheduler and generated code operations.
+</p>
+<p>
 Build products below:
 </p>
 <ul>
