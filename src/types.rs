@@ -578,6 +578,7 @@ pub struct OutputFile {
     pub name: String,
     pub number: i32,
     pub suffix: String,
+    /// URL to a human-readable HTML version of inductor_provenance_tracking_kernel_stack_traces.json
     pub readable_url: Option<String>,
 }
 

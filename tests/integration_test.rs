@@ -427,7 +427,7 @@ fn test_provenance_tracking() {
 
 #[test]
 fn test_provenance_stack_trace_readable() {
-    let path = Path::new("tests/inputs/inductor_provenance_aot_cuda_log.txt").to_path_buf();
+    let path = Path::new("tests/inputs/inductor_provenance_extended_log.txt").to_path_buf();
     let config = tlparse::ParseConfig {
         inductor_provenance: true,
         ..Default::default()
