@@ -6,7 +6,7 @@ use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
 use tempfile::tempdir;
-use tlparse;
+use tlparse::{self, parsers, CollectivesParityReport};
 
 fn prefix_exists(map: &HashMap<PathBuf, String>, prefix: &str) -> bool {
     map.keys()
@@ -1631,6 +1631,13 @@ fn test_all_ranks_basic() -> Result<(), Box<dyn std::error::Error>> {
     let landing_content = fs::read_to_string(landing_page).unwrap();
     assert!(landing_content.contains(r#"<a href="rank_0/index.html">"#));
     assert!(landing_content.contains(r#"<a href="rank_1/index.html">"#));
+    assert!(
+        !landing_content.contains("collectives_parity.json"),
+        "multi-rank landing page should not link collectives parity"
+    );
+
+    let rank0_content = fs::read_to_string(rank0_index).unwrap();
+    assert!(rank0_content.contains("collectives_parity.json"));
     Ok(())
 }
 
@@ -2363,5 +2370,43 @@ fn test_tensor_meta_divergence_groups() -> Result<(), Box<dyn std::error::Error>
     // Ranks 5 and 6 should be grouped together (same tensor meta)
     assert!(html_content.contains("Ranks: 5, 6"));
 
+    Ok(())
+}
+
+#[test]
+fn test_collectives_parity_detects_mismatch() -> Result<(), Box<dyn std::error::Error>> {
+    let temp_dir = tempdir()?;
+    let out_dir = temp_dir.path();
+    let rank_dir = out_dir.join("rank_0");
+    let compile_dir = rank_dir.join("graph_dir");
+    std::fs::create_dir_all(&compile_dir)?;
+
+    let compile_dir_json = serde_json::json!({
+        "cid0": {
+            "artifacts": [{"url": "graph_dir/file"}]
+        }
+    });
+    fs::write(
+        rank_dir.join("compile_directory.json"),
+        serde_json::to_string(&compile_dir_json)?,
+    )?;
+
+    let schedule = serde_json::json!(["nccl.all_reduce", "nccl.all_gather"]);
+    fs::write(
+        compile_dir.join("inductor_collective_schedule_0.json"),
+        serde_json::to_string(&schedule)?,
+    )?;
+
+    fs::write(
+        compile_dir.join("inductor_output_code_0.py"),
+        "nccl.all_reduce(x)",
+    )?;
+
+    parsers::check_collectives_parity(&out_dir.to_path_buf(), &[0])?;
+
+    let report_content = fs::read_to_string(rank_dir.join("collectives_parity.json"))?;
+    let report: CollectivesParityReport = serde_json::from_str(&report_content)?;
+    assert_eq!(report.graphs.len(), 1);
+    assert_eq!(report.graphs[0].offset, 1);
     Ok(())
 }
