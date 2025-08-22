@@ -459,6 +459,8 @@ fn handle_all_ranks(
         println!("Collective schedules: {}", schedules_path.display());
     }
 
+    tlparse::parsers::check_collectives_parity(&out_path, &rank_nums)?;
+
     // Process tensor meta fingerprints from all ranks
     let tensor_meta = tlparse::parsers::read_tensor_meta_fingerprints(&out_path, &rank_nums)?;
     let mut tensor_meta_groups: FxHashMap<String, Vec<u32>> = FxHashMap::default();

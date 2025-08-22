@@ -25,8 +25,9 @@ mod templates;
 mod types;
 
 pub use types::{
-    ArtifactFlags, Diagnostics, DivergenceFlags, DivergenceGroup, GraphAnalysis, GraphRuntime,
-    RankMetaData, RuntimeAnalysis, RuntimeRankDetail,
+    ArtifactFlags, CollectivesParityReport, Diagnostics, DivergenceFlags, DivergenceGroup,
+    GraphAnalysis, GraphCollectivesParity, GraphRuntime, RankMetaData, RuntimeAnalysis,
+    RuntimeRankDetail,
 };
 
 #[derive(Debug)]

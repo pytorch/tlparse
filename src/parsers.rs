@@ -747,8 +747,7 @@ pub fn read_collective_schedules(
 
 pub fn check_collectives_parity(out_path: &PathBuf, rank_nums: &[u32]) -> anyhow::Result<()> {
     use regex::Regex;
-    use std::collections::HashMap;
-    use std::fs;
+    use std::{collections::HashMap, fs};
 
     const OPS: [&str; 6] = [
         "all_reduce",
@@ -768,106 +767,107 @@ pub fn check_collectives_parity(out_path: &PathBuf, rank_nums: &[u32]) -> anyhow
             continue;
         }
 
-        // Map compile directory names to compile IDs via compile_directory.json
-        let mut dir_to_compile_id: HashMap<String, String> = HashMap::new();
-        if let Ok(cd_content) = fs::read_to_string(rank_dir.join("compile_directory.json")) {
-            if let Ok(val) = serde_json::from_str::<serde_json::Value>(&cd_content) {
-                if let Some(obj) = val.as_object() {
-                    for (cid_str, entry) in obj {
-                        if let Some(arts) = entry.get("artifacts").and_then(|v| v.as_array()) {
-                            for a in arts {
-                                if let Some(url) = a.get("url").and_then(|v| v.as_str()) {
-                                    if let Some((prefix, _)) = url.split_once('/') {
-                                        dir_to_compile_id
-                                            .entry(prefix.to_string())
-                                            .or_insert_with(|| cid_str.to_string());
+        // Map compile directory names (e.g. graph folders) to compile IDs
+        let dir_to_compile_id: HashMap<String, String> =
+            fs::read_to_string(rank_dir.join("compile_directory.json"))
+                .ok()
+                .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok())
+                .and_then(|v| {
+                    v.as_object().map(|obj| {
+                        let mut m = HashMap::new();
+                        for (cid, entry) in obj {
+                            if let Some(arts) = entry.get("artifacts").and_then(|x| x.as_array()) {
+                                for a in arts {
+                                    if let Some(url) = a.get("url").and_then(|x| x.as_str()) {
+                                        if let Some((prefix, _)) = url.split_once('/') {
+                                            m.entry(prefix.to_string())
+                                                .or_insert_with(|| cid.to_string());
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                }
-            }
-        }
-
-        let mut report = crate::types::CollectivesParityReport { graphs: Vec::new() };
-
-        for entry in fs::read_dir(&rank_dir)? {
-            let entry = entry?;
-            let compile_dir = entry.path();
-            if !compile_dir.is_dir() {
-                continue;
-            }
-
-            let mut schedule_path = None;
-            let mut code_path = None;
-            for file in fs::read_dir(&compile_dir)? {
-                let file = file?;
-                let p = file.path();
-                if p.extension() == Some(OsStr::new("json")) {
-                    if p.file_stem()
-                        .and_then(|s| s.to_str())
-                        .map_or(false, |s| s.starts_with("inductor_collective_schedule"))
-                    {
-                        schedule_path = Some(p.clone());
-                    }
-                } else if p.extension() == Some(OsStr::new("txt")) {
-                    if p.file_stem()
-                        .and_then(|s| s.to_str())
-                        .map_or(false, |s| s.starts_with("inductor_output_code"))
-                    {
-                        code_path = Some(p.clone());
-                    }
-                }
-            }
-
-            if let (Some(schedule), Some(code)) = (schedule_path, code_path) {
-                let schedule_content = fs::read_to_string(schedule)?;
-                let code_content = fs::read_to_string(code)?;
-
-                let raw_ops: Vec<String> =
-                    serde_json::from_str(&schedule_content).unwrap_or_default();
-                let schedule_ops: Vec<String> = raw_ops
-                    .into_iter()
-                    .filter_map(|op| {
-                        OPS.iter()
-                            .find(|name| op.contains(**name))
-                            .map(|s| s.to_string())
+                        m
                     })
-                    .collect();
+                })
+                .unwrap_or_default();
 
-                let code_clean = comment_re.replace_all(&code_content, "");
-                let code_ops: Vec<String> = code_re
-                    .captures_iter(&code_clean)
-                    .map(|c| c[1].to_string())
-                    .collect();
+        let mut report = crate::types::CollectivesParityReport {
+            description: "Difference of # of collectives in scheduler and inductor output code"
+                .to_string(),
+            graphs: Vec::new(),
+        };
 
-                let mismatch_positions = schedule_ops
-                    .iter()
-                    .zip(&code_ops)
-                    .filter(|(a, b)| a != b)
-                    .count();
-                let missing_from_schedule = schedule_ops.len().saturating_sub(code_ops.len());
-                let extra_in_code = code_ops.len().saturating_sub(schedule_ops.len());
-                let missing_count = mismatch_positions + missing_from_schedule;
-
-                if missing_count > 0 || extra_in_code > 0 {
-                    let graph_name = compile_dir
-                        .file_name()
-                        .and_then(|n| n.to_str())
-                        .unwrap_or("unknown")
-                        .to_string();
-                    let compile_id = dir_to_compile_id
-                        .get(&graph_name)
-                        .cloned()
-                        .unwrap_or_else(|| "unknown".to_string());
-                    report.graphs.push(crate::types::GraphCollectivesParity {
-                        graph: graph_name,
-                        compile_id,
-                        missing_count,
-                        extra_count: extra_in_code,
-                    });
+        for compile_dir in fs::read_dir(&rank_dir)?
+            .flatten()
+            .map(|e| e.path())
+            .filter(|p| p.is_dir())
+        {
+            // Find schedule and code paths within the compile directory
+            let (mut schedule_path, mut code_path) = (None, None);
+            for p in fs::read_dir(&compile_dir)?.flatten().map(|e| e.path()) {
+                let stem = p.file_stem().and_then(|s| s.to_str()).unwrap_or("");
+                if p.extension() == Some(OsStr::new("json"))
+                    && stem.starts_with("inductor_collective_schedule")
+                {
+                    schedule_path = Some(p);
+                } else if stem.starts_with("inductor_output_code") {
+                    code_path = Some(p);
                 }
+            }
+
+            let (Some(schedule), Some(code)) = (schedule_path, code_path) else {
+                continue;
+            };
+
+            // Schedule counts
+            let schedule_src = fs::read_to_string(schedule)?;
+            let raw_ops: Vec<String> = serde_json::from_str(&schedule_src).unwrap_or_default();
+            let mut schedule_counts: HashMap<&str, usize> = HashMap::new();
+            for op in raw_ops {
+                if let Some(&name) = OPS.iter().find(|&&n| op.contains(n)) {
+                    *schedule_counts.entry(name).or_insert(0) += 1;
+                }
+            }
+
+            // Code counts (strip comments first)
+            let code_src = fs::read_to_string(code)?;
+            let code_clean = comment_re.replace_all(&code_src, "").into_owned();
+            let mut code_counts: HashMap<&str, usize> = HashMap::new();
+            for cap in code_re.captures_iter(&code_clean) {
+                let name = cap.get(1).unwrap().as_str();
+                *code_counts.entry(name).or_insert(0) += 1;
+            }
+
+            // Sum absolute differences across ops
+            let offset: usize = OPS
+                .iter()
+                .map(|&n| {
+                    let s = *schedule_counts.get(n).unwrap_or(&0);
+                    let c = *code_counts.get(n).unwrap_or(&0);
+                    if s > c {
+                        s - c
+                    } else {
+                        c - s
+                    }
+                })
+                .sum();
+
+            if offset > 0 {
+                let graph = compile_dir
+                    .file_name()
+                    .and_then(|n| n.to_str())
+                    .unwrap_or("unknown")
+                    .to_string();
+                let compile_id = dir_to_compile_id
+                    .get(&graph)
+                    .cloned()
+                    .unwrap_or_else(|| "unknown".to_string());
+                report.graphs.push(crate::types::GraphCollectivesParity {
+                    graph,
+                    compile_id,
+                    offset,
+                });
             }
         }
 
