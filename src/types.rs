@@ -929,6 +929,21 @@ pub struct ArtifactFlags {
     pub runtime_trace: bool,
 }
 
+/// Summary of graph execution-order diagnostics across ranks
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
+pub struct ExecOrderSummary {
+    /// True if any index has differing compile_ids across ranks
+    pub order_differs: bool,
+    /// Ranks involved in any schedule mismatches (sorted numerically)
+    pub ranks_schedule: Vec<u32>,
+    /// Ranks involved in any cache hit/miss mismatches (sorted numerically)
+    pub ranks_cache: Vec<u32>,
+    /// Pretty-printed ranks for template rendering (e.g., "r0, r1, r2")
+    pub ranks_schedule_str: String,
+    /// Pretty-printed ranks for template rendering (e.g., "r0, r2")
+    pub ranks_cache_str: String,
+}
+
 #[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize)]
 pub struct Diagnostics {
     pub divergence: DivergenceFlags,
@@ -937,6 +952,8 @@ pub struct Diagnostics {
     pub cache_groups: Vec<DivergenceGroup>,
     pub collective_groups: Vec<DivergenceGroup>,
     pub tensor_meta_groups: Vec<DivergenceGroup>,
+    /// Optional graph execution-order summary (present when >=2 ranks have artifacts)
+    pub exec_order: Option<ExecOrderSummary>,
 }
 
 #[derive(Serialize)]

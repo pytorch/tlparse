@@ -595,6 +595,22 @@ Each rank appears as a separate process (PID) in the trace; within each process,
 You can download and view this trace in <a href='https://ui.perfetto.dev/'>Perfetto</a> to visualize performance differences across ranks.
 </p>
 {{ endif }}
+{{ if diagnostics.exec_order }}
+<h3>Graph Execution-Order Diagnostics</h3>
+{{ if diagnostics.exec_order.order_differs }}
+<p><strong>Warning:</strong> Graph execution order differs across ranks.</p>
+{{ endif }}
+{{ if diagnostics.exec_order.ranks_schedule.len() > 0 }}
+<p>Schedule mismatch across ranks: {diagnostics.exec_order.ranks_schedule_str}</p>
+{{ else }}
+<p>Schedule: consistent across ranks.</p>
+{{ endif }}
+{{ if diagnostics.exec_order.ranks_cache.len() > 0 }}
+<p>Cache hit/miss mismatch across ranks: {diagnostics.exec_order.ranks_cache_str}</p>
+{{ else }}
+<p>Cache hit/miss: consistent across ranks.</p>
+{{ endif }}
+{{ endif }}
 <p>
 Individual rank reports:
 </p>

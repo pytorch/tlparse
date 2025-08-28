@@ -26,7 +26,7 @@ mod types;
 
 pub use types::{
     ArtifactFlags, CollectivesParityReport, Diagnostics, DivergenceFlags, DivergenceGroup,
-    GraphAnalysis, GraphCollectivesParity, GraphRuntime, RankMetaData, RuntimeAnalysis,
+    ExecOrderSummary, GraphAnalysis, GraphCollectivesParity, GraphRuntime, RankMetaData, RuntimeAnalysis,
     RuntimeRankDetail,
 };
 
