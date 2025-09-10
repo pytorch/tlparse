@@ -1568,6 +1568,66 @@ fn test_provenance_tracking_jit_debug_handle() {
 }
 
 #[test]
+fn test_provenance_tracking_multiple_colons_in_kernel_name() {
+    let expected_files = [
+        "-_-_-_-/before_pre_grad_graph_0.txt",
+        "-_-_-_-/after_post_grad_graph_8.txt",
+        "provenance_tracking_-_-_-_-.html",
+        "-_-_-_-/inductor_provenance_tracking_node_mappings_12.json",
+    ];
+
+    let path = Path::new("tests/inputs/inductor_provenance_long_log.txt").to_path_buf();
+    let config = tlparse::ParseConfig {
+        inductor_provenance: true,
+        ..Default::default()
+    };
+    let output = tlparse::parse_path(&path, &config);
+    assert!(output.is_ok());
+    let map: HashMap<PathBuf, String> = output.unwrap().into_iter().collect();
+
+    // Check all files are present
+    for prefix in expected_files {
+        assert!(
+            prefix_exists(&map, prefix),
+            "{} not found in output",
+            prefix
+        );
+    }
+
+    // Read the HTML file and verify the line mappings
+    let html_path = map
+        .keys()
+        .find(|p| {
+            p.to_str()
+                .unwrap()
+                .contains("provenance_tracking_-_-_-_-.html")
+        })
+        .unwrap();
+    let html_content = map.get(html_path).unwrap();
+
+    // Extract the line mappings JSON from the script tag
+    let script_start = html_content
+        .find(r#"<script id="lineMappings" type="application/json">"#)
+        .unwrap();
+    let json_start = html_content[script_start..].find(">").unwrap() + script_start + 1;
+    let json_end = html_content[json_start..].find("</script>").unwrap() + json_start;
+    let line_mappings_str = &html_content[json_start..json_end];
+    let line_mappings: serde_json::Value = serde_json::from_str(line_mappings_str).unwrap();
+
+    // For jit log, we expect similar structure to jit cuda but with different kernel names
+    let expected_post_nodes = vec![
+        10197, 10194, 10191, 10200, 10225, 10223, 10221, 10220, 10219, 10218, 10215, 10214, 10213,
+        10212, 10211, 10205, 10204, 10203, 10199, 10198, 10202, 10201, 10217, 10216, 10210, 10209,
+        10208, 10207, 10206, 10224, 10222, 10227, 10226,
+    ];
+
+    assert_eq!(
+        line_mappings["cppCodeToPost"]["15892"],
+        serde_json::json!(expected_post_nodes)
+    );
+}
+
+#[test]
 fn test_provenance_stack_trace_readable() {
     let path = Path::new("tests/inputs/inductor_provenance_extended_log.txt").to_path_buf();
     let config = tlparse::ParseConfig {

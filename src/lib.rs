@@ -2157,7 +2157,7 @@ fn convert_node_mappings_to_line_numbers(
         // - If kernel_name not found: map to all lines with pure_kernel_name
         for kernel_name in kernel_names {
             // Get pure kernel name before ':' if it exists
-            let pure_kernel_name = if let Some(idx) = kernel_name.find(':') {
+            let pure_kernel_name = if let Some(idx) = kernel_name.rfind(':') {
                 &kernel_name[..idx]
             } else {
                 kernel_name
@@ -2174,7 +2174,7 @@ fn convert_node_mappings_to_line_numbers(
                         let next_line = content
                             .lines()
                             .skip(i + 1)
-                            .position(|l| l.contains(pure_kernel_name))
+                            .position(|l| l.contains(pure_kernel_name) && !l.contains("_xnumel = "))
                             .map(|pos| i + pos + 2);
 
                         if let Some(line_num) = next_line {
