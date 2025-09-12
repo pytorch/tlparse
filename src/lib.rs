@@ -966,7 +966,15 @@ pub fn parse_path(path: &PathBuf, config: &ParseConfig) -> anyhow::Result<ParseO
         }
 
         if let Some(_) = e.chromium_event {
-            chromium_events.push(serde_json::from_str(&payload)?);
+            // Skip bad json in chromium event. This can happen if log lines are dropped.
+            match serde_json::from_str(&payload) {
+                Ok(event) => chromium_events.push(event),
+                Err(_) => {
+                    // Continue processing instead of crashing
+                    // If json line is dropped, we should see fail_payload_md5 in result because the
+                    // payload doesn't match the md5.
+                }
+            }
         }
 
         if let Some(specialization) = e.symbolic_shape_specialization {
