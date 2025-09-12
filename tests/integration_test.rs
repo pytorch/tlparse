@@ -68,6 +68,59 @@ fn test_parse_simple() {
 }
 
 #[test]
+fn test_parse_simple_corrupted_json() {
+    let expected_files = [
+        "-_0_0_0/aot_forward_graph",
+        "-_0_0_0/dynamo_output_graph",
+        "index.html",
+        "compile_directory.json",
+        "failures_and_restarts.html",
+        "-_0_0_0/inductor_post_grad_graph",
+        "-_0_0_0/inductor_output_code",
+    ];
+    // Read the test file
+    // payload 6762d47fdbf80071626529f25dc69013 is a corrupted json
+    let path = Path::new("tests/inputs/simple_corrupted_json.log").to_path_buf();
+    let config = tlparse::ParseConfig {
+        strict: false,
+        ..Default::default()
+    };
+    let output = tlparse::parse_path(&path, &config);
+    assert!(output.is_ok());
+    let map: HashMap<PathBuf, String> = output.unwrap().into_iter().collect();
+    // Check all files are present
+    for prefix in expected_files {
+        assert!(
+            prefix_exists(&map, prefix),
+            "{} not found in output",
+            prefix
+        );
+    }
+
+    // Check that raw.jsonl exists and has exactly 26 lines (non-payload lines from original, excluding chromium_event entries)
+    assert!(
+        map.contains_key(&PathBuf::from("raw.jsonl")),
+        "raw.jsonl not found in output"
+    );
+    let shortraw_content = &map[&PathBuf::from("raw.jsonl")];
+    let shortraw_lines = shortraw_content.lines().count();
+    assert_eq!(
+        shortraw_lines, 15,
+        "raw.jsonl should have exactly 15 lines (1 string table + 14 log entries, excluding 50 chromium_event entries and 12 str entries)"
+    );
+
+    // Verify that the first line contains the string table
+    let first_line = shortraw_content
+        .lines()
+        .next()
+        .expect("raw.jsonl should have at least one line");
+    assert!(
+        first_line.starts_with("{\"string_table\":"),
+        "First line of raw.jsonl should be the string table object"
+    );
+}
+
+#[test]
 fn test_parse_compilation_metrics() {
     let expected_files = [
         "-_0_0_1/dynamo_output_graph",
