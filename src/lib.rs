@@ -2182,7 +2182,14 @@ fn convert_node_mappings_to_line_numbers(
                         let next_line = content
                             .lines()
                             .skip(i + 1)
-                            .position(|l| l.contains(pure_kernel_name) && !l.contains("_xnumel = "))
+                            // Filter out variable declarations like "int64_t kernel_xnumel_1 = value;" but keep function calls
+                            .position(|l| {
+                                l.contains(pure_kernel_name)
+                                    && !l.contains("_xnumel = ")
+                                    && !Regex::new(r"^\s*\w+\s+.*_xnumel(?:_\d+)?\s*=")
+                                        .unwrap()
+                                        .is_match(l)
+                            })
                             .map(|pos| i + pos + 2);
 
                         if let Some(line_num) = next_line {
